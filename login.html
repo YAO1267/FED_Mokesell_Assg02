@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <!-- css file -->
+    <link href="main.css" rel="stylesheet" type="text/css" />
+<!-- sdsa -->
+
+    <!-- google font Averia Serif Libre -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+</head>
+
+</head>
+<body>
+<div style="display: flex;margin-top: 10%;margin-left: 10%;margin-right: 10%;">
+    <div class="imgcontainer">
+        <img src="pic resources\web acai pics\conmunity ppl.png" alt="Avatar" class="avatar">
+    </div>
+    <div>
+        <div class="tab">
+            <button class="tabLinks" onclick="clickTab(event, 'Login')">Login</button>
+            <button class="tabLinks" onclick="clickTab(event, 'Signup')">Signup</button>
+        </div>
+        <div id="Login" class="tabContent">
+            <h2 style="text-align: center;color: rgb(56, 79, 49);">Log In As A Member</h2>
+            <div class="container">
+                <label><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" id="login_name" required>
+                <label><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" id="login_psw" required>
+                <div style="left: 50%;right: 50%;text-align: center;">
+                <button type="submit" class="submitBtn" onclick="loginOrSignup(event, 'Login')">Login</button>
+                </div>
+            </div>
+        </div>
+        <div id="Signup" class="tabContent" style="display: none;">
+            <h2 style="text-align: center;color: rgb(56, 79, 49);">Create Your Free Account</h2>
+            <div class="container">
+                <label><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" id="signup_name" required>
+                <label><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" id="signup_psw" required>
+                <div style="left: 50%;right: 50%;text-align: center;">
+                <button type="submit" class="submitBtn" onclick="loginOrSignup(event, 'Signup')">Signup</button>
+                </div>
+            </div>
+        </div> 
+    </div>
+</div>
+
+<script src="main.js"></script>
+
+</body>
+</html>

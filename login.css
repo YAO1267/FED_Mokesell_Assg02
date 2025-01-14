@@ -1,0 +1,120 @@
+*{
+    font-family: 'Averia Serif Libre', serif;
+}
+form {
+    border: 3px solid #f1f1f1;
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 20px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.submitBtn {
+  width: 50%;
+  padding: 10px 18px;
+  align-items: center;
+  background-color:rgb(56, 79, 49);
+  border: none;
+  color: white;
+  border-radius: 5px;
+}
+
+.imgcontainer {
+  width: 65%;
+  height: auto;
+  display: flex;
+  margin-right: 5%;
+}
+
+img.avatar {
+  width: 100%;
+}
+
+.container {
+  padding: 16px;
+  color: rgb(56, 79, 49);
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+.tab {
+  overflow: hidden;
+  background-color: rgb(56, 79, 49);
+  display: flex;
+  border-radius: 5px;
+  justify-content: center;          /* Center elements horizontally */
+  align-items: center;              /* Center elements vertically */
+}
+
+.tab button {
+  background-color: inherit;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  color: white;
+  display: flex;                    /* Center content inside the child element */
+  justify-content: center;
+  align-items: center;
+  margin: 0 50px;
+}
+
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+
+
+/* Responsive Styles - Adjust layout on smaller screens */
+@media (max-width: 768px) {
+  .login-container {
+      padding: 10px;
+  }
+
+  .tab button {
+      font-size: 0.9rem;
+      padding: 12px;
+  }
+
+  .tabContent {
+      max-width: 100%;
+  }
+}
+
+/* Further adjustments for mobile screens */
+@media (max-width: 480px) {
+  .login-container {
+      padding: 10px;
+  }
+
+  .tabContent {
+      max-width: 100%;
+      padding: 15px;
+  }
+
+  .submitBtn {
+      font-size: 0.9rem;
+      padding: 10px 16px;
+  }
+
+  .imgcontainer {
+      width: 100%;
+      max-width: 250px;
+  }
+}
