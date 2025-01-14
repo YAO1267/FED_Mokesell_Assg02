@@ -4,13 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shoes</title>
+    <style>
+         
+    /* shoe menu */
+.shoes-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 30px;
+    width: 80% ;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align:center ;
+}
+.shoe-item {
     
+    border-radius: 10px;
+    padding: 10px;
+    width: 25%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1) ;
+}
+.shoe-item img {
+    width: 100%;
+    
+    border-radius: 10px;
+}
+.product-title {
+    font-size: 14px; 
+    font-weight: bold;
+    margin: 10px 0;
+    color: #5A4E42;
+  }
+.product-price {
+    font-size: 14px; 
+    color: #e74c3c;
+    margin-bottom: 10px;
+  }
+
+    </style>
 </head>
 <body>
     <div class="shoes-container">
         <!-- Item 1 -->
         <div class="shoe-item">
-        <img src="1.jpg" alt="Choco Bliss Cake">
+        <img src="images/1.jpg" alt="Choco Bliss Cake">
 
         <div class="product-title">Choco Bliss Cake</div>
         <div class="product-price">
@@ -22,7 +61,7 @@
 
         <!-- Item 2 -->
         <div class="shoe-item">
-            <img src="2.jpg" alt="Mocha Delight Cake">
+            <img src="images/2.jpg" alt="Mocha Delight Cake">
             <div class="product-title">Mocha Delight Cake</div>
             <div class="product-price">S$33.60</div>
             
@@ -31,7 +70,7 @@
 
         <!-- Item 3 -->
         <div class="shoe-item">
-            <img src="3.jpg" alt="Cookies & Cream Dream">
+            <img src="images/3.jpg" alt="Cookies & Cream Dream">
             <div class="product-title">Cookies & Cream Dream</div>
             <div class="product-price">S$33.80</div>
             <button onclick="addToCart('Cookies & Cream Dream', 33.80)">Add to Cart</button>
@@ -39,7 +78,7 @@
 
         <!-- Item 4 -->
         <div class="shoe-item">
-            <img src="4.jpg" alt="Velvet Dream Cake">
+            <img src="images/4.jpg" alt="Velvet Dream Cake">
             <div class="product-title">Velvet Dream Cake</div>
             <div class="product-price">
                 <strong><s>S$48.80</s></strong> $43.90</div>
@@ -48,7 +87,7 @@
 
         <!-- Item 5 -->
         <div class="shoe-item">
-            <img src="5.jpg" alt="Whisked Vanilla Cloud">
+            <img src="images/5.jpg" alt="Whisked Vanilla Cloud">
             <div class="product-title">Whisked Vanilla Cloud</div>
             <div class="product-price">S$38.80</div>
             <button onclick="addToCart('Whisked Vanilla Cloud', 38.80)">Add to Cart</button>
@@ -56,7 +95,7 @@
 
         <!-- Item 6 -->
         <div class="shoe-item">
-            <img src="6.jpg" alt="Royal Purple Bliss">
+            <img src="images/6.jpg" alt="Royal Purple Bliss">
             <div class="product-title">Royal Purple Bliss</div>
             <div class="product-price">
                 <strong><s>S$42.40</s></strong> S$38.15</div>
@@ -65,7 +104,7 @@
 
         <!-- Item 7 -->
         <div class="shoe-item">
-            <img src="3.jpg" alt="Rainbow Wonder Cake">
+            <img src="images/6.jpg" alt="Rainbow Wonder Cake">
             <div class="product-title">Rainbow Wonder Cake</div>
             <div class="product-price">S$26.10</div>
             <button onclick="addToCart('Rainbow Wonder Cake', 26.10)">Add to Cart</button>
@@ -73,7 +112,7 @@
 
         <!-- Item 8 -->
         <div class="shoe-item">
-            <img src="3.jpg" alt="Blue Ocean Cake">
+            <img src="images/6.jpg" alt="Blue Ocean Cake">
             <div class="product-title">Blue Ocean Cake</div>
             <div class="product-price">
                 <strong><s>S$47.40</s></strong> S$42.65</div>
@@ -82,7 +121,7 @@
 
         <!-- Item 9 -->
         <div class="shoe-item">
-            <img src="3.jpg" alt="Key Lime Fantasy Cake">
+            <img src="images/6.jpg" alt="Key Lime Fantasy Cake">
             <div class="product-title">Key Lime Fantasy Cake</div>
             <div class="product-price">S$38.80</div>
             <button onclick="addToCart('Key Lime Fantasy Cake', 38.80)">Add to Cart</button>
