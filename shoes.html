@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shoes</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <style>
          
     /* shoe menu */
@@ -27,9 +28,10 @@
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1) ;
 }
 .shoe-item img {
-    width: 100%;
-    
-    border-radius: 10px;
+    width: 100%; 
+    height: 200px; 
+    object-fit: cover; /* Ensures the image fills the dimensions without distortion */
+    border-radius: 10px; 
 }
 .product-title {
     font-size: 14px; 
