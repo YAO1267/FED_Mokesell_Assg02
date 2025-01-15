@@ -10,3 +10,8 @@ footer {
     color: white;
     padding: 50px;
 }
+.footerBottom {
+    width: 100%;
+    text-align: center;
+}
+
