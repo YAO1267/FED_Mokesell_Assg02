@@ -1,0 +1,12 @@
+html{
+    scroll-behavior: smooth;
+}
+body{
+    background-color: #FAFAFA;
+    font-family:'Merriweather', serif;
+}
+footer {
+    background-color:#333333;
+    color: white;
+    padding: 50px;
+}
