@@ -18,65 +18,66 @@ function clickTab(evt, name) {
   }
 
 
-  const signup = async (email, password) => {
-    const password = hashPassword(password); // Use bcrypt or another library.
-    const response = await fetch('https://database-9cfc.restdb.io/rest/contactdetail', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'x-apikey': '677f336bc7a864b3d4c78324',
-        },
-        body: JSON.stringify({ username: email, password: password }),
-    });
-    if (response.ok) {
-        console.log('Signup successful');
-        // window.alert('sign up successfully')
-    } else {
-        console.error('Error signing up:', response.statusText);
-    }
-};
-
-
-
-
-
-
-
-
-
-
-  
-// var users = new Map();
-// users.set('Adam', '123456')
-// users.set('Bob', '123456')
 
 function loginOrSignup(evt, name) {
     // Check if the action is Login
     if (name == 'Login') {
         name = document.getElementById('login_name').value
         psw = document.getElementById('login_psw').value
-
-        if (users.get(name) == psw) {
-            window.alert('login success')
-            window.location.href = "index.html?username=" + name
-        } else {
-            window.alert('login failed')
-        }
+        login(name,psw)
     }
 
     if (name == 'Signup') {
         name = document.getElementById('signup_name').value
         psw = document.getElementById('signup_psw').value
         signup(name,psw)
-       
-       
-        // adds the new username-password
-        // if (name != '' && psw != '') {
-        //     users.set(name, psw)
-        //     window.alert('singn success')
-        //     window.location.href = "index.html?username=" + name
-        // } else {
-        //     window.alert('please input username and password')
-        // }
+    
     }
 }
+
+
+const signup = async (email, password) => {
+    // const hashPassword = hashPassword(password)  ; // Use bcrypt or another library.
+    const response = await fetch('https://database-9cfc.restdb.io/rest/contactdetail', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-apikey': '677f336bc7a864b3d4c78324',
+        },
+        body: JSON.stringify({ loginemail: email, password: password }),
+    });
+    if (response.ok) {
+        console.log('Signup successfully');
+        window.alert('Sign up successfully')
+    } else {
+        console.error('Error signing up:', response.statusText);
+        window.alert('Sing up successfully')
+    }
+};
+
+const login = async (email, password) => {
+    const query = JSON.stringify({ loginemail: email, password: Number(password) }); // Convert password to number
+    const queryURL = `https://database-9cfc.restdb.io/rest/contactdetail?q=${encodeURIComponent(query)}`;
+    const response = await fetch(queryURL, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-apikey': '677f336bc7a864b3d4c78324',
+        },
+    });
+    const users = await response.json();
+    if (users.length > 0) {
+        const user = users[0];
+      
+        if (password === user.password.toString()) {
+            console.log('Login successfully');
+            window.alert('Login successfully')
+        } else {
+            console.error('Invalid username or password');
+            window.alert('Invalid username or password')
+        }
+    } else {
+        console.error('Invalid username or password');
+        window.alert('Invalid username or password')
+    }
+};
