@@ -49,9 +49,10 @@ const signup = async (email, password) => {
     if (response.ok) {
         console.log('Signup successfully');
         window.alert('Sign up successfully')
+        window.location.href = "index.html"
     } else {
         console.error('Error signing up:', response.statusText);
-        window.alert('Sing up successfully')
+        window.alert('Errors')
     }
 };
 
@@ -72,6 +73,12 @@ const login = async (email, password) => {
         if (password === user.password.toString()) {
             console.log('Login successfully');
             window.alert('Login successfully')
+            if (email.startsWith("Admin")){
+                // window.location.href = "index.html"
+            } else{
+                window.location.href = "index.html"
+            }
+            
         } else {
             console.error('Invalid username or password');
             window.alert('Invalid username or password')
