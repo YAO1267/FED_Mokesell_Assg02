@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const BASE_URL = "https://mokeselldb-5c11.restdb.io/rest/menu";
 
     const form = document.getElementById("add-product-form");
+    const nameInput = document.getElementById("name");
     const categoryInput = document.getElementById("category");
     const priceInput = document.getElementById("price");
     const imageInput = document.getElementById("upload");
@@ -28,8 +29,10 @@ document.addEventListener("DOMContentLoaded", function () {
     form.addEventListener("submit", function (e) {
         e.preventDefault();
 
+        const name = nameInput.value;
         const category = categoryInput.value;
         const price = parseFloat(priceInput.value);
+
 
         if (!category || isNaN(price) || price <= 0 || !imageBase64) {
             alert("Please fill in all fields correctly!");
@@ -37,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         const productData = {
+            name, 
             category,
             price,
             image: imageBase64,
