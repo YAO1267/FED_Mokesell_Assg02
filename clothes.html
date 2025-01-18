@@ -49,88 +49,10 @@
     </style>
 </head>
 <body>
-    <div class="clothes-container">
-        <!-- Item 1 -->
-        <div class="clothes-item">
-        <img src="images/cl1.jpg" alt="Unisex Varsity Jacket - Red">
-
-        <div class="product-title">Unisex Varsity Jacket - Red</div>
-        <div class="product-price">
-            <strong></strong> S$46.50</div>
-          
-        
-        <button onclick="addToCart('Unisex Varsity Jacket - Red', 29.50)">Add to Cart</button>
-        </div>
-
-        <!-- Item 2 -->
-        <div class="clothes-item">
-            <img src="images/cl2.jpg" alt="Ruched Leather Jacket Vintage">
-            <div class="product-title">Ruched Leather Jacket Vintage</div>
-            <div class="product-price">S$37.60</div>
-            
-            <button onclick="addToCart('Ruched Leather Jacket Vintage', 33.60)">Add to Cart</button>
-        </div>
-
-        <!-- Item 3 -->
-        <div class="clothes-item">
-            <img src="images/cl3.jpg" alt="Lazy Style Knitted Top">
-            <div class="product-title">Lazy Style Knitted Top</div>
-            <div class="product-price">S$33.80</div>
-            <button onclick="addToCart('Lazy Style Knitted Top', 33.80)">Add to Cart</button>
-        </div>
-
-        <!-- Item 4 -->
-        <div class="clothes-item">
-            <img src="images/cl4.jpg" alt="Velvet Dream Cake">
-            <div class="product-title">Celine Jacket(L) - Green</div>
-            <div class="product-price">
-                <strong></strong> $63.90</div>
-            <button onclick="addToCart('Celine Jacket(L) - Green', 43.90)">Add to Cart</button>
-        </div>
-
-        <!-- Item 5 -->
-        <div class="clothes-item">
-            <img src="images/cl5.jpg" alt="Whisked Vanilla Cloud">
-            <div class="product-title">Whisked Vanilla Cloud</div>
-            <div class="product-price">S$38.80</div>
-            <button onclick="addToCart('Whisked Vanilla Cloud', 38.80)">Add to Cart</button>
-        </div>
-
-        <!-- Item 6 -->
-        <div class="clothes-item">
-            <img src="images/cl6.jpg" alt="Royal Purple Bliss">
-            <div class="product-title">Royal Purple Bliss</div>
-            <div class="product-price">
-                <strong><s>S$42.40</s></strong> S$38.15</div>
-            <button onclick="addToCart('Royal Purple Bliss', 38.15)">Add to Cart</button>
-        </div>
-
-        <!-- Item 7 -->
-        <div class="clothes-item">
-            <img src="images/cl7.jpg" alt="V-Neck Cable Knit Sweater">
-            <div class="product-title">V-Neck Cable Knit Sweater</div>
-            <div class="product-price">S$26.10</div>
-            <button onclick="addToCart('V-Neck Cable Knit Sweater', 26.10)">Add to Cart</button>
-        </div>
-
-        <!-- Item 8 -->
-        <div class="clothes-item">
-            <img src="images/cl8.jpg" alt="Cropped Denim Jacket">
-            <div class="product-title">Cropped Denim Jacket</div>
-            <div class="product-price">
-                <strong><s>S$47.40</s></strong> S$42.65</div>
-            <button onclick="addToCart('Cropped Denim Jacket', 42.65)">Add to Cart</button>
-        </div>
-
-        <!-- Item 9 -->
-        <div class="clothes-item">
-            <img src="images/cl9.jpg" alt="Key Lime Fantasy Cake">
-            <div class="product-title">Key Lime Fantasy Cake</div>
-            <div class="product-price">S$38.80</div>
-            <button onclick="addToCart('Key Lime Fantasy Cake', 38.80)">Add to Cart</button>
-        </div>
-        </div>
-        <p></p>
+    <div class="clothes-container" id="clothes-container">
+     
+        <!--shows product dynamically-->
+    </div>
 
         <footer>
                 <div class="footerBottom">
@@ -144,6 +66,81 @@
                       <a href="https://x.com/i/flow/login" target="_blank" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
                     </div>                 
                 </div>
-            </footer>        
+        </footer>       
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const APIKEY = "677f336bc7a864b3d4c78324";
+                const BASE_URL = "https://database-9cfc.restdb.io/rest/menu";
+                const clothesContainer = document.getElementById("clothes-container");
+        
+                // Fetch data from RestDB
+                fetch(BASE_URL, {
+                    method: "GET",
+                    headers: {
+                        "x-apikey": APIKEY,
+                        "Cache-Control": "no-cache",
+                    },
+                })
+                .then((response) => response.json())
+                .then((products) => {
+                    // Filter products by category (clothes for this page)
+                    const filteredClothes = products.filter(
+                        (product) => product.category && product.category.toLowerCase() === "clothes"
+                    );
+        
+                    if (filteredClothes.length === 0) {
+                        clothesContainer.innerHTML = "<p>No clothes available.</p>";
+                        return;
+                    }
+        
+                    filteredClothes.forEach((product) => {
+                        // Create a new product item div
+                        const clothesItem = document.createElement("div");
+                        clothesItem.classList.add("clothes-item");
+        
+                        // Create an image element
+                        const productImage = document.createElement("img");
+                        productImage.src = product.image || "placeholder.jpg"; // Default image if none exists
+                        productImage.alt = product.name || "Product Image";
+        
+                        // Product title
+                        const productTitle = document.createElement("div");
+                        productTitle.classList.add("product-title");
+                        productTitle.textContent = product.name || "Untitled Product";
+        
+                        // Product price
+                        const productPrice = document.createElement("div");
+                        productPrice.classList.add("product-price");
+                        productPrice.textContent = `S$${product.price}`;
+        
+                        // Add to cart button
+                        const addToCartButton = document.createElement("button");
+                        addToCartButton.textContent = "Add to Cart";
+                        addToCartButton.onclick = function () {
+                            addToCart(product.name, product.price);
+                        };
+        
+                        // Append image, title, price, and button to the product item
+                        clothesItem.appendChild(productImage);
+                        clothesItem.appendChild(productTitle);
+                        clothesItem.appendChild(productPrice);
+                        clothesItem.appendChild(addToCartButton);
+        
+                        // Append the product item to the clothes container
+                        clothesContainer.appendChild(clothesItem);
+                    });
+                })
+                .catch((error) => {
+                    console.error("Error fetching products:", error);
+                    clothesContainer.innerHTML = "<p>Failed to load clothes. Please try again later.</p>";
+                });
+            });
+        
+            // Mock Add to Cart function
+            function addToCart(productName, productPrice) {
+                alert(`${productName} (S$${productPrice}) added to the cart.`);
+            }
+        </script>
+         
 </body>
 </html>

@@ -49,89 +49,8 @@
     </style>
 </head>
 <body>
-    <div class="decor-container">
-        <!-- Item 1 -->
-        <div class="decor-item">
-        <img src="images/hd1.jpg" alt="Choco Bliss Cake">
-
-        <div class="product-title">Choco Bliss Cake</div>
-        <div class="product-price">
-            <strong><s>S$32.80</s></strong> S$29.50</div>
-          
-        
-        <button onclick="addToCart('Choco Bliss Cake', 29.50)">Add to Cart</button>
-        </div>
-
-        <!-- Item 2 -->
-        <div class="decor-item">
-            <img src="images/hd2.jpg" alt="Mocha Delight Cake">
-            <div class="product-title">Mocha Delight Cake</div>
-            <div class="product-price">S$33.60</div>
-            
-            <button onclick="addToCart('Mocha Delight Cake', 33.60)">Add to Cart</button>
-        </div>
-
-        <!-- Item 3 -->
-        <div class="decor-item">
-            <img src="images/hd3.jpg" alt="Cookies & Cream Dream">
-            <div class="product-title">Cookies & Cream Dream</div>
-            <div class="product-price">S$33.80</div>
-            <button onclick="addToCart('Cookies & Cream Dream', 33.80)">Add to Cart</button>
-        </div>
-
-        <!-- Item 4 -->
-        <div class="decor-item">
-            <img src="images/hd4.jpg" alt="Velvet Dream Cake">
-            <div class="product-title">Velvet Dream Cake</div>
-            <div class="product-price">
-                <strong><s>S$48.80</s></strong> $43.90</div>
-            <button onclick="addToCart('Velvet Dream Cake', 43.90)">Add to Cart</button>
-        </div>
-
-        <!-- Item 5 -->
-        <div class="decor-item">
-            <img src="images/hd5.jpg" alt="Whisked Vanilla Cloud">
-            <div class="product-title">Whisked Vanilla Cloud</div>
-            <div class="product-price">S$38.80</div>
-            <button onclick="addToCart('Whisked Vanilla Cloud', 38.80)">Add to Cart</button>
-        </div>
-
-        <!-- Item 6 -->
-        <div class="decor-item">
-            <img src="images/hd6.jpg" alt="Royal Purple Bliss">
-            <div class="product-title">Royal Purple Bliss</div>
-            <div class="product-price">
-                <strong><s>S$42.40</s></strong> S$38.15</div>
-            <button onclick="addToCart('Royal Purple Bliss', 38.15)">Add to Cart</button>
-        </div>
-
-        <!-- Item 7 -->
-        <div class="decor-item">
-            <img src="images/hd7.jpg" alt="Rainbow Wonder Cake">
-            <div class="product-title">Rainbow Wonder Cake</div>
-            <div class="product-price">S$26.10</div>
-            <button onclick="addToCart('Rainbow Wonder Cake', 26.10)">Add to Cart</button>
-        </div>
-
-        <!-- Item 8 -->
-        <div class="decor-item">
-            <img src="images/hd8.jpg" alt="Blue Ocean Cake">
-            <div class="product-title">Blue Ocean Cake</div>
-            <div class="product-price">
-                <strong><s>S$47.40</s></strong> S$42.65</div>
-            <button onclick="addToCart('Blue Ocean Cake', 42.65)">Add to Cart</button>
-        </div>
-
-        <!-- Item 9 -->
-        <div class="decor-item">
-            <img src="images/hd9.jpg" alt="Key Lime Fantasy Cake">
-            <div class="product-title">Key Lime Fantasy Cake</div>
-            <div class="product-price">S$38.80</div>
-            <button onclick="addToCart('Key Lime Fantasy Cake', 38.80)">Add to Cart</button>
-        </div>
-        </div>
-        <p></p>
-
+    <div id="homedecor-container" class="decor-container"></div>
+     
         <footer>
             <div class="footerBottom">
             
@@ -145,5 +64,81 @@
                 </div>                 
             </div>
         </footer>        
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const APIKEY = "677f336bc7a864b3d4c78324";
+                const BASE_URL = "https://database-9cfc.restdb.io/rest/menu";
+                const homedecorContainer = document.getElementById("homedecor-container");
+        
+                // Fetch data from RestDB
+                fetch(BASE_URL, {
+                    method: "GET",
+                    headers: {
+                        "x-apikey": APIKEY,
+                        "Cache-Control": "no-cache",
+                    },
+                })
+                .then((response) => response.json())
+                .then((products) => {
+                    // Filter products by category (homedecor for this page)
+                    const filteredHomedecor = products.filter(
+                        (product) => product.category && product.category.toLowerCase() === "homedecor"
+                    );
+        
+                    if (filteredHomedecor.length === 0) {
+                        homedecorContainer.innerHTML = "<p>No home decor items available.</p>";
+                        return;
+                    }
+        
+                    filteredHomedecor.forEach((product) => {
+                        // Create a new product item div
+                        const homedecorItem = document.createElement("div");
+                        homedecorItem.classList.add("decor-item");
+        
+                        // Create an image element
+                        const productImage = document.createElement("img");
+                        productImage.src = product.image || "placeholder.jpg"; // Default image if none exists
+                        productImage.alt = product.name || "Product Image";
+        
+                        // Product title
+                        const productTitle = document.createElement("div");
+                        productTitle.classList.add("product-title");
+                        productTitle.textContent = product.name || "Untitled Product";
+        
+                        // Product price
+                        const productPrice = document.createElement("div");
+                        productPrice.classList.add("product-price");
+                        productPrice.textContent = `S$${product.price}`;
+        
+                        // Add to cart button
+                        const addToCartButton = document.createElement("button");
+                        addToCartButton.textContent = "Add to Cart";
+                        addToCartButton.onclick = function () {
+                            addToCart(product.name, product.price);
+                        };
+        
+                        // Append image, title, price, and button to the product item
+                        homedecorItem.appendChild(productImage);
+                        homedecorItem.appendChild(productTitle);
+                        homedecorItem.appendChild(productPrice);
+                        homedecorItem.appendChild(addToCartButton);
+        
+                        // Append the product item to the homedecor container
+                        homedecorContainer.appendChild(homedecorItem);
+                    });
+                })
+                .catch((error) => {
+                    console.error("Error fetching products:", error);
+                    homedecorContainer.innerHTML = "<p>Failed to load home decor items. Please try again later.</p>";
+                });
+            });
+        
+            // Mock Add to Cart function
+            function addToCart(productName, productPrice) {
+                alert(`${productName} (S$${productPrice}) added to the cart.`);
+            }
+        </script>
+        
 </body>
 </html>
