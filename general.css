@@ -1,0 +1,131 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(231,230,214);
+    box-sizing: border-box;
+}
+
+/* general -- nav menu bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 25px;
+    font-family:'Averia Serif Libre',serif;
+    font-size: 25px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;                                      /* Removes the underline from the links */
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+}
+
+
+
+.navbar .link1 a{
+    font-size: 30px;
+    text-decoration: none; 
+    color: black;
+}
+
+/* general -- Hide hamburger icon on larger screens */
+.hamburger {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;                                            /* Changes the cursor to a pointer when hovering over the icon, indicating it's clickable. */
+}
+
+header .nav-links a:hover {
+    color: rgba(0, 0, 0, 0.635);
+}
+
+.navbar .link1 a:hover {
+    color: rgb(0, 0, 0, 0.635);
+}
+
+/* general -- menubar -- Responsive Styling for Smaller Screens */
+@media screen and (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        background-color: rgb(231,230,214);
+        border: 1px solid white;
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .hamburger {
+        display: block;
+    }
+}
+
+/* general -- Footer styles */
+footer {
+    background-color: rgb(231,230,214);
+    color: rgb(0, 0, 0);
+    padding: 20px;
+    text-align: center;
+}
+  
+footer .footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+  
+footer .footer-logo {
+    text-align: center;
+}
+  
+footer .footer-logo img {
+    width: 80px;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 50%;
+}
+  
+footer .footer-logo p {
+    margin: 0;
+}
+  
+footer .social-media {
+    text-align: center;
+}
+  
+footer .social-media p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+  
+footer .social-media a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-size: 35px;
+    margin: 0 10px;
+}
+  
+footer .social-media a:hover {
+    color: rgb(0, 0, 0, 0.635);
+} 
+  
+footer .copyright {
+    margin-top: 10px;
+    font-size: 14px;
+}

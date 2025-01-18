@@ -44,11 +44,13 @@ const signup = async (email, password) => {
             'x-apikey': '677f336bc7a864b3d4c78324',
         },
         // 0 means normal user and 1 means admin account
-        body: JSON.stringify({ loginemail: email, password: password,tpye: 0 }),  
+        body: JSON.stringify({ loginemail: email, password: password, type: 0 }),  
     });
     if (response.ok) {
         console.log('Signup successfully');
         window.alert('Sign up successfully')
+        sessionStorage.setItem("loginemail",JSON.stringify(email))
+        sessionStorage.setItem("password",JSON.stringify(password))
         window.location.href = "index.html"
     } else {
         console.error('Error signing up:', response.statusText);
@@ -57,7 +59,7 @@ const signup = async (email, password) => {
 };
 
 const login = async (email, password) => {
-    const query = JSON.stringify({ loginemail: email, password: Number(password) }); // Convert password to number
+    const query = JSON.stringify({ loginemail: email, password: Number(password)}); // Convert password to number
     const queryURL = `https://database-9cfc.restdb.io/rest/contactdetail?q=${encodeURIComponent(query)}`;
     const response = await fetch(queryURL, {
         method: 'GET',
@@ -69,14 +71,22 @@ const login = async (email, password) => {
     const users = await response.json();
     if (users.length > 0) {
         const user = users[0];
-      
+        // check if the user entert the right pw
         if (password === user.password.toString()) {
             console.log('Login successfully');
             window.alert('Login successfully')
-            if (user.tpye === 1){
-                window.location.href = "index.html"
+            
+            // check if the user is admin or normal user
+            if (user.type === 1){
+                // store the data using local storage
+                sessionStorage.setItem("loginemail",JSON.stringify(email))
+                sessionStorage.setItem("password",JSON.stringify(password))
+                // window.location.href = "index.html" //go to the admin page
             } else{
-                // window.location.href = "index.html"
+                // store the data using local storage
+                sessionStorage.setItem("loginemail",JSON.stringify(email))
+                sessionStorage.setItem("password",JSON.stringify(password))
+                window.location.href = "index.html"
             }
             
         } else {
