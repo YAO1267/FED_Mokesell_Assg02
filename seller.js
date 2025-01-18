@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const APIKEY = "678a44b019b96a2362af6318";
-    const BASE_URL = "https://mokeselldb-5c11.restdb.io/rest/menu";
+    const APIKEY = "677f336bc7a864b3d4c78324";
+    const BASE_URL = "https://database-9cfc.restdb.io/rest/menu";
 
     const form = document.getElementById("add-product-form");
     const nameInput = document.getElementById("name");
