@@ -37,14 +37,14 @@ function loginOrSignup(evt, name) {
 
 
 const signup = async (email, password) => {
-    // const hashPassword = hashPassword(password)  ; // Use bcrypt or another library.
     const response = await fetch('https://database-9cfc.restdb.io/rest/contactdetail', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'x-apikey': '677f336bc7a864b3d4c78324',
         },
-        body: JSON.stringify({ loginemail: email, password: password }),
+        // 0 means normal user and 1 means admin account
+        body: JSON.stringify({ loginemail: email, password: password,tpye: 0 }),  
     });
     if (response.ok) {
         console.log('Signup successfully');
@@ -73,10 +73,10 @@ const login = async (email, password) => {
         if (password === user.password.toString()) {
             console.log('Login successfully');
             window.alert('Login successfully')
-            if (email.startsWith("Admin")){
-                // window.location.href = "index.html"
-            } else{
+            if (user.tpye === 1){
                 window.location.href = "index.html"
+            } else{
+                // window.location.href = "index.html"
             }
             
         } else {

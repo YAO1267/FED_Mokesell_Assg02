@@ -1,3 +1,24 @@
-#navbarNavAltMarkup{
-    
+
+.custom-green {
+    background-color: #6c6c6c6b !important; /* Change to any green shade */
+  }
+
+/* Change offcanvas (sidebar) background */
+.offcanvas {
+    background-color: #1a1a1af7 !important; /* Green */
+}
+
+/* Change dropdown background */
+.dropdown-menu {
+    background-color: #28a745 !important; /* Green */
+}
+
+/* Change dropdown items' text color */
+.dropdown-menu .dropdown-item {
+    color: white !important; /* Ensure white text */
+}
+
+/* Change dropdown items' hover effect */
+.dropdown-menu .dropdown-item:hover {
+    background-color: #1f7a33 !important; /* Darker green */
 }
