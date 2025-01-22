@@ -1,9 +1,10 @@
+
 /* General Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: rgb(231,230,214);
+    background-color:#F2EFE7;
     box-sizing: border-box;
 }
 

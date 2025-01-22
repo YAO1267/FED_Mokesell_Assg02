@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shoes</title>
     <link rel="icon" type="image/x-icon" href="images/logo.png">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="general.css">
     <style>
          
     /* shoe menu */
@@ -49,6 +49,23 @@
     </style>
 </head>
 <body>
+     <!-- nav bar -->
+  <header class="navbar">
+    <div class="link1">
+        <a onclick="click_my_account(event, 'MokeSell')">MokeSell</a>
+    </div>
+    <nav class="nav-links">
+        <a onclick="click_my_account(event, 'Clothes')">Clothes</a>
+        <a onclick="click_my_account(event, 'Shoes')">Shoes</a>
+        <a onclick="click_my_account(event, 'Home-decor')">Home-decor</a>
+        <a onclick="click_my_account(event, 'my_account')" id="myAccountLink" style="display:none;">My Account</a>
+        <a onclick="click_my_account(event, 'Login')" id="loginLink" style="display:block;">Login/Sign Up</a>
+        <a onclick="click_my_account(event, 'shopping')">
+          <i class="fa-solid fa-cart-shopping"></i>
+        </a>
+    </nav>
+  </header>
+  
     <div class="shoes-container" id="shoes-container">
      
         <!--shows product dynamically-->
