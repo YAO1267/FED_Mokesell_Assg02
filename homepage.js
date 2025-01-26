@@ -68,6 +68,7 @@ function showSlides() {
   setTimeout(showSlides, 2000); // Change image every 2 seconds
 }
 
+//spin-to-win
 document.getElementById("spinButton").addEventListener("click", function () {
     let wheel = document.getElementById("wheel");
 
@@ -91,6 +92,7 @@ function getPrize(degree) {
     if (degree >= 60 && degree < 120) return "Free Shipping";
     if (degree >= 120 && degree < 180) return "20% Off Coupon";
     if (degree >= 180 && degree < 240) return "Buy 1 Get 1 Free";
-    if (degree >= 240 && degree < 300) return "No Prize 😢";
+    if (degree >= 240 && degree < 300) return "No Prize";
     if (degree >= 300 && degree < 360) return "50% Off Coupon";
 }
+
