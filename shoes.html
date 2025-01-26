@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shoes</title>
     <link rel="icon" type="image/x-icon" href="images/logo.png">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="general.css">
+
+      <!-- google font Averia Serif Libre  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
     <style>
          
     /* shoe menu */
@@ -49,11 +54,46 @@
     </style>
 </head>
 <body>
+     <!-- nav bar -->
+  <header class="navbar">
+    <div class="link1">
+        <a onclick="click_my_account(event, 'MokeSell')">MokeSell</a>
+    </div>
+    <nav class="nav-links">
+        <a onclick="click_my_account(event, 'Clothes')">Clothes</a>
+        <a onclick="click_my_account(event, 'Shoes')">Shoes</a>
+        <a onclick="click_my_account(event, 'Home-decor')">Home-decor</a>
+        <a onclick="click_my_account(event, 'my_account')" id="myAccountLink" style="display:none;">My Account</a>
+        <a onclick="click_my_account(event, 'Login')" id="loginLink" style="display:block;">Login/Sign Up</a>
+        <a onclick="click_my_account(event, 'shopping')">
+          <i class="fa-solid fa-cart-shopping"></i>
+        </a>
+    </nav>
+  </header>
+
+  <div class="menu-header">
+    <h1 >Shoes Collection</h1>
+  </div>  
+  
     <div class="shoes-container" id="shoes-container">
      
         <!--shows product dynamically-->
     </div>
 
+    <div id="filter-options">
+        <h3>Filter by Price</h3>
+        <label><input type="radio" name="price" value="0-40"> $0 - $40</label><br>
+        <label><input type="radio" name="price" value="41-100"> $41 - $100</label><br>
+        <label><input type="radio" name="price" value="101-250"> $101 - $250</label><br>
+
+        <h3>Sort Alphabetically</h3>
+        <label><input type="radio" name="alphabet" value="A-Z"> A-Z</label><br>
+        <label><input type="radio" name="alphabet" value="Z-A"> Z-A</label><br>
+
+        <button id="apply-filters">Apply Filters</button>
+
+    </div>
+    
         <footer>
             <div class="footerBottom">
             
@@ -133,7 +173,7 @@
                 });
             });
     
-    
-        </script>       
+        </script> 
+        <script src="filtering.js"></script>       
 </body>
 </html>

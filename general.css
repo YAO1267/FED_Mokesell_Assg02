@@ -1,12 +1,18 @@
+
 /* General Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: rgb(231,230,214);
+    background-color:#F2EFE7;
     box-sizing: border-box;
 }
-
+h1{
+    font-family: 'Averia Serif Libre', serif;
+    font-size: 28px;
+    color: #5A4E42;
+    margin: 0;
+}
 /* general -- nav menu bar */
 .navbar {
     display: flex;
@@ -128,4 +134,11 @@ footer .social-media a:hover {
 footer .copyright {
     margin-top: 10px;
     font-size: 14px;
+}
+.menu-header {
+    text-align: center;
+    background-color: #c7cfc1; 
+    padding: 20px 10px;
+    border-bottom: 2px ;
+    margin-bottom: 20px; 
 }
