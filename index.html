@@ -2,18 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-    <title>homepage</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>homepage</title>
+
   <link rel="stylesheet" href="homepage.css">
   <link rel="stylesheet" href="general.css">
 
-  <!-- google font Averia Serif Libre  -->
+  <!-- google font Rubik Scribble -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Scribble&display=swap" rel="stylesheet">
+  
+  <!-- google font Averia Serif Libre -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
   
+ 
+  
+  <!-- google font Rubik Burned-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Rubik+Burned&family=Rubik+Doodle+Shadow&display=swap" rel="stylesheet">
+  
   <!-- icon kit -->
   <script src="https://kit.fontawesome.com/c3f87a633e.js" crossorigin="anonymous"></script>
-	
 </head>
 <body>
   <!-- nav bar -->
@@ -35,6 +48,17 @@
       &#9776;       <!-- Hamburger icon -->
     </div>
   </header>
+
+  <!-- <audio id="backgroundMusic" src="your-audio-file.mp3" preload="auto"></audio> -->
+  <!-- top video showcase the video -->
+  <div class="con">
+      <video autoplay loop muted class="background-video">
+          <source src="./commercialVideo.MP4" type="video/mp4">
+      </video>
+      <div class="overlay-text1">
+          <h1>Old Finds, New Stories</h1>
+      </div>
+  </div>
 
   <!-- Slideshow container -->
   <div class="slideshow-container">
@@ -93,13 +117,26 @@
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        background-color: white;
+        background-color: #fff;
         padding: 20px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-        border-radius: 8px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+        border-radius: 12px;
         z-index: 1000;
+        text-align: center;
+        width: 300px;
+        animation: popupAnimation 0.5s ease-out;
     }
-    
+
+    /* Animation for popup */
+    @keyframes popupAnimation {
+        from {
+            transform: translate(-50%, -50%) scale(0.8);
+        }
+        to {
+            transform: translate(-50%, -50%) scale(1);
+        }
+    }
+
     /* Overlay background */
     .overlay {
         display: none;
@@ -108,9 +145,68 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.5);
+        background: rgba(0, 0, 0, 0.6);
         z-index: 999;
+        transition: opacity 0.3s ease;
     }
+
+    /* Wheel container */
+    .wheel-container {
+        margin: 20px 0;
+    }
+
+    .wheel {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 5px solid #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f1f1f1;
+    }
+
+    .wheel img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* Spin button styles */
+    #spinButton {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 10px;
+        transition: background-color 0.3s ease;
+    }
+
+    #spinButton:hover {
+        background-color: #45a049;
+    }
+
+    /* Close button styles */
+    .popup button {
+        background-color: #f44336;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 15px;
+        font-size: 14px;
+    }
+
+    .popup button:hover {
+        background-color: #e53935;
+    }
+
   </style>
  
 
@@ -118,20 +214,16 @@
   <!-- The Popup -->
   <div id="overlay" class="overlay" onclick="closePopup()"></div>
   <div id="popup" class="popup">
-      <h2>Popup Title</h2>
-      <p>This is a customizable popup.</p>
-      <button onclick="closePopup()">Close</button>
-  </div>
-
-
-  <!-- wheel -->
-  <div class="wheel-container">
-    <div class="wheel" id="wheel">
-        <img src="./images/wheel.png" alt="Spin Wheel">
+    <!-- wheel -->
+    <div class="wheel-container">
+      <div class="wheel" id="wheel">
+          <img src="./images/wheel.png" alt="Spin Wheel">
+      </div>
+      <button id="spinButton">Spin</button>
     </div>
-    <button id="spinButton">Spin</button>
+    <div id="result"></div>
+    <button onclick="closePopup()">Close</button>
   </div>
-  <div id="result"></div>
 
   <!-- footer -->
   <footer>
