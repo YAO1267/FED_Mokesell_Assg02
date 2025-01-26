@@ -112,13 +112,10 @@
         z-index: 999;
     }
   </style>
-  </head>
-  <body>
+ 
 
-  <button onclick="openPopup()">Open Popup</button>
-
+ <button onclick="openPopup()">Open Popup</button>
   <!-- The Popup -->
-  <!-- testing -->
   <div id="overlay" class="overlay" onclick="closePopup()"></div>
   <div id="popup" class="popup">
       <h2>Popup Title</h2>
@@ -126,23 +123,7 @@
       <button onclick="closePopup()">Close</button>
   </div>
 
-  <script>
-      function openPopup() {
-          document.getElementById("popup").style.display = "block";
-          document.getElementById("overlay").style.display = "block";
-      }
 
-      function closePopup() {
-          document.getElementById("popup").style.display = "none";
-          document.getElementById("overlay").style.display = "none";
-      }
-      window.onload = function() {  
-            if (sessionStorage.getItem("loginemail") === JSON.stringify(email)) {
-                openPopup();
-                sessionStorage.removeItem("loginemail"); // Ensure it only appears once
-            }
-      };
-  </script>
   <!-- wheel -->
   <div class="wheel-container">
     <div class="wheel" id="wheel">
