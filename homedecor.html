@@ -36,7 +36,7 @@
 .decor-item img {
     width: 100%; 
     height: 200px; 
-    object-fit: cover; /* Ensures the image fills the dimensions without distortion */
+    object-fit: cover; 
     border-radius: 10px; 
 }
 .product-title {
@@ -131,7 +131,7 @@
                 })
                 .then((response) => response.json())
                 .then((products) => {
-                    // Filter products by category (homedecor for this page)
+                    // Filter products by homedecor
                     const filteredHomedecor = products.filter(
                         (product) => product.category && product.category.toLowerCase() === "home-decor"
                     );
@@ -184,7 +184,7 @@
                 });
             });
         
-            // Mock Add to Cart function
+            
             function addToCart(productName, productPrice) {
                 alert(`${productName} (S$${productPrice}) added to the cart.`);
             }

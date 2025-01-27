@@ -123,7 +123,7 @@
                 })
                 .then((response) => response.json())
                 .then((products) => {
-                    // Filter products by category (shoes for this page)
+                    // Filter products by category (shoes )
                     const filteredShoes = products.filter(product => product.category.toLowerCase() === "shoes");
     
                     if (filteredShoes.length === 0) {
