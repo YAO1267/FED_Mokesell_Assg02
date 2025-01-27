@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Profile</title>
+    
 </head>
 <body>
     
@@ -33,12 +34,42 @@
                 <button type="button" onclick="saveChanges()">Save Changes</button>
                 <button type="button" class="btn-logout" onclick="logout()">Logout</button>
             </div>
-            
+
         </form>
     </div>
     <script>
-        const useremail = JSON.parse(sessionStorage.getItem("loginemail"))
-        console.log(useremail)
+        // const useremail = JSON.parse(sessionStorage.getItem("loginemail")) //to get user data from session
+        // console.log(useremail)
+        const useremail = sessionStorage.getItem("loginemail");
+        document.getElementById("email").value = useremail;
+
+        // to handle save changes
+        function saveChanges() {
+            const firstName = document.getElementById("firstName").value;
+            const lastName = document.getElementById("lastName").value;
+            const password = document.getElementById("password").value;
+
+            if (!firstName || !lastName) {
+                alert("First Name and Last Name are required!");
+                return;
+            }
+            //missing***(storing of name)
+
+            if (password) {
+                sessionStorage.setItem("password", password); // Save new password if entered
+            }
+
+            alert("Profile updated successfully!");
+        }
+        //log out
+        function logout() {
+            sessionStorage.clear(); 
+            alert("Logged out successfully!");
+            window.location.href = "login.html"; // Redirect to login page after logging out
+        }
+
+
+
     </script>
 </body>
 </html>
