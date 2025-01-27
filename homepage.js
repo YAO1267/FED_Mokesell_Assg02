@@ -12,6 +12,7 @@ function checkLoginStatus(){
         // If email exists, user is logged in
         document.getElementById('myAccountLink').style.display = 'inline';
         document.getElementById('loginLink').style.display = 'none';
+        openPopup()
     } else {
         // If no email, user is not logged in
         document.getElementById('myAccountLink').style.display = 'none';
@@ -20,10 +21,21 @@ function checkLoginStatus(){
 }
 
 
+function openPopup() {
+    document.getElementById("popup").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+}
+
+function closePopup() {
+    document.getElementById("popup").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+}
+
 
 function click_my_account(evt, page_name) {
     if (page_name == 'MokeSell') {
         useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
+  
         window.location.href = "index.html"
     }
     else if(page_name == 'Clothes'){
@@ -68,6 +80,7 @@ function showSlides() {
   setTimeout(showSlides, 2000); // Change image every 2 seconds
 }
 
+// spin-to-win
 document.getElementById("spinButton").addEventListener("click", function () {
     let wheel = document.getElementById("wheel");
 
@@ -91,6 +104,7 @@ function getPrize(degree) {
     if (degree >= 60 && degree < 120) return "Free Shipping";
     if (degree >= 120 && degree < 180) return "20% Off Coupon";
     if (degree >= 180 && degree < 240) return "Buy 1 Get 1 Free";
-    if (degree >= 240 && degree < 300) return "No Prize 😢";
+    if (degree >= 240 && degree < 300) return "No Prize";
     if (degree >= 300 && degree < 360) return "50% Off Coupon";
 }
+
