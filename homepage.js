@@ -1,10 +1,38 @@
 //check if the user has logged in 
 window.onload = checkLoginStatus;
 
+//nav bar
 function toggleMenu() {
-    const navLinks = document.querySelector('.nav-links');
-    navLinks.classList.toggle('show');
+    let menu = document.getElementById("offCanvasMenu");
+    let overlay = document.getElementById("overlay");
+
+    menu.classList.toggle("show");
+    overlay.classList.toggle("show");
 }
+// Close menu when clicking outside or on the overlay
+window.onclick = function(event) {
+    let menu = document.getElementById("offCanvasMenu");
+    let overlay = document.getElementById("overlay");
+    let hamburger = document.querySelector(".hamburger");
+    let othersLink = document.querySelector(".nav-links a:last-child"); // "Others" Link
+
+    if (!menu.contains(event.target) && !hamburger.contains(event.target) && !othersLink.contains(event.target)) {
+        menu.classList.remove("show");
+        overlay.classList.remove("show");
+    }
+};
+
+
+// Close menu when clicking outside
+window.onclick = function(event) {
+    let menu = document.getElementById("offCanvasMenu");
+    let hamburger = document.querySelector(".hamburger");
+    let othersLink = document.querySelector(".nav-links a:last-child"); // "Others" Link
+
+    if (!menu.contains(event.target) && !hamburger.contains(event.target) && !othersLink.contains(event.target)) {
+        menu.classList.remove("show");
+    }
+};
 
 function checkLoginStatus(){
     const useremail = JSON.parse(sessionStorage.getItem("loginemail")) 
@@ -22,8 +50,13 @@ function checkLoginStatus(){
 
 
 function openPopup() {
-    document.getElementById("popup").style.display = "block";
-    document.getElementById("overlay").style.display = "block";
+    if (!sessionStorage.getItem("popupShown")) {
+        document.getElementById("popup").style.display = "block";
+        document.getElementById("overlay").style.display = "block";
+        
+        // Set flag in localStorage to prevent future popups
+        sessionStorage.setItem("popupShown", "true");
+    }
 }
 
 function closePopup() {
@@ -64,47 +97,156 @@ function click_my_account(evt, page_name) {
      }
 }
 
+let currentIndex = 0;
+let slideInterval;
 
-let slideIndex = 0;
-showSlides();
-
-function showSlides() {
-  let i;
-  let slides = document.getElementsByClassName("mySlides");
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
+function showSlide(index) {
+    const slides = document.querySelectorAll('.slide');
+    const caption = document.getElementById('caption');
+  
+    if (index >= slides.length) {
+      currentIndex = 0;
+    } else if (index < 0) {
+      currentIndex = slides.length - 1;
+    }
+  
+    slides.forEach((slide) => {
+      slide.classList.remove('active'); // Hide all slides
+    });
+  
+    slides[currentIndex].classList.add('active'); // Show current slide
+    caption.textContent = `${currentIndex + 1} / ${slides.length}`; // Update slide number
   }
-  slideIndex++;
-  if (slideIndex > slides.length) {slideIndex = 1}
-  slides[slideIndex-1].style.display = "block";
-  setTimeout(showSlides, 2000); // Change image every 2 seconds
-}
+  
 
-// spin-to-win
-document.getElementById("spinButton").addEventListener("click", function () {
-    let wheel = document.getElementById("wheel");
+  function changeSlide(direction) {
+    currentIndex += direction;
+    showSlide(currentIndex);
+  }
 
-    // Generate a random rotation angle (multiples of 360)
-    let randomDegree = Math.floor(Math.random() * 3600) + 3600; // At least 10 full spins
+  // Initial call to display the first slide
+  showSlide(currentIndex);
 
-    // Apply rotation
-    wheel.style.transform = `rotate(${randomDegree}deg)`;
+  // Automatically change slides every 3 seconds
+  function startSlideshow() {
+    slideInterval = setInterval(() => {
+      currentIndex++;
+      showSlide(currentIndex);
+    }, 1500);
+  }
 
-    // Calculate the prize after spin
-    setTimeout(() => {
-        let finalDegree = randomDegree % 360; // Get final position
-        let prize = getPrize(finalDegree);
-        document.getElementById("result").innerText = "You won: " + prize;
-    }, 4000); // Wait for animation to finish
+  // Pause the slideshow
+  function pauseSlideshow() {
+    clearInterval(slideInterval);
+  }
+
+  // Resume the slideshow
+  function resumeSlideshow() {
+    startSlideshow();
+  }
+
+  // Start the slideshow when the page loads
+  startSlideshow();
+
+
+const prizes = [
+    'Get 20% off with MIN $20',
+    'Get $5 off with MIN $35',
+    'Free shipping fee',
+    'Get $50 with MIN $500',
+    'Thank you for participating',
+    'Get $10 with MIN TWO items',
+    'Get 10% off with no MIN Spend',
+    'Get 15% off with $100',
+    'Thank you for participating'
+];
+
+const gridContainer = document.getElementById('gridContainer');
+const resultElement = document.getElementById('result');
+const drawButton = document.getElementById('drawButton');
+const modal = document.getElementById('myModal');
+const modalText = document.getElementById('modalText');
+const closeBtn = document.getElementsByClassName('close')[0];
+
+// Generate grid items and display prize names
+prizes.forEach((prize, index) => {
+    const gridItem = document.createElement('div');
+    gridItem.classList.add('grid-item');
+    gridItem.textContent = prize;  
+
+    
+    gridContainer.appendChild(gridItem);
 });
 
-function getPrize(degree) {
-    // Assume 6 prizes, divide 360 degrees into 6 parts (60 degrees each)
-    if (degree >= 0 && degree < 60) return "10% Off Coupon";
-    if (degree >= 60 && degree < 120) return "Free Shipping";
-    if (degree >= 120 && degree < 180) return "20% Off Coupon";
-    if (degree >= 180 && degree < 240) return "Buy 1 Get 1 Free";
-    if (degree >= 240 && degree < 300) return "No Prize";
-    if (degree >= 300 && degree < 360) return "50% Off Coupon";
+// Click button to start the lottery
+drawButton.addEventListener('click', () => {
+    // Clear previous highlight state
+    const gridItems = document.querySelectorAll('.grid-item');
+    gridItems.forEach(item => item.classList.remove('highlight'));
+
+    
+    resultElement.textContent = "Drawing in progress...";
+    resultElement.classList.remove('highlight');
+
+    // Highlight each grid cell in sequence until the winning one
+    let delay = 0;
+    const duration = 100; 
+    const totalDuration = 2000; 
+
+    // Randomly select a winning grid cell first
+    const randomIndex = Math.floor(Math.random() * prizes.length);
+    let stopAt = randomIndex; 
+    let highLighting = true; 
+
+    // Simulate sequential highlighting of each grid cell
+    for (let i = 0; i < gridItems.length; i++) {
+        if (!highLighting) break; 
+
+        setTimeout(() => {
+    
+            if (i > 0) {
+                gridItems[i - 1].classList.remove('highlight');
+            }
+
+            
+            gridItems[i].classList.add('highlight');
+        }, delay);
+        delay += duration; 
+
+        // When the lottery ends, determine the winning grid cell
+        if (i === stopAt) {
+
+            setTimeout(() => {
+                highLighting = false; 
+            }, delay);
+        }
+    }
+
+    // After a delay, stop at the winning grid cell
+    setTimeout(() => {
+        const gridItems = document.querySelectorAll('.grid-item');
+        
+        gridItems.forEach(item => item.classList.remove('highlight'));
+
+       
+        const winningGridItem = gridItems[stopAt];
+        winningGridItem.classList.add('highlight');
+
+        // Display the winning result
+        const randomPrize = prizes[stopAt];
+        modalText.textContent = `The prize you won is: ${randomPrize}`;
+        modal.style.display = "block";  
+    }, totalDuration); 
+});
+
+// Click the close button to close the popup
+closeBtn.onclick = function() {
+    modal.style.display = "none";
 }
 
+// Clicking outside the popup also closes it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
