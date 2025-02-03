@@ -1,4 +1,3 @@
-
 /* General Styles */
 body {
     font-family: Arial, sans-serif;
@@ -7,19 +6,21 @@ body {
     background-color:#F2EFE7;
     box-sizing: border-box;
 }
-h1{
+
+h1 {
     font-family: 'Averia Serif Libre', serif;
     font-size: 40px;
     color: #5A4E42;
     margin: 0;
 }
-/* general -- nav menu bar */
+
+/* nav bar */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 30px 25px;
-    font-family:'Averia Serif Libre',serif;
+    font-family: 'Averia Serif Libre', serif;
     font-size: 25px;
 }
 
@@ -29,50 +30,92 @@ h1{
 }
 
 .nav-links a {
-    text-decoration: none;                                      /* Removes the underline from the links */
+    text-decoration: none;
     color: rgb(0, 0, 0);
     font-size: 20px;
+    cursor: pointer;
 }
 
-
-
-.navbar .link1 a{
+.navbar .link1 a {
     font-size: 30px;
-    text-decoration: none; 
+    text-decoration: none;
     color: black;
 }
 
-/* general -- Hide hamburger icon on larger screens */
 .hamburger {
     display: none;
     font-size: 24px;
-    cursor: pointer;                                            /* Changes the cursor to a pointer when hovering over the icon, indicating it's clickable. */
+    cursor: pointer;
 }
 
-header .nav-links a:hover {
+.nav-links a:hover, .navbar .link1 a:hover {
     color: rgba(0, 0, 0, 0.635);
 }
 
-.navbar .link1 a:hover {
-    color: rgb(0, 0, 0, 0.635);
+/* Off-Canvas Menu */
+.off-canvas {
+    position: fixed;
+    top: 0;
+    right: -300px; /* Initially hidden */
+    width: 250px;
+    height: 100%;
+    background-color: rgb(231,230,214);
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s ease-in-out;
+    z-index: 1002; /* Ensure it's above the overlay and video */
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    font-family: 'Averia Serif Libre', serif;
 }
 
-/* general -- menubar -- Responsive Styling for Smaller Screens */
+/* Ensure the menu appears when activated */
+.off-canvas.show {
+    right: 0;
+}
+
+.off-canvas a {
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    padding: 10px 0;
+    display: block; 
+}
+
+.off-canvas a:hover {
+    color: rgba(0, 0, 0, 0.635);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    align-self: flex-end;
+    padding: 5px;
+}
+
+/* Add an overlay to dim the entire page when menu is open */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+    z-index: 1000; /* Behind the menu but above the video */
+    display: none; /* Initially hidden */
+}
+
+/* Ensure the overlay appears when menu is open */
+.overlay.show {
+    display: block;
+}
+
+/* Responsive Styling for Smaller Screens */
 @media screen and (max-width: 768px) {
     .nav-links {
         display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 60px;
-        right: 20px;
-        background-color: rgb(231,230,214);
-        border: 1px solid white;
-        border-radius: 5px;
-        padding: 10px;
-    }
-
-    .nav-links.show {
-        display: flex;
     }
 
     .hamburger {
@@ -80,9 +123,10 @@ header .nav-links a:hover {
     }
 }
 
+
 /* general -- Footer styles */
 footer {
-    background-color: rgb(231,230,214);
+    background-color: #F2EFE7;
     color: rgb(0, 0, 0);
     padding: 20px;
     text-align: center;
