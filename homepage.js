@@ -62,37 +62,7 @@ function closePopup() {
 }
 
 
-//direct to other pages with the login email
-function click_my_account(evt, page_name) {
-    if (page_name == 'MokeSell') {
-        useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
-        window.location.href = "index.html"
-    }
-    else if(page_name == 'Clothes'){
-        useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
-        window.location.href = "#"
-    }
-    else if(page_name == "Shoes"){
-        useremail =JSON.parse(sessionStorage.getItem("loginemail")) 
-        window.location.href = "#"
-    } 
-    else if(page_name == "Home-decor"){
-        useremail =JSON.parse(sessionStorage.getItem("loginemail")) 
-        window.location.href = "#"
-    } 
-    else if(page_name == "shopping"){
-        useremail =JSON.parse(sessionStorage.getItem("loginemail")) 
-        window.location.href = "#"
-    }
-    else if(page_name == "Login"){
-        useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
-        window.location.href = "login.html"
-    }
-    else if(page_name == "my_account"){
-        useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
-        window.location.href = "#"
-     }
-}
+
 
 //slideshow
 let currentIndex = 0;
@@ -262,9 +232,6 @@ drawButton.addEventListener('click', () => {
     
 
     async function countUserVouchers(loginemail) {
-    // const url = `${DATABASE_URL}?q={"loginemail":"${loginemail}"}&count=true`;
-    // const url = `${DATABASE_URL}?q=${encodeURIComponent('{"loginemail":"' + loginemail + '"}')}&count=true`;
-    // const url = `${DATABASE_URL}?q=${encodeURIComponent(loginemail)}`;
     const url = `${DATABASE_URL}?q=${encodeURIComponent('{"loginemail":"' + loginemail + '"}')}`;
 
     try {
@@ -350,3 +317,39 @@ window.onclick = function(event) {
     }
 }
 
+function selectCategory(category) {
+    sessionStorage.setItem("selectedCategory", category); // Store category in session
+    window.location.href = "itemByCategory.html"; // Redirect to category page
+}
+
+//direct to other pages with the login email
+function click_my_account(evt, page_name) {
+    if (page_name == 'MokeSell') {
+        useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
+        window.location.href = "index.html"
+    }
+    else if(page_name == 'Clothes'){
+        useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
+        window.location.href = "#"
+    }
+    else if(page_name == "Shoes"){
+        useremail =JSON.parse(sessionStorage.getItem("loginemail")) 
+        window.location.href = "#"
+    } 
+    else if(page_name == "Home-decor"){
+        useremail =JSON.parse(sessionStorage.getItem("loginemail")) 
+        window.location.href = "#"
+    } 
+    else if(page_name == "shopping"){
+        useremail =JSON.parse(sessionStorage.getItem("loginemail")) 
+        window.location.href = "#"
+    }
+    else if(page_name == "Login"){
+        useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
+        window.location.href = "login.html"
+    }
+    else if(page_name == "my_account"){
+        useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
+        window.location.href = "#"
+     }
+}

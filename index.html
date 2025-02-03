@@ -46,9 +46,9 @@
 
   <!-- Nav Bar -->
   <header class="navbar">
-    <div class="link1">
-        <a onclick="click_my_account(event, 'MokeSell')">MokeSell</a>
-    </div>
+    <nav class="nav-links">
+        <a onclick="click_my_account(event, 'MokeSell')" style="font-size: 30px;">MokeSell</a>
+    </nav>
     <nav class="nav-links">
         <a onclick="click_my_account(event, 'Clothes')">Clothes</a>
         <a onclick="click_my_account(event, 'Shoes')">Shoes</a>
@@ -78,17 +78,17 @@
     <!-- Slides -->
     <div class="slide">
       <span class="slide-number">1 / 3</span>
-      <img src="./images/homedecor.png" alt="Image 1">
+      <img src="./images/homedecor.png" alt="homedecor">
       <button class="shop-button" onclick="window.location.href='clothes.html'">Shop Clothes</button>
     </div>
     <div class="slide">
       <span class="slide-number">2 / 3</span>
-      <img src="./images/clothes.png" alt="Image 2">
+      <img src="./images/clothes.png" alt="clothes">
       <button class="shop-button" onclick="window.location.href='clothes.html'">Shop Clothes</button>
     </div>
     <div class="slide">
       <span class="slide-number">3 / 3</span>
-      <img src="./images/shoes.png" alt="Image 3">
+      <img src="./images/shoes.png" alt="shoes">
       <button class="shop-button" onclick="window.location.href='clothes.html'">Shop Clothes</button>
     </div>
   
@@ -100,19 +100,19 @@
 
   <!-- Category container with clickable categories -->
   <div class="category-container">
-    <div class="category-item" onclick="window.location.href='clothes.html'">
+    <div class="category-item" onclick="selectCategory('clothes')">
         <img src="./images/4.jpg" alt="Clothes" class="category-image">
         <p>Clothes</p>
     </div>
-    <div class="category-item" onclick="window.location.href='shoes.html'">
+    <div class="category-item" onclick="selectCategory('shoes')">
         <img src="./images/3.jpg" alt="Shoes" class="category-image">
         <p>Shoes</p>
     </div>
-    <div class="category-item" onclick="window.location.href='home-decor.html'">
+    <div class="category-item" onclick="selectCategory('home-decor')">
         <img src="./images/2.jpg" alt="Home Decor" class="category-image">
         <p>Home Decor</p>
     </div>
-    <div class="category-item" onclick="window.location.href='electronics.html'">
+    <div class="category-item" onclick="window.location.href='itemByCategory.html'">
         <img src="./images/1.jpg" alt="Electronics" class="category-image">
         <p>Electronics</p>
     </div>
