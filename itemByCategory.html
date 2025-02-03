@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>itemByCat</title>
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+    <link rel="stylesheet" type="text/css" href="general.css">
+    <link rel="stylesheet" type="text/css" href="itemByCategory.css">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Overlay for background dim effect -->
+    <div id="overlay" class="overlay"></div>
+
+    <!-- Off-Canvas Menu -->
+    <div id="offCanvasMenu" class="off-canvas">
+        <button class="close-btn" onclick="toggleMenu()">✖</button>
+        <a onclick="click_my_account(event, 'Clothes')">Clothes</a>
+        <a onclick="click_my_account(event, 'Shoes')">Shoes</a>
+        <a onclick="click_my_account(event, 'Home-decor')">Home-decor</a>
+        <a onclick="click_my_account(event, 'my_account')" class="myAccountLink" style="display:none;">My Account</a>
+        <a onclick="click_my_account(event, 'Login')" class="loginLink" style="display:block;">Login/Sign Up</a>
+        <a onclick="click_my_account(event, 'shopping')">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </a>
+    </div>  
+
+    <!-- Nav Bar -->
+    <header class="navbar">
+        <nav class="nav-links">
+            <a onclick="click_my_account(event, 'MokeSell')" style="font-size: 30px;">MokeSell</a>
+        </nav>
+        <nav class="nav-links">
+            <a onclick="click_my_account(event, 'Clothes')">Clothes</a>
+            <a onclick="click_my_account(event, 'Shoes')">Shoes</a>
+            <a onclick="click_my_account(event, 'Home-decor')">Home-decor</a>
+            <a onclick="click_my_account(event, 'my_account')" class="myAccountLink" style="display:none;">My Account</a>
+            <a onclick="click_my_account(event, 'Login')" class="loginLink" style="display:block;">Login/Sign Up</a>
+            <a onclick="click_my_account(event, 'shopping')">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </a>
+            <a onclick="toggleMenu()">Others</a> <!-- Triggers Off-Canvas Menu -->
+        </nav>
+        <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+    </header>
+
+    <div class="menu-header">
+        <h1 id="nameCollection"></h1>
+    </div>  
+
+    <div class="item-container" id="item-container">
+        <!-- Products will be loaded dynamically here -->
+    </div>
+
+    <footer>
+        <div class="footerBottom">
+            <h4>Copyright © 2025 Moke Sell.<br>All rights reserved.</h4>
+            <div class="socials">
+                <h4>Follow Us on Socials</h4>
+                <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://x.com/i/flow/login" target="_blank" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+            </div>                 
+        </div>
+    </footer> 
+    <script src="itemByCategory.js"></script>
+</body>
+</html>

@@ -36,19 +36,13 @@ h1 {
     cursor: pointer;
 }
 
-.navbar .link1 a {
-    font-size: 30px;
-    text-decoration: none;
-    color: black;
-}
-
 .hamburger {
     display: none;
     font-size: 24px;
     cursor: pointer;
 }
 
-.nav-links a:hover, .navbar .link1 a:hover {
+.nav-links a:hover {
     color: rgba(0, 0, 0, 0.635);
 }
 
