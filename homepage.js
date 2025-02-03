@@ -1,5 +1,33 @@
 //check if the user has logged in 
-window.onload = checkLoginStatus;
+window.onload = function () {
+    checkLoginStatus();
+
+    // Show popup once after login, but not on refresh
+    const useremail = JSON.parse(sessionStorage.getItem("loginemail"));
+    if (useremail && !sessionStorage.getItem("popupShown")) {
+        openPopup(); // Show the popup only once
+        sessionStorage.setItem("popupShown", "true");
+    }
+};
+
+//check login status and show myaccount/login
+function checkLoginStatus(){
+    const useremail = JSON.parse(sessionStorage.getItem("loginemail")) 
+    console.log("User email from sessionStorage:", useremail);
+
+    const myAccountLinks = document.getElementsByClassName('myAccountLink');
+    const loginLinks = document.getElementsByClassName('loginLink');
+    if (useremail) {
+        // If email exists, user is logged in
+        // Loop through each element and change its display style
+        Array.from(myAccountLinks).forEach(link => link.style.display = 'inline');
+        Array.from(loginLinks).forEach(link => link.style.display = 'none');
+    } else {
+        // If no email, user is not logged in
+        Array.from(myAccountLinks).forEach(link => link.style.display = 'none');
+        Array.from(loginLinks).forEach(link => link.style.display = 'inline');
+    }
+}
 
 //nav bar
 function toggleMenu() {
@@ -9,66 +37,35 @@ function toggleMenu() {
     menu.classList.toggle("show");
     overlay.classList.toggle("show");
 }
-// Close menu when clicking outside or on the overlay
-window.onclick = function(event) {
-    let menu = document.getElementById("offCanvasMenu");
-    let overlay = document.getElementById("overlay");
-    let hamburger = document.querySelector(".hamburger");
-    let othersLink = document.querySelector(".nav-links a:last-child"); // "Others" Link
 
-    if (!menu.contains(event.target) && !hamburger.contains(event.target) && !othersLink.contains(event.target)) {
-        menu.classList.remove("show");
-        overlay.classList.remove("show");
-    }
-};
+//popup
+// Function to check login before opening popup (Used by floating widget)
+function checkLoginBeforePopup() {
+    const useremail = JSON.parse(sessionStorage.getItem("loginemail"));
 
-
-// Close menu when clicking outside
-window.onclick = function(event) {
-    let menu = document.getElementById("offCanvasMenu");
-    let hamburger = document.querySelector(".hamburger");
-    let othersLink = document.querySelector(".nav-links a:last-child"); // "Others" Link
-
-    if (!menu.contains(event.target) && !hamburger.contains(event.target) && !othersLink.contains(event.target)) {
-        menu.classList.remove("show");
-    }
-};
-
-function checkLoginStatus(){
-    const useremail = JSON.parse(sessionStorage.getItem("loginemail")) 
     if (useremail) {
-        // If email exists, user is logged in
-        document.getElementById('myAccountLink').style.display = 'inline';
-        document.getElementById('loginLink').style.display = 'none';
-        openPopup()
+        openPopup(); // User is logged in, show popup
     } else {
-        // If no email, user is not logged in
-        document.getElementById('myAccountLink').style.display = 'none';
-        document.getElementById('loginLink').style.display = 'inline';
+        alert("Please log in to play the grid lottery!");
+        window.location.href = "login.html"; // Redirect to login page
     }
 }
-
-
 function openPopup() {
-    if (!sessionStorage.getItem("popupShown")) {
+    {
         document.getElementById("popup").style.display = "block";
         document.getElementById("overlay").style.display = "block";
-        
-        // Set flag in localStorage to prevent future popups
-        sessionStorage.setItem("popupShown", "true");
     }
 }
-
 function closePopup() {
     document.getElementById("popup").style.display = "none";
     document.getElementById("overlay").style.display = "none";
 }
 
 
+//direct to other pages with the login email
 function click_my_account(evt, page_name) {
     if (page_name == 'MokeSell') {
         useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
-  
         window.location.href = "index.html"
     }
     else if(page_name == 'Clothes'){
@@ -97,12 +94,13 @@ function click_my_account(evt, page_name) {
      }
 }
 
+//slideshow
 let currentIndex = 0;
 let slideInterval;
 
 function showSlide(index) {
     const slides = document.querySelectorAll('.slide');
-    const caption = document.getElementById('caption');
+
   
     if (index >= slides.length) {
       currentIndex = 0;
@@ -115,10 +113,8 @@ function showSlide(index) {
     });
   
     slides[currentIndex].classList.add('active'); // Show current slide
-    caption.textContent = `${currentIndex + 1} / ${slides.length}`; // Update slide number
   }
   
-
   function changeSlide(direction) {
     currentIndex += direction;
     showSlide(currentIndex);
@@ -148,17 +144,32 @@ function showSlide(index) {
   // Start the slideshow when the page loads
   startSlideshow();
 
+  
+// Close menu when clicking outside or on the overlay
+window.onclick = function(event) {
+    let menu = document.getElementById("offCanvasMenu");
+    let overlay = document.getElementById("overlay");
+    let hamburger = document.querySelector(".hamburger");
+    let othersLink = document.querySelector(".nav-links a:last-child"); // "Others" Link
 
+    if (!menu.contains(event.target) && !hamburger.contains(event.target) && !othersLink.contains(event.target)) {
+        menu.classList.remove("show");
+        overlay.classList.remove("show");
+    }
+};
+
+
+//grid lottery
 const prizes = [
-    'Get 20% off with MIN $20',
-    'Get $5 off with MIN $35',
-    'Free shipping fee',
-    'Get $50 with MIN $500',
-    'Thank you for participating',
-    'Get $10 with MIN TWO items',
-    'Get 10% off with no MIN Spend',
-    'Get 15% off with $100',
-    'Thank you for participating'
+    'Get 20% off with MIN $20',         //0
+    'Get $5 off with MIN $35',          //1
+    'Free shipping fee',                //2
+    'Get $50 with MIN $500',            //3
+    'Thank you for participating',      //4
+    'Get $10 with MIN TWO items',       //5
+    'Get 10% off with no MIN Spend',    //6
+    'Get 15% off with $100',            //7
+    'Thank you for participating'       //8
 ];
 
 const gridContainer = document.getElementById('gridContainer');
@@ -234,10 +245,98 @@ drawButton.addEventListener('click', () => {
 
         // Display the winning result
         const randomPrize = prizes[stopAt];
-        modalText.textContent = `The prize you won is: ${randomPrize}`;
-        modal.style.display = "block";  
+        if (stopAt != 4 && stopAt != 8) {
+            addVoucher(stopAt, 0);
+            modalText.textContent = `The prize you won is: ${randomPrize}`;
+        } else {
+            modalText.textContent = `Sorry, you didn't win this time.`;
+        }
+        
+        modal.style.display = "block";
+        
     }, totalDuration); 
+
+    // 0 = avaliable, 1 = applied 
+    const API_KEY = "677f336bc7a864b3d4c78324"; 
+    const DATABASE_URL = "https://database-9cfc.restdb.io/rest/promo"; 
+    
+
+    async function countUserVouchers(loginemail) {
+    // const url = `${DATABASE_URL}?q={"loginemail":"${loginemail}"}&count=true`;
+    // const url = `${DATABASE_URL}?q=${encodeURIComponent('{"loginemail":"' + loginemail + '"}')}&count=true`;
+    // const url = `${DATABASE_URL}?q=${encodeURIComponent(loginemail)}`;
+    const url = `${DATABASE_URL}?q=${encodeURIComponent('{"loginemail":"' + loginemail + '"}')}`;
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "x-apikey": API_KEY
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.statusText}`);
+        }
+
+        const count = await response.json();
+        console.log(count);  
+        return count;
+    } catch (error) {
+        console.error("Failed to fetch data:", error);
+        return null;
+    }
+}
+    async function addVoucher(promo, status) {
+    // Retrieve the user email from sessionStorage
+    const useremail = JSON.parse(sessionStorage.getItem("loginemail"));
+
+    if (!useremail) {
+        console.error("User is not logged in.");
+        return;
+    }
+
+    const currentCount = await countUserVouchers(useremail);
+
+    if (currentCount === null) {
+        console.error("Could not verify voucher count.");
+        return;
+    }
+
+    if (currentCount.length >= 2) {
+        console.log("User already has 2 vouchers. Cannot add more.");
+        window.alert("You already have 2 vouchers. Cannot add more.")
+        return;
+    }
+
+    const newVoucher = {
+        loginemail: useremail,
+        promo: promo,
+        status: status
+    };
+
+    try {
+        const response = await fetch(DATABASE_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "x-apikey": API_KEY
+            },
+            body: JSON.stringify(newVoucher)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.statusText}`);
+        }
+
+        console.log("Voucher added successfully!");
+    } catch (error) {
+        console.error("Failed to add voucher:", error);
+    }
+}    
 });
+
 
 // Click the close button to close the popup
 closeBtn.onclick = function() {
@@ -250,3 +349,4 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+

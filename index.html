@@ -37,12 +37,12 @@
     <a onclick="click_my_account(event, 'Clothes')">Clothes</a>
     <a onclick="click_my_account(event, 'Shoes')">Shoes</a>
     <a onclick="click_my_account(event, 'Home-decor')">Home-decor</a>
-    <a onclick="click_my_account(event, 'my_account')" id="myAccountLink" style="display:none;">My Account</a>
-    <a onclick="click_my_account(event, 'Login')" id="loginLink" style="display:block;">Login/Sign Up</a>
+    <a onclick="click_my_account(event, 'my_account')" class="myAccountLink" style="display:none;">My Account</a>
+    <a onclick="click_my_account(event, 'Login')" class="loginLink" style="display:block;">Login/Sign Up</a>
     <a onclick="click_my_account(event, 'shopping')">
         <i class="fa-solid fa-cart-shopping"></i>
     </a>
-  </div>
+  </div>  
 
   <!-- Nav Bar -->
   <header class="navbar">
@@ -53,8 +53,8 @@
         <a onclick="click_my_account(event, 'Clothes')">Clothes</a>
         <a onclick="click_my_account(event, 'Shoes')">Shoes</a>
         <a onclick="click_my_account(event, 'Home-decor')">Home-decor</a>
-        <a onclick="click_my_account(event, 'my_account')" id="myAccountLink" style="display:none;">My Account</a>
-        <a onclick="click_my_account(event, 'Login')" id="loginLink" style="display:block;">Login/Sign Up</a>
+        <a onclick="click_my_account(event, 'my_account')" class="myAccountLink" style="display:none;">My Account</a>
+        <a onclick="click_my_account(event, 'Login')" class="loginLink" style="display:block;">Login/Sign Up</a>
         <a onclick="click_my_account(event, 'shopping')">
             <i class="fa-solid fa-cart-shopping"></i>
         </a>
@@ -98,123 +98,28 @@
   </div>
 
 
-
-  <!-- category -->
-  <div class="category-img">
-    <div class="row">
-      <div class="column">
-        <img src="./images/4.jpg" alt="Snow" style="width:100%">
-      </div>
-      <div class="column">
-        <img src="./images/4.jpg" alt="Forest" style="width:100%">
-      </div>
-      <div class="column">
-        <img src="./images/4.jpg" alt="Mountains" style="width:100%">
-      </div>
+  <!-- Category container with clickable categories -->
+  <div class="category-container">
+    <div class="category-item" onclick="window.location.href='clothes.html'">
+        <img src="./images/4.jpg" alt="Clothes" class="category-image">
+        <p>Clothes</p>
+    </div>
+    <div class="category-item" onclick="window.location.href='shoes.html'">
+        <img src="./images/3.jpg" alt="Shoes" class="category-image">
+        <p>Shoes</p>
+    </div>
+    <div class="category-item" onclick="window.location.href='home-decor.html'">
+        <img src="./images/2.jpg" alt="Home Decor" class="category-image">
+        <p>Home Decor</p>
+    </div>
+    <div class="category-item" onclick="window.location.href='electronics.html'">
+        <img src="./images/1.jpg" alt="Electronics" class="category-image">
+        <p>Electronics</p>
     </div>
   </div>
   
-  <style>
-    /* Styles for the popup (hidden by default) */
-    .popup {
-        display: none;
-        position: fixed;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        background-color: #fff;
-        padding: 20px;
-        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
-        border-radius: 12px;
-        z-index: 1000;
-        text-align: center;
-        width: 300px;
-        animation: popupAnimation 0.5s ease-out;
-    }
-
-    /* Animation for popup */
-    @keyframes popupAnimation {
-        from {
-            transform: translate(-50%, -50%) scale(0.8);
-        }
-        to {
-            transform: translate(-50%, -50%) scale(1);
-        }
-    }
-
-    /* Overlay background */
-    .overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.6);
-        z-index: 999;
-        transition: opacity 0.3s ease;
-    }
-
-    /* Wheel container */
-    .wheel-container {
-        margin: 20px 0;
-    }
-
-    .wheel {
-        width: 200px;
-        height: 200px;
-        margin: 0 auto;
-        border-radius: 50%;
-        overflow: hidden;
-        border: 5px solid #333;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #f1f1f1;
-    }
-
-    .wheel img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    /* Spin button styles */
-    #spinButton {
-        background-color: #4CAF50;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        margin-top: 10px;
-        transition: background-color 0.3s ease;
-    }
-
-    #spinButton:hover {
-        background-color: #45a049;
-    }
-
-    /* Close button styles */
-    .popup button {
-        background-color: #f44336;
-        color: white;
-        padding: 8px 16px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-top: 15px;
-        font-size: 14px;
-    }
-
-    .popup button:hover {
-        background-color: #e53935;
-    }
-  </style>
- 
-
-  <button onclick="openPopup()">Open Popup</button>
+  <!-- Floating Widget -->
+  <div id="floatingWidget" class="floating-widget" onclick="checkLoginBeforePopup()">🎁 Win a Prize!</div>
   <!-- The Popup -->
   <div id="overlay" class="overlay" onclick="closePopup()"></div>
   <div id="popup" class="popup">
