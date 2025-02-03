@@ -79,17 +79,17 @@
     <div class="slide">
       <span class="slide-number">1 / 3</span>
       <img src="./images/homedecor.png" alt="homedecor">
-      <button class="shop-button" onclick="window.location.href='clothes.html'">Shop Clothes</button>
+      <button class="shop-button" onclick="selectCategory('home-decor')">Shop home-decor</button>
     </div>
     <div class="slide">
       <span class="slide-number">2 / 3</span>
       <img src="./images/clothes.png" alt="clothes">
-      <button class="shop-button" onclick="window.location.href='clothes.html'">Shop Clothes</button>
+      <button class="shop-button" onclick="selectCategory('clothes')">Shop Clothes</button>
     </div>
     <div class="slide">
       <span class="slide-number">3 / 3</span>
       <img src="./images/shoes.png" alt="shoes">
-      <button class="shop-button" onclick="window.location.href='clothes.html'">Shop Clothes</button>
+      <button class="shop-button" onclick="selectCategory('shoes')">Shop Shoes</button>
     </div>
   
     <!-- Next and Previous buttons -->
@@ -97,7 +97,7 @@
     <a class="next" onclick="changeSlide(1)">&#10095;</a>
   </div>
 
-
+  
   <!-- Category container with clickable categories -->
   <div class="category-container">
     <div class="category-item" onclick="selectCategory('clothes')">
@@ -117,7 +117,7 @@
         <p>Electronics</p>
     </div>
   </div>
-  
+
   <!-- Floating Widget -->
   <div id="floatingWidget" class="floating-widget" onclick="checkLoginBeforePopup()">🎁 Win a Prize!</div>
   <!-- The Popup -->

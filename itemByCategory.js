@@ -1,3 +1,5 @@
+//check if the user has logged in 
+window.onload = checkLoginStatus();
 //nav bar
 function toggleMenu() {
     let menu = document.getElementById("offCanvasMenu");
@@ -6,7 +8,24 @@ function toggleMenu() {
     menu.classList.toggle("show");
     overlay.classList.toggle("show");
 }
+//check login status and show myaccount/login
+function checkLoginStatus(){
+    const useremail = JSON.parse(sessionStorage.getItem("loginemail")) 
+    console.log("User email from sessionStorage:", useremail);
 
+    const myAccountLinks = document.getElementsByClassName('myAccountLink');
+    const loginLinks = document.getElementsByClassName('loginLink');
+    if (useremail) {
+        // If email exists, user is logged in
+        // Loop through each element and change its display style
+        Array.from(myAccountLinks).forEach(link => link.style.display = 'inline');
+        Array.from(loginLinks).forEach(link => link.style.display = 'none');
+    } else {
+        // If no email, user is not logged in
+        Array.from(myAccountLinks).forEach(link => link.style.display = 'none');
+        Array.from(loginLinks).forEach(link => link.style.display = 'inline');
+    }
+}
 //direct to other pages with the login email
 function click_my_account(evt, page_name) {
     if (page_name == 'MokeSell') {
@@ -38,6 +57,16 @@ function click_my_account(evt, page_name) {
         window.location.href = "#"
      }
 }
+
+// lottie
+setTimeout(() => {
+    const lottieAnimation = document.getElementById("lottie-animation");
+    if (lottieAnimation) {
+        lottieAnimation.stop(); // Stops the animation
+        document.getElementById("loading-container").style.display = "none"; // Hides the animation container
+    }
+}, 3000); // 1.5 seconds
+
 
 //display item by category
 document.addEventListener("DOMContentLoaded", function () {
@@ -107,6 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Append Item to container
             itemContainer.appendChild(item);
         });
+
     })
     .catch(error => {
         console.error("Error fetching products:", error);
