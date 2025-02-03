@@ -98,6 +98,11 @@
         <label><input type="radio" name="alphabet" value="A-Z"> A-Z</label><br>
         <label><input type="radio" name="alphabet" value="Z-A"> Z-A</label><br>
 
+        <h3>Sort by Price</h3>
+        <label><input type="radio" name="price-sort" value="Low-High"> Low to High</label><br>
+        <label><input type="radio" name="price-sort" value="High-Low"> High to Low</label><br>
+
+
         <button id="apply-filters">Apply Filters</button>
 
     </div>
@@ -189,6 +194,6 @@
                 alert(`${productName} (S$${productPrice}) added to the cart.`);
             }
         </script>
-        
+         <script src="homedec-filter.js"></script>      
 </body>
 </html>
