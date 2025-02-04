@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+    <link rel="stylesheet" type="text/css" href="general.css">
+    <title>Selling Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            display: flex;
+            gap: 30px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .left-section {
+            width: 350px;
+            height: 350px;
+            border: 2px dashed #bbb;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border-radius: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .left-section:hover {
+            background-color: #e0e0e0;
+        }
+
+        .left-section label {
+            background-color: #444;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+        .left-section label:hover {
+            background-color: #222;
+        }
+
+        .left-section input {
+            display: none;
+        }
+
+        #image-preview {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+            border-radius: 10px;
+        }
+
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 300px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .field label {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .field input,
+        .field select,
+        .field textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border 0.3s;
+        }
+
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+            border-color: #6A9C89;
+            outline: none;
+        }
+
+        textarea {
+            resize: none;
+            height: 80px;
+        }
+
+        button {
+            margin-top: 15px;
+            background-color: #6A9C89;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #578872;
+        }
+    </style>
+</head>
+<body>
+    <form id="add-product-form" class="container">
+        <div class="left-section">
+            <img id="image-preview" alt="Preview">
+            <label for="upload">Select Photos +</label>
+            <input type="file" id="upload" accept="image/*">
+        </div>
+
+        <div class="right-section">
+            <div class="field">
+                <label for="name">Product Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter product name" required>
+            </div>
+
+            <div class="field">
+                <label for="category">Category:</label>
+                <select id="category" name="category" required>
+                    <option value="" disabled selected>Select a category</option>
+                    <option value="clothes">Clothes</option>
+                    <option value="shoes">Shoes</option>
+                    <option value="home-decor">Home Decor</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" placeholder="Enter price" min="0" step="0.01" required>
+            </div>
+
+            <div class="field">
+                <label for="comment">Suggestions:</label>
+                <textarea id="comment" placeholder="Write your comment here..." required></textarea>
+            </div>
+
+            <button id="submit-btn">Submit</button>
+        </div>
+    </form>
+    <script src="selling.js"></script>
+</body>
+</html>
