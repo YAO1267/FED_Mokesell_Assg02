@@ -129,7 +129,7 @@ button:hover {
   }
   
   .floating-widget:hover {
-    background-color: #2424248a;
+    background-color: #434343f1;
     transform: scale(1.1);
   }
   
