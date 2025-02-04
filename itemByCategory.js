@@ -65,7 +65,7 @@ setTimeout(() => {
         lottieAnimation.stop(); // Stops the animation
         document.getElementById("loading-container").style.display = "none"; // Hides the animation container
     }
-}, 3000); // 1.5 seconds
+}, 6000); // duration
 
 
 //display item by category
