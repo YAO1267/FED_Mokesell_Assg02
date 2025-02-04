@@ -235,9 +235,9 @@ async function fetchUserProfile() {
         const data = await response.json();
         if (data.length > 0) {
             const user = data[0];
-            document.getElementById("firstName").value = user.firstName || "";
-            document.getElementById("lastName").value = user.lastName || "";
-            document.getElementById("email").value = user.email;
+            document.getElementById("firstName").value = user.firstname || "";
+            document.getElementById("lastName").value = user.lastname || "";
+            document.getElementById("email").value = user.loginemail; 
             if (user.profilePic) {
                 document.getElementById("profileImage").src = user.profilePic;
             }
