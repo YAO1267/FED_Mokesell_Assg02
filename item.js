@@ -152,7 +152,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const addToCartButton = document.createElement("button");
     addToCartButton.textContent = "Add to Cart";
     addToCartButton.onclick = function () {
-        addToCart(product.name, product.price);
+        useremail = JSON.parse(sessionStorage.getItem("loginemail"))
+        const data = {
+            index: product.index,
+            price:product.price,
+            amount:1,
+            loginemail:useremail,
+            status: 0, //0 means still pending, 1 means finished
+        };
+        addToCart(data);
     };
 
     // Append elements to itemInfo
@@ -169,4 +177,35 @@ document.addEventListener("DOMContentLoaded", function () {
     // Append everything to the container
     itemContainer.appendChild(itemDiv);
 });
+
+//add-to-cart
+const apiUrl = 'https://database-9cfc.restdb.io/rest/cart';
+const apiKey = '677f336bc7a864b3d4c78324';
+
+// Function to send data to restdb.io
+async function addToCart(data) {
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-apikey': apiKey
+            },
+            body: JSON.stringify(data) // Convert data object to JSON string
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            console.log('Data saved:', result);
+            window.alert('Add to your cart successfully!')
+        } else {
+            console.log('Error saving data:', response.status, response.statusText);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+
+
 

@@ -83,8 +83,8 @@ setTimeout(() => {
 document.addEventListener("DOMContentLoaded", function () {
     const APIKEY = "677f336bc7a864b3d4c78324";
     const BASE_URL = "https://database-9cfc.restdb.io/rest/menu";
-    const itemContainer = document.getElementById("item-container");
-
+    const itemContainer = document.getElementById("item-container"); 
+    
     fetch(BASE_URL, {
         method: "GET",
         headers: {
@@ -109,6 +109,12 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         filteredItems.forEach(product => {
+            // filter the products that the current user is selling 
+            useremail =JSON.parse(sessionStorage.getItem("loginemail"))
+            if(product.loginemail === useremail){
+                return;
+            }
+
             const item = document.createElement("div");
             item.classList.add("cate-item");
 

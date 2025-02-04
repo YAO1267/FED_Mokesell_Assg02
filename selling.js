@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
             price:price,
             image: imageBase64,
             description: description,
-            loginemail:useremail,
+            loginemail:useremail
         };
         console.log(productData); // Check the content before sending
 
