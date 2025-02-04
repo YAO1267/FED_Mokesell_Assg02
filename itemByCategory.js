@@ -56,6 +56,12 @@ function click_my_account(evt, page_name) {
         useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
         window.location.href = "#"
      }
+    else if(page_name == "Logout"){
+        useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
+        sessionStorage.removeItem("loginemail");
+        window.alert('logout successfully!')
+        window.location.href = "index.html"
+    }
 }
 
 // lottie

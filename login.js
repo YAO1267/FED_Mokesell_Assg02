@@ -30,21 +30,23 @@ function loginOrSignup(evt, name) {
     if (name == 'Signup') {
         name = document.getElementById('signup_name').value
         psw = document.getElementById('signup_psw').value
-        signup(name,psw)
+        firstName = document.getElementById('firstName').value
+        lastName = document.getElementById('lastName').value
+        signup(name,psw,firstName,lastName)
     
     }
 }
 
 
-const signup = async (email, password) => {
-    const response = await fetch('https://database-9cfc.restdb.io/rest/contactdetail', {
+const signup = async (email, password,firstName,lastName) => {
+        const response = await fetch('https://database-9cfc.restdb.io/rest/contactdetail', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'x-apikey': '677f336bc7a864b3d4c78324',
         },
         // 0 means normal user and 1 means admin account
-        body: JSON.stringify({ loginemail: email, password: password, type: 0 }),  
+        body: JSON.stringify({ loginemail: email, password: password, type: 0, firstname: firstName, lastname: lastName }),  
     });
     if (response.ok) {
         console.log('Signup successfully');
@@ -61,6 +63,7 @@ const signup = async (email, password) => {
 const login = async (email, password) => {
     const query = JSON.stringify({ loginemail: email, password: Number(password)}); // Convert password to number
     const queryURL = `https://database-9cfc.restdb.io/rest/contactdetail?q=${encodeURIComponent(query)}`;
+    
     const response = await fetch(queryURL, {
         method: 'GET',
         headers: {

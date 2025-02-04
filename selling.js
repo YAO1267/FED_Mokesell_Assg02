@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const priceInput = document.getElementById("price");
     const imageInput = document.getElementById("upload");
     const previewImage = document.getElementById("image-preview");
+    const commentInput = document.getElementById("comment");
 
     let imageBase64 = "";
 
@@ -32,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const name = nameInput.value;
         const category = categoryInput.value;
         const price = parseFloat(priceInput.value);
+        const comment = commentInput ? commentInput.value.trim() : "";
 
 
         if (!category || isNaN(price) || price <= 0 || !imageBase64) {
@@ -44,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
             category,
             price,
             image: imageBase64,
+            comment,
         };
 
         fetch(BASE_URL, {
@@ -61,7 +64,9 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .then(() => {
                 alert("Product successfully added!");
+
                 form.reset();
+                previewImage.src = "";
                 previewImage.style.display = "none";
                 imageBase64 = "";
             })
