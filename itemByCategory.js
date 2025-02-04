@@ -15,17 +15,22 @@ function checkLoginStatus(){
 
     const myAccountLinks = document.getElementsByClassName('myAccountLink');
     const loginLinks = document.getElementsByClassName('loginLink');
+    const logoutLinks =document.getElementsByClassName('logoutLink')
+
     if (useremail) {
         // If email exists, user is logged in
         // Loop through each element and change its display style
         Array.from(myAccountLinks).forEach(link => link.style.display = 'inline');
+        Array.from(logoutLinks).forEach(link => link.style.display = 'inline');
         Array.from(loginLinks).forEach(link => link.style.display = 'none');
     } else {
         // If no email, user is not logged in
         Array.from(myAccountLinks).forEach(link => link.style.display = 'none');
+        Array.from(logoutLinks).forEach(link => link.style.display = 'none');
         Array.from(loginLinks).forEach(link => link.style.display = 'inline');
     }
 }
+
 //direct to other pages with the login email
 function click_my_account(evt, page_name) {
     if (page_name == 'MokeSell') {
@@ -91,6 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .then(products => {
         //retrive the category from local storage
         const selectedCategory = sessionStorage.getItem("selectedCategory");
+
         const collectionNameContainer = document.getElementById("nameCollection");
         collectionNameContainer.innerText = selectedCategory + " Collection";
         const filteredItems = products.filter(product => product.category.toLowerCase() === selectedCategory.toLowerCase());
@@ -106,6 +112,15 @@ document.addEventListener("DOMContentLoaded", function () {
             const item = document.createElement("div");
             item.classList.add("cate-item");
 
+            // Create a clickable link
+            const itemLink = document.createElement("a");
+            itemLink.href = "item.html";  // Redirect to product detail page
+
+            // Store product details in sessionStorage when clicked
+            itemLink.onclick = function () {
+                sessionStorage.setItem("productDetails", JSON.stringify(product));
+            };
+
             // Create image element
             const itemImage = document.createElement("img");
             itemImage.src = product.image;
@@ -115,6 +130,9 @@ document.addEventListener("DOMContentLoaded", function () {
             itemImage.onload = () => {
                 itemImage.classList.remove("hidden-img"); // Show after loaded
             };
+
+            // Append image to the link
+            itemLink.appendChild(itemImage);
 
             // Product title
             const productTitle = document.createElement("div");
@@ -134,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
             };
 
             // Append elements to Item
-            item.appendChild(itemImage);
+            item.appendChild(itemLink);
             item.appendChild(productTitle);
             item.appendChild(productPrice);
             item.appendChild(addToCartButton);

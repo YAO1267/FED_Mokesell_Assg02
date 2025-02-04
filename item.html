@@ -1,44 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>itemByCat</title>
-    <link rel="icon" type="image/x-icon" href="images/logo.png">
-    <link rel="stylesheet" type="text/css" href="general.css">
-    <link rel="stylesheet" type="text/css" href="itemByCategory.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>homepage</title>
 
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="item.css">
+  <link rel="stylesheet" href="general.css">
 
-    <!-- icon kit -->
-    <script src="https://kit.fontawesome.com/c3f87a633e.js" crossorigin="anonymous"></script>
+  <!-- google font Averia Serif Libre -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+
+  <!-- icon kit -->
+  <script src="https://kit.fontawesome.com/c3f87a633e.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <!-- animation -->
-  <div id="loading-container" class="bg-blue">
-    <div class="animation-center">
-        <dotlottie-player id="lottie-animation"
-            src="https://lottie.host/1a9bd2be-83c3-47a9-be46-9b169dfd3aa2/GjzcLUCAB3.json"
-            background="transparent" 
-            speed="1" 
-            style="width: 100vw; height: 100vh;" 
-            loop autoplay>
-        </dotlottie-player>
-    </div>
-    <div class="loading-text">Searching the world...Please wait</div>
-</div>
+ <!-- Overlay for background dim effect -->
+ <div id="overlay" class="overlay"></div>
 
-
-    
-    
-  <!-- Overlay for background dim effect -->
-  <div id="overlay" class="overlay"></div>
-
-  <!-- Off-Canvas Menu -->
-  <div id="offCanvasMenu" class="off-canvas">
+ <!-- Off-Canvas Menu -->
+ <div id="offCanvasMenu" class="off-canvas">
     <button class="close-btn" onclick="toggleMenu()">✖</button>
     <a onclick="click_my_account(event, 'Clothes')">Clothes</a>
     <a onclick="click_my_account(event, 'Shoes')">Shoes</a>
@@ -49,10 +32,10 @@
     <a onclick="click_my_account(event, 'shopping')">
         <i class="fa-solid fa-cart-shopping"></i>
     </a>
-  </div>  
+</div>  
 
-  <!-- Nav Bar -->
-  <header class="navbar">
+<!-- Nav Bar -->
+<header class="navbar">
     <nav class="nav-links">
         <a onclick="click_my_account(event, 'MokeSell')" style="font-size: 30px;">MokeSell</a>
     </nav>
@@ -68,18 +51,21 @@
         <a onclick="toggleMenu()">Others</a> <!-- Triggers Off-Canvas Menu -->
     </nav>
     <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
-  </header>
-    
-  <div class="menu-header">
-    <h1 id="nameCollection"></h1>
-  </div>  
+</header> 
 
-  <div class="item-container" id="item-container">
-      <!-- Products will be loaded dynamically here -->
-  </div>
 
-  <!-- footer -->
-  <footer>
+
+<div class="item-container" id="item-container">
+    <!-- Product details will be loaded dynamically here -->
+</div>
+
+
+<!-- Floating Widget -->
+<div id="floatingWidget" class="floating-widget" onclick="checkLoginBeforePopup()">Chat with Seller</div>
+
+
+<!-- footer -->
+<footer>
     <hr>
     <div class="footer-container">
       <!-- Left Section: Logo and Privacy Policy -->
@@ -102,9 +88,10 @@
     </div>
     <hr>
     <p>&copy; 2025 MokeSell Website. All rights reserved.</p>
-  </footer>
-  <!-- lottie -->
-  <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
-  <script src="itemByCategory.js"></script>
+</footer>
+<script src="item.js"></script>
 </body>
 </html>
+
+
+
