@@ -8,7 +8,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const priceInput = document.getElementById("price");
     const imageInput = document.getElementById("upload");
     const previewImage = document.getElementById("image-preview");
-    const commentInput = document.getElementById("comment");
+    const descriptionInput = document.getElementById("comment");
+    // const useremail = "yao@gmail.com" for testing
+    const useremail =JSON.parse(sessionStorage.getItem("loginemail")) 
 
     let imageBase64 = "";
 
@@ -33,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const name = nameInput.value;
         const category = categoryInput.value;
         const price = parseFloat(priceInput.value);
-        const comment = commentInput ? commentInput.value.trim() : "";
+        const description = descriptionInput ? descriptionInput.value.trim() : "";
 
 
         if (!category || isNaN(price) || price <= 0 || !imageBase64) {
@@ -42,12 +44,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         const productData = {
-            name, 
-            category,
-            price,
+            name:name, 
+            category:category,
+            price:price,
             image: imageBase64,
-            comment,
+            description: description,
+            loginemail:useremail,
         };
+        console.log(productData); // Check the content before sending
 
         fetch(BASE_URL, {
             method: "POST",
@@ -59,12 +63,12 @@ document.addEventListener("DOMContentLoaded", function () {
             body: JSON.stringify(productData),
         })
             .then((response) => {
-                if (!response.ok) throw new Error("Failed to save data.");
+                if (!response.ok) throw new Error(`Failed to save data: ${response.statusText}`);
                 return response.json();
             })
             .then(() => {
                 alert("Product successfully added!");
-
+        
                 form.reset();
                 previewImage.src = "";
                 previewImage.style.display = "none";
@@ -72,7 +76,20 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .catch((error) => {
                 console.error("Error:", error);
+        
+                // If error is due to a failed response, try to read the JSON error message from the response
+                if (error.response) {
+                    error.response.json().then((response) => {
+                        console.log("API Error Response:", response);
+                    });
+                } else {
+                    console.log("Error without response:", error);
+                }
+        
                 alert("An error occurred while saving the product.");
             });
+        
+
+        
     });
 });
