@@ -94,6 +94,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const product = JSON.parse(productData);
+    //store the seller name for the use of chat later
+    sessionStorage.setItem("seller",JSON.stringify(product.loginemail))
 
     // Create elements dynamically
     const itemDiv = document.createElement("div");
@@ -144,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function () {
     sellerName.href = `seller.html?seller=${product.loginemail}`; // Link to seller profile
     sellerName.textContent = product.loginemail;
     sellerName.classList.add("seller-name");
-
+    
     sellerContainer.appendChild(sellerAvatar);
     sellerContainer.appendChild(sellerName);
 

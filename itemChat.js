@@ -32,6 +32,7 @@ export async function sendMessage() {
     const messageInput = document.getElementById("messageInput");
     const messageText = messageInput.value.trim();
     const useremail = JSON.parse(sessionStorage.getItem("loginemail"));
+    const seller = JSON.parse(sessionStorage.getItem("seller"));
 
     if (messageText === "") return; // Don't send empty messages
 
@@ -59,7 +60,8 @@ export async function sendMessage() {
     // Store the message in Firestore using addDoc
     try {
         await addDoc(messagesCollectionRef, {
-            email: useremail,
+            buyer: useremail,
+            seller: seller,
             message: messageText,
             timestamp: serverTimestamp()  
         });

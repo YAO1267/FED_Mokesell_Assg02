@@ -96,7 +96,6 @@ document.addEventListener("DOMContentLoaded", function () {
     .then(products => {
         //retrive the category from local storage
         const selectedCategory = sessionStorage.getItem("selectedCategory");
-
         const collectionNameContainer = document.getElementById("nameCollection");
         collectionNameContainer.innerText = selectedCategory + " Collection";
         const filteredItems = products.filter(product => product.category.toLowerCase() === selectedCategory.toLowerCase());
