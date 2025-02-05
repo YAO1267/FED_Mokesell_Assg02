@@ -206,6 +206,30 @@ async function addToCart(data) {
     }
 }
 
+//chatbox
+function checkLoginBeforePopup() {
+    // Simulate checking if the user is logged in
+    const useremail = JSON.parse(sessionStorage.getItem("loginemail"));
+    if (useremail) {
+        showChatbox();
+    } else {
+        alert("Please log in to chat with the seller.");
+    }
+}
+
+function showChatbox() {
+    document.getElementById("chatbox").style.display = "flex";
+}
+
+function closeChatbox() {
+    document.getElementById("chatbox").style.display = "none";
+}
+
+
+
+    
+    
+    
 
 
 

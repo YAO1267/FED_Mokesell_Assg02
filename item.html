@@ -63,6 +63,21 @@
 <!-- Floating Widget -->
 <div id="floatingWidget" class="floating-widget" onclick="checkLoginBeforePopup()">Chat with Seller</div>
 
+<!-- Chatbox Popup -->
+<div id="chatbox" class="chatbox">
+  <div class="chat-header">
+      <span>Chat with Seller</span>
+      <button onclick="closeChatbox()">X</button>
+  </div>
+  <div class="chat-body" id="chatBody">
+      <!-- Chat messages will appear here -->
+  </div>
+  <div class="chat-footer">
+      <input type="text" id="messageInput" placeholder="Type a message...">
+      <!-- <button onclick="sendMessage()">Send</button> -->
+      <button id="sendButton">Send</button>
+  </div>
+</div>
 
 <!-- footer -->
 <footer>
@@ -89,9 +104,19 @@
     <hr>
     <p>&copy; 2025 MokeSell Website. All rights reserved.</p>
 </footer>
+
+<!-- Import the sendMessage function from itemChat.js and add the event listener -->
+<script type="module">
+  import { sendMessage } from "./itemChat.js";
+  document.getElementById("sendButton").addEventListener("click", sendMessage);
+</script>
+
+<!-- Include your other JS file (item.js) which doesn't use modules -->
 <script src="item.js"></script>
+
 </body>
 </html>
+
 
 
 
