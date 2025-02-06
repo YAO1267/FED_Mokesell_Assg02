@@ -149,6 +149,14 @@ document.addEventListener("DOMContentLoaded", function () {
             productPrice.classList.add("product-price");
             productPrice.textContent = `S$${product.price}`;
 
+            // Append elements to Item
+            item.appendChild(itemLink);
+            item.appendChild(productTitle);
+            item.appendChild(productPrice);
+            
+            // Append Item to container
+            itemContainer.appendChild(item);
+
             // Add to cart button,if user didnt login dont show the button
             if(useremail =JSON.parse(sessionStorage.getItem("loginemail"))){
                 const addToCartButton = document.createElement("button");
@@ -158,17 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 };
                 item.appendChild(addToCartButton);
             }
-            
-
-            // Append elements to Item
-            item.appendChild(itemLink);
-            item.appendChild(productTitle);
-            item.appendChild(productPrice);
-            
-            // Append Item to container
-            itemContainer.appendChild(item);
         });
-
     })
     .catch(error => {
         console.error("Error fetching products:", error);
