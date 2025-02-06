@@ -151,9 +151,10 @@ document.addEventListener("DOMContentLoaded", function () {
     sellerContainer.appendChild(sellerName);
 
     // Add to Cart button
-    const addToCartButton = document.createElement("button");
-    addToCartButton.textContent = "Add to Cart";
-    addToCartButton.onclick = function () {
+    if(useremail =JSON.parse(sessionStorage.getItem("loginemail"))){
+        const addToCartButton = document.createElement("button");
+        addToCartButton.textContent = "Add to Cart";
+        addToCartButton.onclick = function () {
         useremail = JSON.parse(sessionStorage.getItem("loginemail"))
         const data = {
             index: product.index,
@@ -163,14 +164,17 @@ document.addEventListener("DOMContentLoaded", function () {
             status: 0, //0 means still pending, 1 means finished
         };
         addToCart(data);
-    };
+        };
+        itemInfo.appendChild(addToCartButton);
+    }
+    
 
     // Append elements to itemInfo
     itemInfo.appendChild(productTitle);
     itemInfo.appendChild(productPrice);
     itemInfo.appendChild(productDescription);
     itemInfo.appendChild(sellerContainer);
-    itemInfo.appendChild(addToCartButton);
+    
 
     // Append elements to itemDiv
     itemDiv.appendChild(itemImage);
@@ -222,7 +226,6 @@ function checkLoginBeforePopup() {
 function showChatbox() {
     document.getElementById("chatbox").style.display = "flex";
 }
-
 function closeChatbox() {
     document.getElementById("chatbox").style.display = "none";
 }

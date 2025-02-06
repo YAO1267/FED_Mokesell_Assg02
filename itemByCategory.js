@@ -149,19 +149,22 @@ document.addEventListener("DOMContentLoaded", function () {
             productPrice.classList.add("product-price");
             productPrice.textContent = `S$${product.price}`;
 
-            // Add to cart button
-            const addToCartButton = document.createElement("button");
-            addToCartButton.textContent = "Add to Cart";
-            addToCartButton.onclick = function () {
+            // Add to cart button,if user didnt login dont show the button
+            if(useremail =JSON.parse(sessionStorage.getItem("loginemail"))){
+                const addToCartButton = document.createElement("button");
+                addToCartButton.textContent = "Add to Cart";
+                addToCartButton.onclick = function () {
                 addToCart(product.name, product.price);
-            };
+                };
+                item.appendChild(addToCartButton);
+            }
+            
 
             // Append elements to Item
             item.appendChild(itemLink);
             item.appendChild(productTitle);
             item.appendChild(productPrice);
-            item.appendChild(addToCartButton);
-
+            
             // Append Item to container
             itemContainer.appendChild(item);
         });

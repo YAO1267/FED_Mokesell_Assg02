@@ -354,7 +354,7 @@ function click_my_account(evt, page_name) {
     }
     else if(page_name == "my_account"){
         useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
-        window.location.href = "#"
+        window.location.href = "profilepage.html"
      }
     else if(page_name == "Logout"){
         useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
