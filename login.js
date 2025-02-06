@@ -89,6 +89,8 @@ const login = async (email, password) => {
                 // store the data using local storage
                 sessionStorage.setItem("loginemail",JSON.stringify(email))
                 sessionStorage.setItem("password",JSON.stringify(password))
+                sessionStorage.setItem("firstname",JSON.stringify(user.firstname))
+                sessionStorage.setItem("password",JSON.stringify(user.lastname))
                 window.location.href = "index.html"
             }
             

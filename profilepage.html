@@ -215,13 +215,17 @@
     </div>
     <script>
         const userEmail = sessionStorage.getItem("loginemail"); // Directly retrieving as a string
+        const password = sessionStorage.getItem("password");
+        const lastName = sessionStorage.getItem("lastname");
+        const firstName = sessionStorage.getItem("firstname");
+
         const APIKEY = "677f336bc7a864b3d4c78324";
         const BASE_URL = "https://database-9cfc.restdb.io/rest/contactdetail"; 
 
         // Fetch user data on page load
         async function fetchUserProfile() {
             try {
-                const response = await fetch(`${BASE_URL}?q={"email":"${userEmail}"}`, {
+                const response = await fetch(BASE_URL, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
