@@ -138,17 +138,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Placeholder avatar
     const sellerAvatar = document.createElement("img");
-    sellerAvatar.src = "./images/avatar.png"; // You can replace this if avatars exist in DB
+    sellerAvatar.src = "./images/avatar.png"; //put fixed avatar first
     sellerAvatar.alt = "Seller Avatar";
     sellerAvatar.classList.add("seller-avatar");
-
+    //link to seller avatar also 
+    sellerAvatar.addEventListener("click",function(){
+        window.location.href = "profilepage.html"
+    })
+    //seller email
     const sellerName = document.createElement("a");
-    sellerName.href = `seller.html?seller=${product.loginemail}`; // Link to seller profile
+    sellerName.href = `profilepage.html`; // Link to seller profile also
     sellerName.textContent = product.loginemail;
     sellerName.classList.add("seller-name");
     
     sellerContainer.appendChild(sellerAvatar);
     sellerContainer.appendChild(sellerName);
+
+    // Append elements to itemInfo
+    itemInfo.appendChild(productTitle);
+    itemInfo.appendChild(productPrice);
+    itemInfo.appendChild(productDescription);
+    itemInfo.appendChild(sellerContainer);
 
     // Add to Cart button
     if(useremail =JSON.parse(sessionStorage.getItem("loginemail"))){
@@ -169,11 +179,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     
 
-    // Append elements to itemInfo
-    itemInfo.appendChild(productTitle);
-    itemInfo.appendChild(productPrice);
-    itemInfo.appendChild(productDescription);
-    itemInfo.appendChild(sellerContainer);
+    
     
 
     // Append elements to itemDiv
