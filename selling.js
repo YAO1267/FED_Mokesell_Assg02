@@ -68,6 +68,27 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .then(() => {
                 alert("Product successfully added!");
+
+                // Play Lottie Animation
+            const lottieContainer = document.getElementById("lottie-success");
+            lottieContainer.style.display = "block";
+            lottie.loadAnimation({
+                container: lottieContainer,
+                renderer: 'svg',
+                loop: false,
+                autoplay: true,
+                path: '/success.json' 
+            });
+
+            // Reset form and hide animation after completion
+                setTimeout(() => {
+                    lottieContainer.style.display = "none";
+                    form.reset();
+                    previewImage.src = "";
+                    previewImage.style.display = "none";
+                    imageBase64 = "";
+                }, 3000); // Adjust timing 
+            })
         
                 form.reset();
                 previewImage.src = "";
@@ -92,4 +113,3 @@ document.addEventListener("DOMContentLoaded", function () {
 
         
     });
-});
