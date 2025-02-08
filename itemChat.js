@@ -1,5 +1,5 @@
 // Import Firebase dependencies (MUST be at the top)
-import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, serverTimestamp,query, where, orderBy, onSnapshot  } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-analytics.js";
@@ -27,7 +27,7 @@ const db = getFirestore(app);
 // Reference to Firestore collection
 const messagesCollectionRef = collection(db, "chatmsg");
 
-// itemChat.js
+// display and store msg
 export async function sendMessage() {
     const messageInput = document.getElementById("messageInput");
     const messageText = messageInput.value.trim();
@@ -71,3 +71,38 @@ export async function sendMessage() {
     }
 }
 
+
+// Function to listen to real-time chat updates for a specific seller
+export async function listenForNewMessages(sellerEmail) {
+    // Create the query
+    const messagesCollectionRef = collection(db, "chatmsg");
+    const q = query(
+        messagesCollectionRef,
+        where("seller", "==", sellerEmail),  // Filter by seller email
+        orderBy("timestamp")  // Order messages by timestamp
+    );
+    
+    
+    onSnapshot(q,(querySnapshot) => {
+        let messagesDiv = document.getElementById("messages");
+        messagesDiv.innerHTML = ""; // Clear the previous messages
+
+        querySnapshot.forEach((doc) => {
+            let messageData = doc.data();
+            let chatItem = document.createElement("div");
+            chatItem.classList.add("chat-item");
+            chatItem.textContent = messageData.buyer;
+            chatItem.onclick = function() { openChat(messageData); };
+            chatList.appendChild(chatItem);
+        });
+    }, (error) => {
+        console.error("Error listening for new messages: ", error);
+    });
+}
+
+function openChat(user) {
+    document.getElementById("chatTitle").textContent = user.buyer;
+    document.getElementById("messages").innerHTML = user.message;
+    document.getElementById("chatBox").style.display = "flex";
+    document.getElementById("chatBox").dataset.user = user.buyer;
+}

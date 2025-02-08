@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>seller caht</title>
+
+  <link rel="stylesheet" href="sellerChatMsg.css">
+  <link rel="stylesheet" href="general.css">
+
+  <!-- google font Averia Serif Libre -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+
+  <!-- icon kit -->
+  <script src="https://kit.fontawesome.com/c3f87a633e.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<!-- Overlay for background dim effect -->
+<div id="overlay" class="overlay"></div>
+
+<!-- Off-Canvas Menu -->
+<div id="offCanvasMenu" class="off-canvas">
+   <button class="close-btn" onclick="toggleMenu()">✖</button>
+   <a onclick="click_my_account(event, 'Clothes')">Clothes</a>
+   <a onclick="click_my_account(event, 'Shoes')">Shoes</a>
+   <a onclick="click_my_account(event, 'Home-decor')">Home-decor</a>
+   <a onclick="click_my_account(event, 'my_account')" class="myAccountLink" style="display:none;">My Account</a>
+   <a onclick="click_my_account(event, 'Logout')" class="logoutLink" style="display:none;">Logout</a>
+   <a onclick="click_my_account(event, 'Login')" class="loginLink" style="display:block;">Login/Sign Up</a>
+   <a onclick="click_my_account(event, 'shopping')">
+       <i class="fa-solid fa-cart-shopping"></i>
+   </a>
+</div>  
+<!-- Nav Bar -->
+<header class="navbar">
+    <nav class="nav-links">
+        <a onclick="click_my_account(event, 'MokeSell')" style="font-size: 30px;">MokeSell</a>
+    </nav>
+    <nav class="nav-links">
+        <a onclick="click_my_account(event, 'Clothes')">Clothes</a>
+        <a onclick="click_my_account(event, 'Shoes')">Shoes</a>
+        <a onclick="click_my_account(event, 'Home-decor')">Home-decor</a>
+        <a onclick="click_my_account(event, 'my_account')" class="myAccountLink" style="display:none;">My Account</a>
+        <a onclick="click_my_account(event, 'Login')" class="loginLink" style="display:block;">Login/Sign Up</a>
+        <a onclick="click_my_account(event, 'shopping')">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </a>
+        <a onclick="toggleMenu()">Others</a> <!-- Triggers Off-Canvas Menu -->
+    </nav>
+    <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+</header> 
+
+    <!-- chatmsg -->
+    <div class="chat-container">
+        <div class="chat-list" id="chatList"></div>
+        <div class="chat-box" id="chatBox">
+            <h3 id="chatTitle">Chat</h3>
+            <div class="messages" id="messages"></div>
+            <div class="input-box">
+                <input type="text" id="messageInput" placeholder="Type a message...">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+
+<!-- footer -->
+<footer>
+    <hr>
+    <div class="footer-container">
+      <!-- Left Section: Logo and Privacy Policy -->
+      <div class="footer-logo">
+        <img src="./images/logo.png" alt="MokeSell icon">
+        <p>Privacy policy</p>
+      </div>
+
+      <!-- Right Section: Social Media Links -->
+      <div class="social-media">
+        <p>Follow us on</p>
+        <div>
+          <a href="#">&#9993;</a>                                   <!-- Email Icon -->
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>    <!-- Instagram Icon -->
+          <a href="#"><i class="fa-brands fa-twitter"></i></a>      <!-- Twitter Icon -->
+          <a href="#"><i class="fa-brands fa-facebook"></i></a>     <!-- Facebook Icon -->
+        </div>
+        <p class="copyright">&copy; MokeSell 2025</p>
+      </div>
+    </div>
+    <hr>
+    <p>&copy; 2025 MokeSell Website. All rights reserved.</p>
+</footer>
+<script type="module">
+    import { listenForNewMessages } from "./itemChat.js";
+    // show the seller the msg from other potential buyers
+    window.onload = listenForNewMessages("abc@gmail.com")
+</script>
+<script src="sellerChatMsg.js"></script>
+</body>
+</html>
