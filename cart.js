@@ -91,6 +91,7 @@ const apiKey = "677f336bc7a864b3d4c78324";
 // Initialize the cart total
 let cartTotal = 0;
 var totalPrice = 0;
+let itemAdded = [];
 // Fetch cart items for the logged-in user
 async function fetchCartItems() {
     const url = `https://database-9cfc.restdb.io/rest/cart?q={"loginemail": "${userEmail}"}`;
@@ -106,6 +107,7 @@ async function fetchCartItems() {
         // var totalPrice = 0;
         const cartItems = await response.json();
         for (const cartItem of cartItems) {
+            itemAdded.push = cartItem.index;
             // Get the table body
             const tableBody = document.querySelector("#cart-table");
 
@@ -144,27 +146,6 @@ async function fetchCartItems() {
     } catch (error) {
         console.error("Error fetching cart items:", error);
     }
-
-    // Fetch menu item details using index
-    // async function fetchMenuItem(index) {
-    // const url = `https://database-9cfc.restdb.io/rest/menu?q={"index": "${index}"}`;
-
-    // try {
-    //     const response = await fetch(url, {
-    //         method: "GET",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             "x-apikey": apiKey
-    //         }
-    //     });
-
-    //     const data = await response.json();
-        
-    // } catch (error) {
-    //     console.error(`Error fetching menu item with index ${index}:`, error);
-    //     return null;
-    // }
-    // }
 
 }
 
@@ -358,12 +339,98 @@ async function patchData(recordId) {
 }
 
 
+// filter user then update partical field
+// async function finishPayment() {
+//     const url = `https://database-9cfc.restdb.io/rest/cart?q=${encodeURIComponent(
+//         JSON.stringify({ loginemail: userEmail, index: {"$in": itemAdded} })
+//     )}`;
 
+//     try {
+//         const response = await fetch(url, {
+//             method: "GET",
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 "x-apikey": "677f336bc7a864b3d4c78324",
+//             },
+//         });
 
-
-  
-
-
-// function finishPayment(){
-
+//         const data = await response.json();
+//         if (data.length > 0) {
+//             // Update all matching records
+//             data.forEach(async (record) => {
+//                 await patchData(record._id);
+//             });
+//         } else {
+//             console.log("No matching record found.");
+//         }
+//     } catch (error) {
+//         console.error("Error fetching data:", error);
+//     }
 // }
+
+// async function patchData(recordId) {
+//     try {
+//         const response = await fetch(`https://database-9cfc.restdb.io/rest/cart/${recordId}`, {
+//             method: "PATCH",
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 "x-apikey": "677f336bc7a864b3d4c78324",
+//             },
+//             body: JSON.stringify({ status: 1 }),
+//         });
+
+//         const updatedData = await response.json();
+//         console.log("Updated successfully:", updatedData);
+//     } catch (error) {
+//         console.error("Error updating data:", error);
+//     }
+// }
+
+
+console.log(itemAdded); 
+async function finishPayment() {
+    const url = `https://database-9cfc.restdb.io/rest/cart?q=${encodeURIComponent(
+        JSON.stringify({ loginemail: userEmail, index: { "$in": itemAdded } }) // Fix filter
+    )}`;
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "x-apikey": "677f336bc7a864b3d4c78324",
+            },
+        });
+
+        const data = await response.json();
+        if (data.length > 0) {
+            // Update all matching records
+            data.forEach(async (record) => {
+                await patchData2(record._id);
+            });
+        } else {
+            console.log("No matching records found.");
+        }
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+}
+
+async function patchData2(recordId) {
+    console.log("Updating record ID:", recordId);
+    try {
+        const response = await fetch(`https://database-9cfc.restdb.io/rest/cart/${recordId}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "x-apikey": "677f336bc7a864b3d4c78324",
+            },
+            body: JSON.stringify({ status: Number(1) }), // Update status to 1
+        });
+
+        const updatedData = await response.json();
+        console.log(`Updated record ${recordId} successfully:`, updatedData);
+    } catch (error) {
+        console.error(`Error updating record ${recordId}:`, error);
+    }
+}
