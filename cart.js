@@ -120,6 +120,7 @@ async function fetchCartItems() {
             const cell3 = document.createElement("td");
             const cell4 = document.createElement("td");
 
+           
             cell1.textContent = cartItem.name;
             cell2.textContent = cartItem.price;
             cell3.textContent = cartItem.amount;
@@ -337,55 +338,6 @@ async function patchData(recordId) {
         console.error("Error updating data:", error);
     }
 }
-
-
-// filter user then update partical field
-// async function finishPayment() {
-//     const url = `https://database-9cfc.restdb.io/rest/cart?q=${encodeURIComponent(
-//         JSON.stringify({ loginemail: userEmail, index: {"$in": itemAdded} })
-//     )}`;
-
-//     try {
-//         const response = await fetch(url, {
-//             method: "GET",
-//             headers: {
-//                 "Content-Type": "application/json",
-//                 "x-apikey": "677f336bc7a864b3d4c78324",
-//             },
-//         });
-
-//         const data = await response.json();
-//         if (data.length > 0) {
-//             // Update all matching records
-//             data.forEach(async (record) => {
-//                 await patchData(record._id);
-//             });
-//         } else {
-//             console.log("No matching record found.");
-//         }
-//     } catch (error) {
-//         console.error("Error fetching data:", error);
-//     }
-// }
-
-// async function patchData(recordId) {
-//     try {
-//         const response = await fetch(`https://database-9cfc.restdb.io/rest/cart/${recordId}`, {
-//             method: "PATCH",
-//             headers: {
-//                 "Content-Type": "application/json",
-//                 "x-apikey": "677f336bc7a864b3d4c78324",
-//             },
-//             body: JSON.stringify({ status: 1 }),
-//         });
-
-//         const updatedData = await response.json();
-//         console.log("Updated successfully:", updatedData);
-//     } catch (error) {
-//         console.error("Error updating data:", error);
-//     }
-// }
-
 
 console.log(itemAdded); 
 async function finishPayment() {
