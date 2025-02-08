@@ -12,143 +12,172 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
     <style>
-    
         .profile-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-        
-            margin: 30px auto;
-            max-width: 750px;
-            width: 90%;
-            gap: 40px;
-        }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
 
-        .profile-pic-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
+    margin: 30px auto;
+    max-width: 750px;
+    width: 90%;
+    gap: 40px;
+}
 
-        .profile-pic {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            border: 3px solid #ddd;
-            object-fit: cover;
-            transition: 0.3s ease;
-        }
+.profile-pic-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
 
-        .profile-pic:hover {
-            border-color: #3b5b55;
-        }
+.profile-pic {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    border: 3px solid #ddd;
+    object-fit: cover;
+    transition: 0.3s ease;
+}
 
-        .upload-btn {
-            margin-top: 10px;
-            padding: 8px 14px;
-            border: none;
-            border-radius: 8px;
-            background: #497D74;
-            color: white;
-            cursor: pointer;
-            font-size: 14px;
-            transition: 0.3s;
-        }
+.profile-pic:hover {
+    border-color: #444;
+}
 
-        .upload-btn:hover {
-            background: #3b5b55;
-        }
+.upload-btn {
+    margin-top: 10px;
+    padding: 8px 16px; 
+    background: #444;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
 
-        .profile-details {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-        }
+.upload-btn:hover {
+    background: #222;
+}
+
+.profile-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.personal-info {
+    margin-bottom: 16px;
+}
+
+.personal-info label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.personal-info input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.personal-info input:focus {
+    border-color: #5594d7;
+    outline: none;
+    box-shadow: 0px 0px 5px rgba(127, 171, 219, 0.5);
+}
+
+.personal-info input:read-only {
+    background: #f4f4f4;
+    color: #666;
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 12px;  
+}
+
+.form-group button {
+    padding: 8px 16px;  
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    flex: 1; 
+}
+
+.form-group button:first-child {
+    background: #444;
+    color: white;
+}
+
+.form-group button:first-child:hover {
+    background: #222;
+}
+
+#saveBtn {
+    background: #444;  
+    color: white;
+}
+
+#saveBtn:hover {
+    background: #222;  
+}
+
+.btn-logout {
+    background: #dc3545;
+    color: white;
+    padding: 8px 16px;  
+    border-radius: 8px;
+    flex: 1;  
+}
+
+.btn-logout:hover {
+    background: #b02a37;
+}
+
+#newPassSection {
+    display: none;
+}
+
+#newPassword, #confirmPassword {
+    margin-top: 10px;
+}
+
+#editImageBtn:disabled {
+    background: #bbb;
+}
+
+#saveBtn {
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    .profile-container {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .form-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
 
 
-        .personal-info {
-            margin-bottom: 16px;
-        }
-
-        .personal-info label {
-            font-size: 16px;
-            font-weight: 600;
-            color: #333;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .personal-info input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: 0.3s;
-        }
-
-        .personal-info input:focus {
-            border-color: #5594d7;
-            outline: none;
-            box-shadow: 0px 0px 5px rgba(127, 171, 219, 0.5);
-        }
-
-        .personal-info input:read-only {
-            background: #f4f4f4;
-            color: #666;
-        }
-
-        .form-group {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-
-        .form-group button {
-            padding: 8px 12px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .form-group button:first-child {
-            background: #497D74;
-            color: white;
-        }
-
-        .form-group button:first-child:hover {
-            background: #3f534f;
-        }
-
-        .btn-logout {
-            background: #dc3545;
-            color: white;
-        }
-
-        .btn-logout:hover {
-            background: #b02a37;
-        }
-
-
-        @media screen and (max-width: 600px) {
-            .profile-container {
-                flex-direction: column;
-                text-align: center;
-                padding: 20px;
-            }
-            
-            .form-group {
-                flex-direction: column;
-                gap: 10px;
-            }
-        }
 
     </style>
 </head>
@@ -181,134 +210,178 @@
     <div class="profile-pic-container">
         <img src="./images/avatar.png" alt="Profile Picture" class="profile-pic" id="profileImage">
         <input type="file" id="uploadImage" style="display: none;" accept="image/*" onchange="previewImage(event)">
-        <button class="upload-btn" onclick="document.getElementById('uploadImage').click();">Change Photo</button>
+        <button class="upload-btn" onclick="document.getElementById('uploadImage').click();" id="editImageBtn" disabled>Change Photo</button>
     </div>
     
     <div class="profile-container">
         <form id="profileInfo">
             <div class="personal-info">
                 <label for="firstName">First Name</label>
-                <input type="text" id="firstName" placeholder="" required readonly>
+                <input type="text" id="firstName" required readonly>
             </div>
 
             <div class="personal-info">
                 <label for="lastName">Last Name</label>
-                <input type="text" id="lastName" placeholder="" required readonly>
+                <input type="text" id="lastName" required readonly>
             </div>
 
             <div class="personal-info">
                 <label for="email">Email Address</label>
-                <input type="email" id="email" placeholder="" required readonly>
+                <input type="email" id="email" required readonly>
             </div>
 
             <div class="personal-info">
-                <label for="password">Change Password</label>
-                <input type="password" id="password" placeholder="Enter a new password">
+                <label for="oldPassword">Old Password</label>
+                <input type="password" id="oldPassword" readonly>
+            </div>
+
+            <div class="personal-info" id="newPassSection" style="display: none;">
+                <label for="newPassword">New Password</label>
+                <input type="password" id="newPassword" placeholder="Enter new password">
+                
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" placeholder="Confirm new password">
             </div>
 
             <div class="form-group">
-                <button type="button" onclick="saveChanges()">Save Changes</button>
+                <button type="button" id="editBtn" onclick="enableEdit()">Edit</button>
+                <button type="button" id="saveBtn" onclick="saveChanges()" disabled>Save Changes</button>
                 <button type="button" class="btn-logout" onclick="logout()">Logout</button>
             </div>
-
         </form>
     </div>
+
     <script>
-       
         const userEmail = sessionStorage.getItem("loginemail");
         const APIKEY = "677f336bc7a864b3d4c78324";
         const BASE_URL = "https://database-9cfc.restdb.io/rest/contactdetail";
+        let userData = {}; // Store user data
 
-    // Fetch user data based on session email
-    async function fetchUserProfile() {
-        try {
-            const response = await fetch(`${BASE_URL}?q={"email":"${userEmail}"}`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    "x-apikey": APIKEY,
-                    "Cache-Control": "no-cache",
-                },
-            });
-
-            const data = await response.json();
-            if (data.length > 0) {
-                const user = data[0];
-                document.getElementById("firstName").value = user.firstname || "";
-                document.getElementById("lastName").value = user.lastname || "";
-                document.getElementById("email").value = user.email || "";
-
-                document.getElementById("firstName").readOnly = true;
-                document.getElementById("lastName").readOnly = true;
-                document.getElementById("email").readOnly = true;
-
-                if (user.profilePic) {
-                    document.getElementById("profileImage").src = user.profilePic;
-                }
-            }
-        } catch (error) {
-            console.error("Error fetching user data:", error);
+        if (!userEmail) {
+            alert("User not logged in! Redirecting to login page...");
+            window.location.href = "login.html";
         }
-    }
 
-    fetchUserProfile();
+        async function fetchUserProfile() {
+            try {
+                const query = encodeURIComponent(JSON.stringify({ loginemail: userEmail }));
+                const response = await fetch(`${BASE_URL}?q=${query}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "x-apikey": APIKEY,
+                        "Cache-Control": "no-cache",
+                    },
+                });
 
-    // Save updated profile data using PUT
-    async function saveChanges() {
-        const newPassword = document.getElementById("password").value;
-        const profilePic = document.getElementById("profileImage").src;
+                const data = await response.json();
+                if (data.length > 0) {
+                    userData = data[0]; // Store user data
 
-        try {
-            const response = await fetch(`${BASE_URL}?q={"email":"${userEmail}"}`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    "x-apikey": APIKEY,
-                    "Cache-Control": "no-cache",
-                },
-            });
+                    document.getElementById("firstName").value = userData.firstname || "";
+                    document.getElementById("lastName").value = userData.lastname || "";
+                    document.getElementById("email").value = userData.loginemail || "";
+                    document.getElementById("oldPassword").value = userData.password || "";
 
-            const data = await response.json();
-            if (data.length > 0) {
-                const userId = data[0]._id;
+                    if (userData.profilePic) {
+                        document.getElementById("profileImage").src = userData.profilePic;
+                    }
+                } else {
+                    alert("User profile not found!");
+                }
+            } catch (error) {
+                console.error("Error fetching user data:", error);
+            }
+        }
 
-                // Update user profile with PUT
-                await fetch(`${BASE_URL}/${userId}`, {
+        function enableEdit() {
+            document.getElementById("editBtn").disabled = true;
+            document.getElementById("saveBtn").disabled = false;
+            document.getElementById("editImageBtn").disabled = false;
+            document.getElementById("newPassSection").style.display = "block";
+
+            document.getElementById("newPassword").required = true;
+            document.getElementById("confirmPassword").required = true;
+        }
+
+        async function saveChanges() {
+            const newPassword = document.getElementById("newPassword").value.trim();
+            const confirmPassword = document.getElementById("confirmPassword").value.trim();
+            const profilePic = document.getElementById("profileImage").src;
+
+            if (newPassword !== confirmPassword) {
+                alert("Passwords do not match!");
+                return;
+            }
+
+            try {
+                const updatedUserData = {
+                    firstname: userData.firstname,
+                    lastname: userData.lastname,
+                    loginemail: userData.loginemail,
+                    type: userData.type,
+                    password: newPassword || userData.password,
+                    profilePic: profilePic || userData.profilePic,
+                };
+
+                const updateResponse = await fetch(`${BASE_URL}/${userData._id}`, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
                         "x-apikey": APIKEY,
                         "Cache-Control": "no-cache",
                     },
-                    body: JSON.stringify({
-                        firstname: data[0].firstname,
-                        lastname: data[0].lastname,
-                        email: userEmail,
-                        password: newPassword || data[0].password, // Keep old password if not updated
-                        profilePic,
-                    }),
+                    body: JSON.stringify(updatedUserData),
                 });
 
-                alert("Profile updated successfully!");
+                if (updateResponse.ok) {
+                    alert("Profile updated successfully!");
+                    location.reload();
+                } else {
+                    console.error("Failed to update profile:", await updateResponse.text());
+                    alert("Failed to update profile. Check console for details.");
+                }
+            } catch (error) {
+                console.error("Error updating profile:", error);
             }
-        } catch (error) {
-            console.error("Error updating profile:", error);
         }
-    }
 
-    function previewImage(event) {
-        const reader = new FileReader();
-        reader.onload = function () {
-            document.getElementById("profileImage").src = reader.result;
-        };
-        reader.readAsDataURL(event.target.files[0]);
-    }
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                document.getElementById("profileImage").src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
 
-    function logout() {
-        sessionStorage.clear();
-        alert("Logged out successfully!");
-        window.location.href = "login.html";
-    }
+        function logout() {
+            sessionStorage.clear();
+            alert("Logged out successfully!");
+            window.location.href = "login.html";
+        }
+
+        window.onload = fetchUserProfile;
+        function enableEdit() {
+            // Disable the Edit button
+            document.getElementById("editBtn").style.display = "none";
+            
+            // Enable the Save Changes button
+            document.getElementById("saveBtn").style.display = "inline-block";
+            
+            // Enable the profile image change button
+            document.getElementById("editImageBtn").disabled = false;
+            
+            // Show new password section
+            document.getElementById("newPassSection").style.display = "block";
+            
+            // Set fields to editable
+            document.getElementById("firstName").removeAttribute("readonly");
+            document.getElementById("lastName").removeAttribute("readonly");
+            document.getElementById("email").removeAttribute("readonly");
+            document.getElementById("oldPassword").removeAttribute("readonly");
+            document.getElementById("newPassword").required = true;
+            document.getElementById("confirmPassword").required = true;
+}
 
     </script>
 </body>
