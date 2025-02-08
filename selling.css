@@ -1,12 +1,12 @@
 body {
-    font-family: Arial, sans-serif;
+    
     margin: 0;
-    padding: 0;
+    padding: 0; 
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f9f9f9;
+    
 }
 
 .container {
@@ -104,7 +104,7 @@ textarea {
 
 button {
     margin-top: 15px;
-    background-color: #6A9C89;
+    background-color: #444;
     color: white;
     border: none;
     padding: 12px;
@@ -115,5 +115,12 @@ button {
 }
 
 button:hover {
-    background-color: #578872;
+    background-color: #222;
+}
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px; /* Adjust the gap as needed */
+    
 }

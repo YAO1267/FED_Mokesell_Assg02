@@ -7,44 +7,57 @@
     <link rel="icon" type="image/x-icon" href="images/logo.png">
     <link rel="stylesheet" type="text/css" href="general.css">
     <link rel="stylesheet" type="text/css" href="selling.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
     <title>Selling Page</title>
 </head>
 <body>
-    <form id="add-product-form" class="container">
-        <div class="left-section">
-            <img id="image-preview" alt="Preview">
-            <label for="upload">Select Photos +</label>
-            <input type="file" id="upload" accept="image/*">
+    
+    <div class="wrapper">
+
+        <h1>Listing</h1>
+        <a href="itemByCategory.html" class="link" style="float: left;">← Continue Shopping</a>
+        <!-- <div class="container"> -->
+            <!-- Left and Right Sections -->
+            <form id="add-product-form" class="container">
+                <div class="left-section">
+                    <img id="image-preview" alt="Preview">
+                    <label for="upload">Select Photos +</label>
+                    <input type="file" id="upload" accept="image/*">
+                </div>
+        
+                <div class="right-section">
+                    <div class="field">
+                        <label for="name">Product Name:</label>
+                        <input type="text" id="name" name="name" placeholder="Enter product name" required>
+                    </div>
+        
+                    <div class="field">
+                        <label for="category">Category:</label>
+                        <select id="category" name="category" required>
+                            <option value="" disabled selected>Select a category</option>
+                            <option value="clothes">Clothes</option>
+                            <option value="shoes">Shoes</option>
+                            <option value="home-decor">Home Decor</option>
+                        </select>
+                    </div>
+        
+                    <div class="field">
+                        <label for="price">Price:</label>
+                        <input type="number" id="price" name="price" placeholder="Enter price" min="0" step="0.01" required>
+                    </div>
+        
+                    <div class="field">
+                        <label for="comment">Description:</label>
+                        <textarea type="text" id="comment" name="comment" placeholder="Write your comment here..." required></textarea>
+                    </div>
+                    <button id="submit-btn">Submit</button>
+                </div>
+            </form>
         </div>
-
-        <div class="right-section">
-            <div class="field">
-                <label for="name">Product Name:</label>
-                <input type="text" id="name" name="name" placeholder="Enter product name" required>
-            </div>
-
-            <div class="field">
-                <label for="category">Category:</label>
-                <select id="category" name="category" required>
-                    <option value="" disabled selected>Select a category</option>
-                    <option value="clothes">Clothes</option>
-                    <option value="shoes">Shoes</option>
-                    <option value="home-decor">Home Decor</option>
-                </select>
-            </div>
-
-            <div class="field">
-                <label for="price">Price:</label>
-                <input type="number" id="price" name="price" placeholder="Enter price" min="0" step="0.01" required>
-            </div>
-
-            <div class="field">
-                <label for="comment">Description:</label>
-                <textarea type="text" id="comment" name="comment" placeholder="Write your comment here..." required></textarea>
-            </div>
-            <button id="submit-btn">Submit</button>
-        </div>
-    </form>
+    </div>
+    
     <script src="selling.js"></script>
 </body>
 </html>
