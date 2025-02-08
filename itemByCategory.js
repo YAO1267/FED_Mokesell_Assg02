@@ -1,13 +1,7 @@
 //check if the user has logged in 
 window.onload = checkLoginStatus();
-//nav bar
-function toggleMenu() {
-    let menu = document.getElementById("offCanvasMenu");
-    let overlay = document.getElementById("overlay");
 
-    menu.classList.toggle("show");
-    overlay.classList.toggle("show");
-}
+
 //check login status and show myaccount/login
 function checkLoginStatus(){
     const useremail = sessionStorage.getItem("loginemail");
@@ -29,6 +23,15 @@ function checkLoginStatus(){
         Array.from(logoutLinks).forEach(link => link.style.display = 'none');
         Array.from(loginLinks).forEach(link => link.style.display = 'inline');
     }
+}
+
+//nav bar
+function toggleMenu() {
+    let menu = document.getElementById("offCanvasMenu");
+    let overlay = document.getElementById("overlay");
+
+    menu.classList.toggle("show");
+    overlay.classList.toggle("show");
 }
 
 function selectCategory(category) {
@@ -168,6 +171,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         amount:1,
                         loginemail:useremail,
                         status: 0, //0 means still pending, 1 means finished
+                        name:product.name,
                     }
                     addToCart(data);
                 };

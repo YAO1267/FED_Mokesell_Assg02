@@ -137,10 +137,10 @@ window.onclick = function(event) {
 const prizes = [
     'Get 20% off with MIN $20',         //0
     'Get $5 off with MIN $35',          //1
-    'Free shipping fee',                //2
+    'Get $2 off with no MIN Spend',     //2
     'Get $50 with MIN $500',            //3
     'Thank you for participating',      //4
-    'Get $10 with MIN TWO items',       //5
+    'Get $10 with no MIN Spend',       //5
     'Get 10% off with no MIN Spend',    //6
     'Get 15% off with $100',            //7
     'Thank you for participating'       //8
@@ -275,7 +275,7 @@ drawButton.addEventListener('click', () => {
         return;
     }
 
-    if (currentCount.length >= 2) {
+    if (currentCount.length >= 2 && currentCount.status == 0) {
         console.log("User already has 2 vouchers. Cannot add more.");
         window.alert("You already have 2 vouchers. Cannot add more.")
         return;

@@ -41,19 +41,19 @@
         <i class="fa-solid fa-cart-shopping"></i>
     </a>
   </div> 
-  
+
   <!-- Nav Bar -->
   <header class="navbar">
     <nav class="nav-links">
-        <a onclick="click_my_account(event, 'MokeSell')" style="font-size: 30px;">MokeSell</a>
+      <a onclick="click_my_account('MokeSell')" style="font-size: 30px;">MokeSell</a>
     </nav>
   <nav class="nav-links">
-      <a onclick="click_my_account(event, 'Clothes')">Clothes</a>
-      <a onclick="click_my_account(event, 'Shoes')">Shoes</a>
-      <a onclick="click_my_account(event, 'Home-decor')">Home-decor</a>
-      <a onclick="click_my_account(event, 'my_account')" class="myAccountLink" style="display:none;">My Account</a>
-      <a onclick="click_my_account(event, 'Login')" class="loginLink" style="display:block;">Login/Sign Up</a>
-      <a onclick="click_my_account(event, 'shopping')">
+      <a onclick="click_my_account('Clothes')">Clothes</a>
+      <a onclick="click_my_account('Shoes')">Shoes</a>
+      <a onclick="click_my_account('Home-decor')">Home-decor</a>
+      <a onclick="click_my_account('my_account')" class="myAccountLink" style="display:none;">My Account</a>
+      <a onclick="click_my_account('Login')" class="loginLink" style="display:block;">Login/Sign Up</a>
+      <a onclick="click_my_account('shopping')">
           <i class="fa-solid fa-cart-shopping"></i>
       </a>
       <a onclick="toggleMenu()">Others</a> <!-- Triggers Off-Canvas Menu -->
@@ -63,16 +63,16 @@
   <div class="menu-header">
     <h1>Shopping Cart</h1>
   </div>
+
   <div class="container">
     <div class="cart-container">
-    
       <a href="index.html" class="continue-link">‹ Continue Shopping</a>
       <table id="cart-table">
         <thead>
           <tr>
             <th>Product</th>
             <th>Price</th>
-            <th>Subtotal</th>
+            <th>Amount</th>
             <th>Status</th>
           </tr>
         </thead>
@@ -82,12 +82,23 @@
       </table>
       <div class="cart-summary">
         <div class="coupon-section">
-          <input type="text" placeholder="Coupon Code">
-          <button>Apply Coupon</button>
+          <input type="text" placeholder="Coupon Code" id="apply-coupon">
+          <button onclick="applyCoupon()">Apply Coupon</button>
+        </div>
+      
+        <!-- Coupon List Popup -->
+        <div id="coupon-popup" class="popup">
+          <div class="popup-content">
+            <span id="close-popup" class="close">&times;</span>
+            <h2>Your Coupons</h2>
+            <ul id="coupon-list">
+              <!-- List of Coupons will go here -->
+            </ul>
+          </div>
         </div>
         <div class="cart-total">
-          <p>Sub-Total</p>
-          <button>Proceed to Pay</button>
+          <p id="totalPrice">Sub-Total</p>
+          <button onclick="finishPayment()">Finish Your Payment?</button>
         </div>
       </div>
     </div>
