@@ -44,23 +44,23 @@
         }
 
         .profile-pic:hover {
-            border-color: #3b5b55;
+            border-color: #444;
         }
 
         .upload-btn {
             margin-top: 10px;
-            padding: 8px 14px;
+            padding: 10px 20px;
+            background: #444;
+            color: white;
             border: none;
             border-radius: 8px;
-            background: #497D74;
-            color: white;
             cursor: pointer;
-            font-size: 14px;
-            transition: 0.3s;
+            font-size: 16px;
+            transition: background 0.3s ease;
         }
 
         .upload-btn:hover {
-            background: #3b5b55;
+            background: #222;
         }
 
         .profile-details {
@@ -119,12 +119,12 @@
         }
 
         .form-group button:first-child {
-            background: #497D74;
+            background: #444;
             color: white;
         }
 
         .form-group button:first-child:hover {
-            background: #3f534f;
+            background: #222;
         }
 
         .btn-logout {
@@ -136,6 +136,16 @@
             background: #b02a37;
         }
 
+        #newPassSection {
+            display: none;
+        }
+
+        #newPassword, #confirmPassword {
+            margin-top: 10px;
+        }
+        #editImageBtn:disabled {
+            background: #bbb;
+        }
 
         @media screen and (max-width: 600px) {
             .profile-container {
