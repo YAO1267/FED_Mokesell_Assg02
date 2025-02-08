@@ -9,9 +9,11 @@ body {
 
 h1 {
     font-family: 'Averia Serif Libre', serif;
-    font-size: 40px;
-    color: #5A4E42;
+    font-size: 52px;
+    color: #50463c;
     margin: 0;
+    font-weight: 700; /* Bold to give it more impact */
+    letter-spacing: 1px;
 }
 
 /* nav bar */
@@ -175,7 +177,7 @@ footer .copyright {
 }
 .menu-header {
     text-align: center;
-    background-color: #c7cfc1; 
+    background-color: #929e8a; 
     padding: 20px 10px;
     border-bottom: 2px ;
     margin-bottom: 20px; 

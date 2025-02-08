@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>homepage</title>
+  <title>Cart</title>
 
   <link rel="stylesheet" href="cart.css">
   <link rel="stylesheet" href="general.css">
@@ -23,6 +23,7 @@
 
     h1 {
       text-align: center;
+      
     }
 
     table {
@@ -99,8 +100,14 @@
       margin-bottom: 15px;
       color: #030303;
       text-decoration: none;
-      font-weight: bold;
+   
     }
+    .menu-header {
+    text-align: center;
+    background-color: #929e8a; 
+    padding: 20px 10px;
+     
+  }
   </style>
 </head>
 <body>
@@ -138,11 +145,13 @@
   </nav>
   <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
 </header> 
-
+<div class="menu-header">
+  <h1>Shopping Cart</h1>
+  </div>
 <div class="container">
-  <a href="#" class="continue-link">Continue Shopping</a>
   <div class="cart-container">
-    <h1>My Cart</h1>
+    
+    <a href="index.html" class="continue-link">‹ Continue Shopping</a>
     <table id="cart-table">
       <thead>
         <tr>
