@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>homepage</title>
+  <title>Cart</title>
 
   <link rel="stylesheet" href="cart.css">
   <link rel="stylesheet" href="general.css">
@@ -23,6 +23,7 @@
 
     h1 {
       text-align: center;
+      
     }
 
     table {
@@ -99,32 +100,39 @@
       margin-bottom: 15px;
       color: #030303;
       text-decoration: none;
-      font-weight: bold;
+   
     }
+    .menu-header {
+    text-align: center;
+    background-color: #929e8a; 
+    padding: 20px 10px;
+     
+  }
   </style>
 </head>
 <body>
-<!-- Overlay for background dim effect -->
-<div id="overlay" class="overlay"></div>
 
-<!-- Off-Canvas Menu -->
-<div id="offCanvasMenu" class="off-canvas">
-   <button class="close-btn" onclick="toggleMenu()">✖</button>
-   <a onclick="click_my_account(event, 'Clothes')">Clothes</a>
-   <a onclick="click_my_account(event, 'Shoes')">Shoes</a>
-   <a onclick="click_my_account(event, 'Home-decor')">Home-decor</a>
-   <a onclick="click_my_account(event, 'my_account')" class="myAccountLink" style="display:none;">My Account</a>
-   <a onclick="click_my_account(event, 'Logout')" class="logoutLink" style="display:none;">Logout</a>
-   <a onclick="click_my_account(event, 'Login')" class="loginLink" style="display:block;">Login/Sign Up</a>
-   <a onclick="click_my_account(event, 'shopping')">
-       <i class="fa-solid fa-cart-shopping"></i>
-   </a>
-</div>  
-<!-- Nav Bar -->
-<header class="navbar">
-  <nav class="nav-links">
-      <a onclick="click_my_account(event, 'MokeSell')" style="font-size: 30px;">MokeSell</a>
-  </nav>
+  <!-- Overlay for background dim effect -->
+  <div id="overlay" class="overlay"></div>
+
+  <!-- Off-Canvas Menu -->
+  <div id="offCanvasMenu" class="off-canvas">
+    <button class="close-btn" onclick="toggleMenu()">✖</button>
+    <a onclick="click_my_account(event, 'Clothes')">Clothes</a>
+    <a onclick="click_my_account(event, 'Shoes')">Shoes</a>
+    <a onclick="click_my_account(event, 'Home-decor')">Home-decor</a>
+    <a onclick="click_my_account(event, 'my_account')" class="myAccountLink" style="display:none;">My Account</a>
+    <a onclick="click_my_account(event, 'Logout')" class="logoutLink" style="display:none;">Logout</a>
+    <a onclick="click_my_account(event, 'Login')" class="loginLink" style="display:block;">Login/Sign Up</a>
+    <a onclick="click_my_account(event, 'shopping')">
+        <i class="fa-solid fa-cart-shopping"></i>
+    </a>
+  </div>  
+  <!-- Nav Bar -->
+  <header class="navbar">
+    <nav class="nav-links">
+        <a onclick="click_my_account(event, 'MokeSell')" style="font-size: 30px;">MokeSell</a>
+    </nav>
   <nav class="nav-links">
       <a onclick="click_my_account(event, 'Clothes')">Clothes</a>
       <a onclick="click_my_account(event, 'Shoes')">Shoes</a>
@@ -137,47 +145,49 @@
       <a onclick="toggleMenu()">Others</a> <!-- Triggers Off-Canvas Menu -->
   </nav>
   <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
-</header> 
-
-<div class="container">
-  <a href="#" class="continue-link">Continue Shopping</a>
-  <div class="cart-container">
-    <h1>My Cart</h1>
-    <table id="cart-table">
-      <thead>
-        <tr>
-          <th>Product</th>
-          <th>Price</th>
-          <th>Subtotal</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody id="cart-items">
-        <!-- Cart items will be dynamically inserted here -->
-      </tbody>
-    </table>
-    <div class="cart-summary">
-      <div class="coupon-section">
-        <input type="text" placeholder="Coupon Code">
-        <button>Apply Coupon</button>
-      </div>
-      <div class="cart-total">
-        <p>Sub-Total</p>
-        <button>Proceed to Pay</button>
+  </header> 
+  <div class="menu-header">
+    <h1>Shopping Cart</h1>
+  </div>
+  <div class="container">
+    <div class="cart-container">
+    
+      <a href="index.html" class="continue-link">‹ Continue Shopping</a>
+      <table id="cart-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Subtotal</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="cart-items">
+          <!-- Cart items will be dynamically inserted here -->
+        </tbody>
+      </table>
+      <div class="cart-summary">
+        <div class="coupon-section">
+          <input type="text" placeholder="Coupon Code">
+          <button>Apply Coupon</button>
+        </div>
+        <div class="cart-total">
+          <p>Sub-Total</p>
+          <button>Proceed to Pay</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- footer -->
-<footer>
-  <hr>
-  <div class="footer-container">
-    <!-- Left Section: Logo and Privacy Policy -->
-    <div class="footer-logo">
-      <img src="./images/logo.png" alt="MokeSell icon">
-      <p>Privacy policy</p>
-    </div>
+  <!-- footer -->
+  <footer>
+    <hr>
+    <div class="footer-container">
+      <!-- Left Section: Logo and Privacy Policy -->
+      <div class="footer-logo">
+        <img src="./images/logo.png" alt="MokeSell icon">
+        <p>Privacy policy</p>
+      </div>
 
     <!-- Right Section: Social Media Links -->
     <div class="social-media">
@@ -196,3 +206,4 @@
 </footer>
 <script src="cart.js"></script>
 </body>
+</html>

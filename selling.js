@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const imageInput = document.getElementById("upload");
     const previewImage = document.getElementById("image-preview");
     const descriptionInput = document.getElementById("comment");
-    // const useremail = "yao@gmail.com" 
+    //const useremail = "yao@gmail.com" 
     const useremail =JSON.parse(sessionStorage.getItem("loginemail")) 
 
     let imageBase64 = "";
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     previewImage.src = "";
                     previewImage.style.display = "none";
                     imageBase64 = "";
-                }, 3000); // Adjust timing 
+                }, 5000); // Adjust timing 
             })
         
                 form.reset();
