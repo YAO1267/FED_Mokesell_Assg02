@@ -214,101 +214,137 @@
         </form>
     </div>
     <script>
-       
         const userEmail = sessionStorage.getItem("loginemail");
-        const APIKEY = "677f336bc7a864b3d4c78324";
-        const BASE_URL = "https://database-9cfc.restdb.io/rest/contactdetail";
+const APIKEY = "677f336bc7a864b3d4c78324";
+const BASE_URL = "https://database-9cfc.restdb.io/rest/contactdetail";
 
-    // Fetch user data based on session email
-    async function fetchUserProfile() {
-        try {
-            const response = await fetch(`${BASE_URL}?q={"email":"${userEmail}"}`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    "x-apikey": APIKEY,
-                    "Cache-Control": "no-cache",
-                },
-            });
+// Ensure user is logged in before fetching data
+if (!userEmail) {
+    alert("User not logged in! Redirecting to login page...");
+    window.location.href = "login.html";
+}
 
-            const data = await response.json();
-            if (data.length > 0) {
-                const user = data[0];
-                document.getElementById("firstName").value = user.firstname || "";
-                document.getElementById("lastName").value = user.lastname || "";
-                document.getElementById("email").value = user.email || "";
+// Fetch user data based on session email
+async function fetchUserProfile() {
+    try {
+        const query = encodeURIComponent(JSON.stringify({ loginemail: userEmail })); // Correct field name
+        const url = `${BASE_URL}?q=${query}`;
+        console.log("Fetching from:", url); // Debugging: Check if the URL is correct
 
-                document.getElementById("firstName").readOnly = true;
-                document.getElementById("lastName").readOnly = true;
-                document.getElementById("email").readOnly = true;
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "x-apikey": APIKEY,
+                "Cache-Control": "no-cache",
+            },
+        });
 
-                if (user.profilePic) {
-                    document.getElementById("profileImage").src = user.profilePic;
-                }
+        const data = await response.json();
+        console.log("Fetched user data:", data); // Debugging: Check API response
+
+        if (data.length > 0) {
+            const user = data[0];
+
+            document.getElementById("firstName").value = user.firstname || "";
+            document.getElementById("lastName").value = user.lastname || "";
+            document.getElementById("email").value = user.loginemail || "";
+
+            document.getElementById("firstName").readOnly = true;
+            document.getElementById("lastName").readOnly = true;
+            document.getElementById("email").readOnly = true;
+
+            if (user.profilePic) {
+                document.getElementById("profileImage").src = user.profilePic;
             }
-        } catch (error) {
-            console.error("Error fetching user data:", error);
+        } else {
+            console.warn("No user data found for loginemail:", userEmail);
+            alert("User profile not found! Check if the email exists in the database.");
         }
+    } catch (error) {
+        console.error("Error fetching user data:", error);
     }
+}
 
-    fetchUserProfile();
+// Save updated profile data using PUT
+async function saveChanges() {
+    const newPassword = document.getElementById("password").value.trim();
+    const profilePic = document.getElementById("profileImage").src;
 
-    // Save updated profile data using PUT
-    async function saveChanges() {
-        const newPassword = document.getElementById("password").value;
-        const profilePic = document.getElementById("profileImage").src;
+    try {
+        // Fetch existing user data
+        const query = encodeURIComponent(JSON.stringify({ loginemail: userEmail }));
+        const response = await fetch(`${BASE_URL}?q=${query}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "x-apikey": APIKEY,
+                "Cache-Control": "no-cache",
+            },
+        });
 
-        try {
-            const response = await fetch(`${BASE_URL}?q={"email":"${userEmail}"}`, {
-                method: "GET",
+        const data = await response.json();
+        console.log("Fetched user for update:", data); // Debugging
+
+        if (data.length > 0) {
+            const user = data[0]; // Get user details
+            const userId = user._id; // Extract user ID
+
+            // Ensure all required fields are included in the update
+            const updatedUserData = {
+                firstname: user.firstname, // Keep existing value
+                lastname: user.lastname, // Keep existing value
+                loginemail: user.loginemail, // Keep existing email
+                type: user.type, // Keep existing type
+                password: newPassword ? newPassword : user.password, // Update only if new password is entered
+                profilePic: profilePic || user.profilePic, // Update only if a new profile image is uploaded
+            };
+
+            console.log("Updating with:", updatedUserData); // Debugging
+
+            // Send the update request using PUT
+            const updateResponse = await fetch(`${BASE_URL}/${userId}`, {
+                method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                     "x-apikey": APIKEY,
                     "Cache-Control": "no-cache",
                 },
+                body: JSON.stringify(updatedUserData),
             });
 
-            const data = await response.json();
-            if (data.length > 0) {
-                const userId = data[0]._id;
-
-                // Update user profile with PUT
-                await fetch(`${BASE_URL}/${userId}`, {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "x-apikey": APIKEY,
-                        "Cache-Control": "no-cache",
-                    },
-                    body: JSON.stringify({
-                        firstname: data[0].firstname,
-                        lastname: data[0].lastname,
-                        email: userEmail,
-                        password: newPassword || data[0].password, // Keep old password if not updated
-                        profilePic,
-                    }),
-                });
-
+            if (updateResponse.ok) {
                 alert("Profile updated successfully!");
+            } else {
+                console.error("Failed to update profile:", await updateResponse.text());
+                alert("Failed to update profile. Check console for details.");
             }
-        } catch (error) {
-            console.error("Error updating profile:", error);
+        } else {
+            console.warn("User not found for update.");
         }
+    } catch (error) {
+        console.error("Error updating profile:", error);
     }
+}
 
-    function previewImage(event) {
-        const reader = new FileReader();
-        reader.onload = function () {
-            document.getElementById("profileImage").src = reader.result;
-        };
-        reader.readAsDataURL(event.target.files[0]);
-    }
+// Preview uploaded image before saving
+function previewImage(event) {
+    const reader = new FileReader();
+    reader.onload = function () {
+        document.getElementById("profileImage").src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+}
 
-    function logout() {
-        sessionStorage.clear();
-        alert("Logged out successfully!");
-        window.location.href = "login.html";
-    }
+// Logout function
+function logout() {
+    sessionStorage.clear();
+    alert("Logged out successfully!");
+    window.location.href = "login.html";
+}
+
+// Load user profile when page loads
+window.onload = fetchUserProfile;
 
     </script>
 </body>
