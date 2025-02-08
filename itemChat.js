@@ -81,28 +81,45 @@ export async function listenForNewMessages(sellerEmail) {
         where("seller", "==", sellerEmail),  // Filter by seller email
         orderBy("timestamp")  // Order messages by timestamp
     );
-    
+
+    let checkBuyerList = {};
     
     onSnapshot(q,(querySnapshot) => {
         let messagesDiv = document.getElementById("messages");
         messagesDiv.innerHTML = ""; // Clear the previous messages
-
+        
         querySnapshot.forEach((doc) => {
             let messageData = doc.data();
-            let chatItem = document.createElement("div");
-            chatItem.classList.add("chat-item");
-            chatItem.textContent = messageData.buyer;
-            chatItem.onclick = function() { openChat(messageData); };
-            chatList.appendChild(chatItem);
+            if(messageData.buyer in checkBuyerList){
+                checkBuyerList[messageData.buyer].push(messageData.message);
+            }else{
+                let chatItem = document.createElement("div");
+                chatItem.classList.add("chat-item");
+                chatItem.textContent = messageData.buyer;
+                chatList.appendChild(chatItem);
+                // chatItem.setAttribute("id",messageData.buyer+"1")
+                const key = messageData.buyer;
+                checkBuyerList[key] = [];
+                checkBuyerList[key].push(messageData.message);
+                chatItem.onclick = function() { openChat(messageData,checkBuyerList[key]); };
+            }
+            
+            let elements = document.getElementsByName(messageData.buyer);
+            if(elements.length != 0){
+                document.getElementById("messages").innerHTML += messageData.message + "<br/>";
+            }
         });
+        
     }, (error) => {
         console.error("Error listening for new messages: ", error);
     });
 }
 
-function openChat(user) {
+function openChat(user,msg) {
     document.getElementById("chatTitle").textContent = user.buyer;
-    document.getElementById("messages").innerHTML = user.message;
-    document.getElementById("chatBox").style.display = "flex";
-    document.getElementById("chatBox").dataset.user = user.buyer;
+    msg.forEach(mesg =>{
+        document.getElementById("messages").innerHTML += mesg + "<br>";
+    });
+    document.getElementById("chatBox").setAttribute("name",user.buyer);
+    document.getElementsByName(user.buyer)[0].style.display = "flex";
 }
