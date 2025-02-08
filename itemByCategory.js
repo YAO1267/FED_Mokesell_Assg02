@@ -31,22 +31,27 @@ function checkLoginStatus(){
     }
 }
 
+function selectCategory(category) {
+    sessionStorage.setItem("selectedCategory", category); // Store category in session
+    window.location.href = "itemByCategory.html"; // Redirect to category page
+}
+
 //direct to other pages with the login email
 function click_my_account(page_name) {
     if (page_name == 'MokeSell') {
         window.location.href = "index.html"
     }
     else if(page_name == 'Clothes'){ 
-        window.location.href = "#"
+        selectCategory('clothes');
     }
     else if(page_name == "Shoes"){
-        window.location.href = "#"
+        selectCategory('shoes');
     } 
     else if(page_name == "Home-decor"){
-        window.location.href = "#"
+        selectCategory('home-decor');
     } 
     else if(page_name == "shopping"){
-        window.location.href = "#"
+        window.location.href = "cart.html"
     }
     else if(page_name == "Login"){
         window.location.href = "login.html"
@@ -157,7 +162,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 const addToCartButton = document.createElement("button");
                 addToCartButton.textContent = "Add to Cart";
                 addToCartButton.onclick = function () {
-                addToCart(product.name, product.price);
+                    const data = {
+                        index: product.index,
+                        price:product.price,
+                        amount:1,
+                        loginemail:useremail,
+                        status: 0, //0 means still pending, 1 means finished
+                    }
+                    addToCart(data);
                 };
                 item.appendChild(addToCartButton);
             }
@@ -168,3 +180,34 @@ document.addEventListener("DOMContentLoaded", function () {
         itemContainer.innerHTML = "<p>Failed to load items. Please try again later.</p>";
     });
 });
+
+
+
+
+//add-to-cart
+const apiUrl = 'https://database-9cfc.restdb.io/rest/cart';
+const apiKey = '677f336bc7a864b3d4c78324';
+
+// Function to send data to restdb.io
+async function addToCart(data) {
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-apikey': apiKey
+            },
+            body: JSON.stringify(data) // Convert data object to JSON string
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            console.log('Data saved:', result);
+            window.alert('Add to your cart successfully!')
+        } else {
+            console.log('Error saving data:', response.status, response.statusText);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}

@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const previewImage = document.getElementById("image-preview");
     const descriptionInput = document.getElementById("comment");
     //const useremail = "yao@gmail.com" 
-    const useremail =JSON.parse(sessionStorage.getItem("loginemail")) 
+    const useremail =sessionStorage.getItem("loginemail"); 
 
     let imageBase64 = "";
 

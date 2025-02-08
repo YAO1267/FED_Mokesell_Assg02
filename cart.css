@@ -1,0 +1,92 @@
+.container {
+    max-width: 1000px;
+    margin: auto;
+  }
+
+  h1 {
+    text-align: center;
+    
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    background-color: #050505;
+    color: white;
+  }
+
+  .cart-summary {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  .coupon-section input[type="text"] {
+    padding: 10px;
+    width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+
+  .coupon-section button {
+    padding: 10px 15px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .coupon-section button:hover {
+    background-color: #444;
+  }
+
+  .cart-total {
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 250px;
+  }
+
+  .cart-total p {
+    margin: 10px 0;
+  }
+
+  .cart-total button {
+    width: 100%;
+    padding: 12px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .cart-total button:hover {
+    background-color: #444;
+  }
+
+  .continue-link {
+    display: block;
+    margin-bottom: 15px;
+    color: #030303;
+    text-decoration: none;
+ 
+  }
+  .menu-header {
+  text-align: center;
+  background-color: #929e8a; 
+  padding: 20px 10px;
+   
+}

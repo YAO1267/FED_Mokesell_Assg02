@@ -332,16 +332,16 @@ function click_my_account(page_name) {
         window.location.href = "index.html"
     }
     else if(page_name == 'Clothes'){ 
-        window.location.href = "#"
+        selectCategory('clothes');
     }
     else if(page_name == "Shoes"){
-        window.location.href = "#"
+        selectCategory('shoes');
     } 
     else if(page_name == "Home-decor"){
-        window.location.href = "#"
+        selectCategory('home-decor');
     } 
     else if(page_name == "shopping"){
-        window.location.href = "#"
+        window.location.href = "cart.html"
     }
     else if(page_name == "Login"){
         window.location.href = "login.html"

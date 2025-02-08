@@ -51,8 +51,8 @@ export async function sendMessage() {
     // // Append message to chat body
     // chatBody.appendChild(messageDiv);
 
-    // // Clear input
-    // messageInput.value = "";
+    // Clear input
+    messageInput.value = "";
 
     // // Scroll to the latest message
     // chatBody.scrollTop = chatBody.scrollHeight;

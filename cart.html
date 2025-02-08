@@ -16,98 +16,7 @@
   <!-- icon kit -->
   <script src="https://kit.fontawesome.com/c3f87a633e.js" crossorigin="anonymous"></script>
   <style>
-    .container {
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    h1 {
-      text-align: center;
-      
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-    }
-
-    th, td {
-      padding: 12px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-    }
-
-    th {
-      background-color: #050505;
-      color: white;
-    }
-
-    .cart-summary {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
-
-    .coupon-section input[type="text"] {
-      padding: 10px;
-      width: 200px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-    }
-
-    .coupon-section button {
-      padding: 10px 15px;
-      background-color: black;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .coupon-section button:hover {
-      background-color: #444;
-    }
-
-    .cart-total {
-      padding: 20px;
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      width: 250px;
-    }
-
-    .cart-total p {
-      margin: 10px 0;
-    }
-
-    .cart-total button {
-      width: 100%;
-      padding: 12px;
-      background-color: black;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .cart-total button:hover {
-      background-color: #444;
-    }
-
-    .continue-link {
-      display: block;
-      margin-bottom: 15px;
-      color: #030303;
-      text-decoration: none;
-   
-    }
-    .menu-header {
-    text-align: center;
-    background-color: #929e8a; 
-    padding: 20px 10px;
-     
-  }
+    
   </style>
 </head>
 <body>
@@ -118,16 +27,21 @@
   <!-- Off-Canvas Menu -->
   <div id="offCanvasMenu" class="off-canvas">
     <button class="close-btn" onclick="toggleMenu()">✖</button>
-    <a onclick="click_my_account(event, 'Clothes')">Clothes</a>
-    <a onclick="click_my_account(event, 'Shoes')">Shoes</a>
-    <a onclick="click_my_account(event, 'Home-decor')">Home-decor</a>
-    <a onclick="click_my_account(event, 'my_account')" class="myAccountLink" style="display:none;">My Account</a>
-    <a onclick="click_my_account(event, 'Logout')" class="logoutLink" style="display:none;">Logout</a>
-    <a onclick="click_my_account(event, 'Login')" class="loginLink" style="display:block;">Login/Sign Up</a>
-    <a onclick="click_my_account(event, 'shopping')">
+    <nav class="nav-links">
+      <a onclick="click_my_account('MokeSell')" style="font-size: 30px;">MokeSell</a>
+    </nav>
+    <a onclick="click_my_account('Clothes')">Clothes</a>
+    <a onclick="click_my_account('Shoes')">Shoes</a>
+    <a onclick="click_my_account('Home-decor')">Home-decor</a>
+    <a onclick="click_my_account('my_account')" class="myAccountLink" style="display:none;">My Account</a>
+    <a onclick="click_my_account('Logout')" class="logoutLink" style="display:none;">Logout</a>
+    <a onclick="click_my_account('Login')" class="loginLink" style="display:block;">Login/Sign Up</a>
+    <a onclick="click_my_account('my_message')">My message</a>
+    <a onclick="click_my_account('shopping')">
         <i class="fa-solid fa-cart-shopping"></i>
     </a>
-  </div>  
+  </div> 
+  
   <!-- Nav Bar -->
   <header class="navbar">
     <nav class="nav-links">
