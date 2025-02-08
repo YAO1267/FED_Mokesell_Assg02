@@ -34,13 +34,17 @@
   <!-- Off-Canvas Menu -->
   <div id="offCanvasMenu" class="off-canvas">
     <button class="close-btn" onclick="toggleMenu()">✖</button>
-    <a onclick="click_my_account(event, 'Clothes')">Clothes</a>
-    <a onclick="click_my_account(event, 'Shoes')">Shoes</a>
-    <a onclick="click_my_account(event, 'Home-decor')">Home-decor</a>
-    <a onclick="click_my_account(event, 'my_account')" class="myAccountLink" style="display:none;">My Account</a>
-    <a onclick="click_my_account(event, 'Logout')" class="logoutLink" style="display:none;">Logout</a>
-    <a onclick="click_my_account(event, 'Login')" class="loginLink" style="display:block;">Login/Sign Up</a>
-    <a onclick="click_my_account(event, 'shopping')">
+    <nav class="nav-links">
+      <a onclick="click_my_account('MokeSell')" style="font-size: 30px;">MokeSell</a>
+    </nav>
+    <a onclick="click_my_account('Clothes')">Clothes</a>
+    <a onclick="click_my_account('Shoes')">Shoes</a>
+    <a onclick="click_my_account('Home-decor')">Home-decor</a>
+    <a onclick="click_my_account('my_account')" class="myAccountLink" style="display:none;">My Account</a>
+    <a onclick="click_my_account('Logout')" class="logoutLink" style="display:none;">Logout</a>
+    <a onclick="click_my_account('Login')" class="loginLink" style="display:block;">Login/Sign Up</a>
+    <a onclick="click_my_account('my_message')">My message</a>
+    <a onclick="click_my_account('shopping')">
         <i class="fa-solid fa-cart-shopping"></i>
     </a>
   </div>  
@@ -48,15 +52,15 @@
   <!-- Nav Bar -->
   <header class="navbar">
     <nav class="nav-links">
-        <a onclick="click_my_account(event, 'MokeSell')" style="font-size: 30px;">MokeSell</a>
+        <a onclick="click_my_account('MokeSell')" style="font-size: 30px;">MokeSell</a>
     </nav>
     <nav class="nav-links">
-        <a onclick="click_my_account(event, 'Clothes')">Clothes</a>
-        <a onclick="click_my_account(event, 'Shoes')">Shoes</a>
-        <a onclick="click_my_account(event, 'Home-decor')">Home-decor</a>
-        <a onclick="click_my_account(event, 'my_account')" class="myAccountLink" style="display:none;">My Account</a>
-        <a onclick="click_my_account(event, 'Login')" class="loginLink" style="display:block;">Login/Sign Up</a>
-        <a onclick="click_my_account(event, 'shopping')">
+        <a onclick="click_my_account('Clothes')">Clothes</a>
+        <a onclick="click_my_account('Shoes')">Shoes</a>
+        <a onclick="click_my_account('Home-decor')">Home-decor</a>
+        <a onclick="click_my_account('my_account')" class="myAccountLink" style="display:none;">My Account</a>
+        <a onclick="click_my_account('Login')" class="loginLink" style="display:block;">Login/Sign Up</a>
+        <a onclick="click_my_account('shopping')">
             <i class="fa-solid fa-cart-shopping"></i>
         </a>
         <a onclick="toggleMenu()">Others</a> <!-- Triggers Off-Canvas Menu -->

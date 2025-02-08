@@ -10,7 +10,7 @@ function toggleMenu() {
 }
 //check login status and show myaccount/login
 function checkLoginStatus(){
-    const useremail = JSON.parse(sessionStorage.getItem("loginemail")) 
+    const useremail = sessionStorage.getItem("loginemail");
     console.log("User email from sessionStorage:", useremail);
 
     const myAccountLinks = document.getElementsByClassName('myAccountLink');
@@ -32,40 +32,35 @@ function checkLoginStatus(){
 }
 
 //direct to other pages with the login email
-function click_my_account(evt, page_name) {
+function click_my_account(page_name) {
     if (page_name == 'MokeSell') {
-        useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
         window.location.href = "index.html"
     }
-    else if(page_name == 'Clothes'){
-        useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
+    else if(page_name == 'Clothes'){ 
         window.location.href = "#"
     }
     else if(page_name == "Shoes"){
-        useremail =JSON.parse(sessionStorage.getItem("loginemail")) 
         window.location.href = "#"
     } 
     else if(page_name == "Home-decor"){
-        useremail =JSON.parse(sessionStorage.getItem("loginemail")) 
         window.location.href = "#"
     } 
     else if(page_name == "shopping"){
-        useremail =JSON.parse(sessionStorage.getItem("loginemail")) 
         window.location.href = "#"
     }
     else if(page_name == "Login"){
-        useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
         window.location.href = "login.html"
     }
     else if(page_name == "my_account"){
-        useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
-        window.location.href = "#"
+        window.location.href = "profilepage.html"
      }
     else if(page_name == "Logout"){
-        useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
         sessionStorage.removeItem("loginemail");
         window.alert('logout successfully!')
         window.location.href = "index.html"
+    }
+    else if(page_name == "my_message"){
+        window.location.href = "sellerChatMsg.html"
     }
 }
 
@@ -109,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         filteredItems.forEach(product => {
             // filter the products that the current user is selling 
-            useremail =JSON.parse(sessionStorage.getItem("loginemail"))
+            useremail =sessionStorage.getItem("loginemail");
             if(product.loginemail === useremail){
                 return;
             }
@@ -158,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
             itemContainer.appendChild(item);
 
             // Add to cart button,if user didnt login dont show the button
-            if(useremail =JSON.parse(sessionStorage.getItem("loginemail"))){
+            if(useremail = sessionStorage.getItem("loginemail")){
                 const addToCartButton = document.createElement("button");
                 addToCartButton.textContent = "Add to Cart";
                 addToCartButton.onclick = function () {

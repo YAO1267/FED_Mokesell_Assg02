@@ -3,7 +3,7 @@ window.onload = function () {
     checkLoginStatus();
 
     // Show popup once after login, but not on refresh
-    const useremail = JSON.parse(sessionStorage.getItem("loginemail"));
+    const useremail = sessionStorage.getItem("loginemail");
     if (useremail && !sessionStorage.getItem("popupShown")) {
         openPopup(); // Show the popup only once
         sessionStorage.setItem("popupShown", "true");
@@ -12,7 +12,7 @@ window.onload = function () {
 
 //check login status and show myaccount/login
 function checkLoginStatus(){
-    const useremail = JSON.parse(sessionStorage.getItem("loginemail")) 
+    const useremail = sessionStorage.getItem("loginemail");
     console.log("User email from sessionStorage:", useremail);
 
     const myAccountLinks = document.getElementsByClassName('myAccountLink');
@@ -45,7 +45,7 @@ function toggleMenu() {
 //popup
 // Function to check login before opening popup (Used by floating widget)
 function checkLoginBeforePopup() {
-    const useremail = JSON.parse(sessionStorage.getItem("loginemail"));
+    const useremail = sessionStorage.getItem("loginemail");
 
     if (useremail) {
         openPopup(); // User is logged in, show popup
@@ -261,7 +261,7 @@ drawButton.addEventListener('click', () => {
 }
     async function addVoucher(promo, status) {
     // Retrieve the user email from sessionStorage
-    const useremail = JSON.parse(sessionStorage.getItem("loginemail"));
+    const useremail = sessionStorage.getItem("loginemail");
 
     if (!useremail) {
         console.error("User is not logged in.");
@@ -327,39 +327,34 @@ function selectCategory(category) {
 }
 
 //direct to other pages with the login email
-function click_my_account(evt, page_name) {
+function click_my_account(page_name) {
     if (page_name == 'MokeSell') {
-        useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
         window.location.href = "index.html"
     }
-    else if(page_name == 'Clothes'){
-        useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
+    else if(page_name == 'Clothes'){ 
         window.location.href = "#"
     }
     else if(page_name == "Shoes"){
-        useremail =JSON.parse(sessionStorage.getItem("loginemail")) 
         window.location.href = "#"
     } 
     else if(page_name == "Home-decor"){
-        useremail =JSON.parse(sessionStorage.getItem("loginemail")) 
         window.location.href = "#"
     } 
     else if(page_name == "shopping"){
-        useremail =JSON.parse(sessionStorage.getItem("loginemail")) 
         window.location.href = "#"
     }
     else if(page_name == "Login"){
-        useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
         window.location.href = "login.html"
     }
     else if(page_name == "my_account"){
-        useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
         window.location.href = "profilepage.html"
      }
     else if(page_name == "Logout"){
-        useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
         sessionStorage.removeItem("loginemail");
         window.alert('logout successfully!')
         window.location.href = "index.html"
+    }
+    else if(page_name == "my_message"){
+        window.location.href = "sellerChatMsg.html"
     }
 }

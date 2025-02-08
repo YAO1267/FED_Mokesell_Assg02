@@ -27,35 +27,35 @@ const db = getFirestore(app);
 // Reference to Firestore collection
 const messagesCollectionRef = collection(db, "chatmsg");
 
-// display and store msg
+// display and store msg from buyer side
 export async function sendMessage() {
     const messageInput = document.getElementById("messageInput");
     const messageText = messageInput.value.trim();
-    const useremail = JSON.parse(sessionStorage.getItem("loginemail"));
-    const seller = JSON.parse(sessionStorage.getItem("seller"));
+    const useremail = sessionStorage.getItem("loginemail");
+    const seller = sessionStorage.getItem("seller");
 
     if (messageText === "") return; // Don't send empty messages
 
-    const chatBody = document.getElementById("chatBody");
+    // const chatBody = document.getElementById("chatBody");
 
-    // Create a new message div
-    const messageDiv = document.createElement("div");
-    messageDiv.textContent = messageText;
-    messageDiv.style.padding = "5px";
-    messageDiv.style.margin = "5px 0";
-    messageDiv.style.background = "#007bff";
-    messageDiv.style.color = "white";
-    messageDiv.style.borderRadius = "5px";
-    messageDiv.style.textAlign = "right";
+    // // Create a new message div
+    // const messageDiv = document.createElement("div");
+    // messageDiv.textContent = messageText;
+    // messageDiv.style.padding = "5px";
+    // messageDiv.style.margin = "5px 0";
+    // messageDiv.style.background = "#007bff";
+    // messageDiv.style.color = "white";
+    // messageDiv.style.borderRadius = "5px";
+    // messageDiv.style.textAlign = "right";
 
-    // Append message to chat body
-    chatBody.appendChild(messageDiv);
+    // // Append message to chat body
+    // chatBody.appendChild(messageDiv);
 
-    // Clear input
-    messageInput.value = "";
+    // // Clear input
+    // messageInput.value = "";
 
-    // Scroll to the latest message
-    chatBody.scrollTop = chatBody.scrollHeight;
+    // // Scroll to the latest message
+    // chatBody.scrollTop = chatBody.scrollHeight;
 
     // Store the message in Firestore using addDoc
     try {
@@ -63,7 +63,8 @@ export async function sendMessage() {
             buyer: useremail,
             seller: seller,
             message: messageText,
-            timestamp: serverTimestamp()  
+            timestamp: serverTimestamp(),
+            from: 'buyer'  
         });
         console.log("Message successfully sent to Firestore!");
     } catch (error) {
@@ -74,6 +75,7 @@ export async function sendMessage() {
 
 // Function to listen to real-time chat updates for a specific seller
 export async function listenForNewMessages(sellerEmail) {
+    console.log('sellerEmail: ' + sellerEmail)
     // Create the query
     const messagesCollectionRef = collection(db, "chatmsg");
     const q = query(
@@ -83,7 +85,7 @@ export async function listenForNewMessages(sellerEmail) {
     );
 
     let checkBuyerList = {};
-    
+    const useremail = sessionStorage.getItem("loginemail");
     onSnapshot(q,(querySnapshot) => {
         let messagesDiv = document.getElementById("messages");
         messagesDiv.innerHTML = ""; // Clear the previous messages
@@ -93,15 +95,14 @@ export async function listenForNewMessages(sellerEmail) {
             if(messageData.buyer in checkBuyerList){
                 checkBuyerList[messageData.buyer].push(messageData.message);
             }else{
-                let chatItem = document.createElement("div");
-                chatItem.classList.add("chat-item");
-                chatItem.textContent = messageData.buyer;
-                chatList.appendChild(chatItem);
-                // chatItem.setAttribute("id",messageData.buyer+"1")
-                const key = messageData.buyer;
-                checkBuyerList[key] = [];
-                checkBuyerList[key].push(messageData.message);
-                chatItem.onclick = function() { openChat(messageData,checkBuyerList[key]); };
+                    let chatItem = document.createElement("div");
+                    chatItem.classList.add("chat-item");
+                    chatItem.textContent = messageData.buyer;
+                    chatList.appendChild(chatItem);
+                    const key = messageData.buyer;
+                    checkBuyerList[key] = [];
+                    checkBuyerList[key].push(messageData.message);
+                    chatItem.onclick = function() { openChat(messageData,checkBuyerList[key]); };
             }
             
             let elements = document.getElementsByName(messageData.buyer);
@@ -114,12 +115,108 @@ export async function listenForNewMessages(sellerEmail) {
         console.error("Error listening for new messages: ", error);
     });
 }
-
+let buyeremail; 
 function openChat(user,msg) {
     document.getElementById("chatTitle").textContent = user.buyer;
+    buyeremail = user.buyer;
     msg.forEach(mesg =>{
         document.getElementById("messages").innerHTML += mesg + "<br>";
     });
     document.getElementById("chatBox").setAttribute("name",user.buyer);
     document.getElementsByName(user.buyer)[0].style.display = "flex";
 }
+
+
+// store and display from seller side
+export async function sendMessage2() {
+    const messageInput = document.getElementById("messageInput");
+    const messageText = messageInput.value.trim();
+    const useremail = sessionStorage.getItem("loginemail");
+    // const seller = JSON.parse(sessionStorage.getItem("seller"));
+
+    if (messageText === "") return; // Don't send empty messages
+    
+    const messages = document.getElementById("messages");
+
+    // Create a new message div
+    const messageDiv = document.createElement("div");
+    messageDiv.textContent = messageText;
+    messageDiv.style.padding = "5px";
+    messageDiv.style.margin = "5px 0";
+    messageDiv.style.background = "#007bff";
+    messageDiv.style.color = "white";
+    messageDiv.style.borderRadius = "5px";
+    messageDiv.style.textAlign = "right";
+
+    // Append message to chat body
+    messages.appendChild(messageDiv);
+    
+    // Clear input
+    messageInput.value = "";
+
+    // Scroll to the latest message
+    messages.scrollTop = messages.scrollHeight;
+
+    // Store the message in Firestore using addDoc
+    try {
+        await addDoc(messagesCollectionRef, {
+            buyer: buyeremail,
+            seller: useremail,
+            message: messageText,
+            timestamp: serverTimestamp(),
+            from: 'seller'
+        }); 
+        console.log("Message successfully sent to Firestore!");
+    } catch (error) {
+        console.error("Error sending message to Firestore: ", error);
+    }
+}
+
+
+// Function to listen to real-time chat updates for buyer
+export async function listenForNewMessages2(email) {
+    // console.log('email:' + email)
+    // Create the query
+    const messagesCollectionRef = collection(db, "chatmsg");
+    const q = query(
+        messagesCollectionRef,
+        where("seller", "==", email),  // Filter by seller email
+        orderBy("timestamp")  // Order messages by timestamp
+    );
+    
+    onSnapshot(q,(querySnapshot) => {
+        let messagesDiv = document.getElementById("chatBody");
+        messagesDiv.innerHTML = ""; // Clear the previous messages
+        
+        querySnapshot.forEach((doc) => {
+            let messageData = doc.data();
+            const messageDiv3 = document.createElement("div");
+            const messageDiv2 = document.createElement("div");
+            messageDiv3.style.display ="flex";
+            
+            messageDiv2.textContent = messageData.message;
+            messageDiv2.style.padding = "5px";
+            messageDiv2.style.margin = "5px 0";
+            messageDiv2.style.background = "#007bff";
+            messageDiv2.style.color = "white";
+            messageDiv2.style.borderRadius = "5px";
+            messageDiv2.style.width = "fit-content";
+
+            // Append message to chat body
+            if(messageData.from == "seller"){
+                messageDiv3.appendChild(messageDiv2)
+                chatBody.appendChild(messageDiv3);   
+            }else{
+                messageDiv3.style.setProperty("justify-content", "flex-end");
+                messageDiv3.appendChild(messageDiv2)
+                chatBody.appendChild(messageDiv3);   
+            }
+            
+            // Scroll to the latest message
+            chatBody.scrollTop = chatBody.scrollHeight;
+        });
+    }, (error) => {
+        console.error("Error listening for new messages: ", error);
+    });
+}
+

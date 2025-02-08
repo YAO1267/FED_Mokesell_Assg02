@@ -3,7 +3,7 @@ window.onload = function () {
     checkLoginStatus();
 
     // Show popup once after login, but not on refresh
-    const useremail = JSON.parse(sessionStorage.getItem("loginemail"));
+    const useremail = sessionStorage.getItem("loginemail");
     if (useremail && !sessionStorage.getItem("popupShown")) {
         openPopup(); // Show the popup only once
         sessionStorage.setItem("popupShown", "true");
@@ -12,7 +12,7 @@ window.onload = function () {
 
 //check login status and show myaccount/login
 function checkLoginStatus(){
-    const useremail = JSON.parse(sessionStorage.getItem("loginemail")) 
+    const useremail = sessionStorage.getItem("loginemail");
     console.log("User email from sessionStorage:", useremail);
 
     const myAccountLinks = document.getElementsByClassName('myAccountLink');
@@ -43,40 +43,35 @@ function toggleMenu() {
 }
 
 //direct to other pages with the login email
-function click_my_account(evt, page_name) {
+function click_my_account(page_name) {
     if (page_name == 'MokeSell') {
-        useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
         window.location.href = "index.html"
     }
-    else if(page_name == 'Clothes'){
-        useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
+    else if(page_name == 'Clothes'){ 
         window.location.href = "#"
     }
     else if(page_name == "Shoes"){
-        useremail =JSON.parse(sessionStorage.getItem("loginemail")) 
         window.location.href = "#"
     } 
     else if(page_name == "Home-decor"){
-        useremail =JSON.parse(sessionStorage.getItem("loginemail")) 
         window.location.href = "#"
     } 
     else if(page_name == "shopping"){
-        useremail =JSON.parse(sessionStorage.getItem("loginemail")) 
         window.location.href = "#"
     }
     else if(page_name == "Login"){
-        useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
         window.location.href = "login.html"
     }
     else if(page_name == "my_account"){
-        useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
-        window.location.href = "#"
+        window.location.href = "profilepage.html"
      }
     else if(page_name == "Logout"){
-        useremail =JSON.parse(sessionStorage.getItem("loginemail"))  
         sessionStorage.removeItem("loginemail");
         window.alert('logout successfully!')
         window.location.href = "index.html"
+    }
+    else if(page_name == "my_message"){
+        window.location.href = "sellerChatMsg.html"
     }
 }
 
@@ -95,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const product = JSON.parse(productData);
     //store the seller name for the use of chat later
-    sessionStorage.setItem("seller",JSON.stringify(product.loginemail))
+    sessionStorage.setItem("seller",product.loginemail);
 
     // Create elements dynamically
     const itemDiv = document.createElement("div");
@@ -161,11 +156,11 @@ document.addEventListener("DOMContentLoaded", function () {
     itemInfo.appendChild(sellerContainer);
 
     // Add to Cart button
-    if(useremail =JSON.parse(sessionStorage.getItem("loginemail"))){
+    if(useremail = sessionStorage.getItem("loginemail")){
         const addToCartButton = document.createElement("button");
         addToCartButton.textContent = "Add to Cart";
         addToCartButton.onclick = function () {
-        useremail = JSON.parse(sessionStorage.getItem("loginemail"))
+        useremail = sessionStorage.getItem("loginemail")
         const data = {
             index: product.index,
             price:product.price,
@@ -221,7 +216,7 @@ async function addToCart(data) {
 //chatbox
 function checkLoginBeforePopup() {
     // Simulate checking if the user is logged in
-    const useremail = JSON.parse(sessionStorage.getItem("loginemail"));
+    const useremail = sessionStorage.getItem("loginemail");
     if (useremail) {
         showChatbox();
     } else {

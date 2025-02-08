@@ -51,8 +51,8 @@ const signup = async (email, password,firstName,lastName) => {
     if (response.ok) {
         console.log('Signup successfully');
         window.alert('Sign up successfully')
-        sessionStorage.setItem("loginemail",JSON.stringify(email))
-        sessionStorage.setItem("password",JSON.stringify(password))
+        sessionStorage.setItem("loginemail",email)
+        sessionStorage.setItem("password",password)
         window.location.href = "index.html"
     } else {
         console.error('Error signing up:', response.statusText);
@@ -82,15 +82,15 @@ const login = async (email, password) => {
             // check if the user is admin or normal user
             if (user.type === 1){
                 // store the data using local storage
-                sessionStorage.setItem("loginemail",JSON.stringify(email))
-                sessionStorage.setItem("password",JSON.stringify(password))
+                sessionStorage.setItem("loginemail",email)
+                sessionStorage.setItem("password",password)
                 // window.location.href = "index.html" //go to the admin page
             } else{
                 // store the data using local storage
-                sessionStorage.setItem("loginemail",JSON.stringify(email))
-                sessionStorage.setItem("password",JSON.stringify(password))
-                sessionStorage.setItem("firstname",JSON.stringify(user.firstname))
-                sessionStorage.setItem("password",JSON.stringify(user.lastname))
+                sessionStorage.setItem("loginemail",email)
+                sessionStorage.setItem("password",password)
+                sessionStorage.setItem("firstname",user.firstname)
+                sessionStorage.setItem("password",user.lastname)
                 window.location.href = "index.html"
             }
             
