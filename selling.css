@@ -147,3 +147,59 @@ button:hover {
     left: 0; 
     right: 0;
 }
+@media (max-width: 480px) {
+    body {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+
+    .container {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+        width: 100%;
+        box-shadow: none;
+    }
+
+    .left-section {
+        width: 100%;
+        height: auto;
+        border: 2px dashed #bbb;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #image-preview {
+        width: 100%;
+        height: auto;
+        max-height: 200px;
+        display: block;
+    }
+
+    .right-section {
+        width: 100%;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+        font-size: 14px;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    .continue-link {
+        margin-left: 0;
+        font-size: medium;
+        text-align: center;
+    }
+
+    .header {
+        font-size: 16px;
+        padding: 10px;
+    }
+}
