@@ -11,11 +11,13 @@ MokeSell caters to two primary user groups:
 ### Purpose
 
 The primary purpose of MokeSell is to create a platform that enables safe and efficient peer-to-peer transactions. By allowing users to list, search, and negotiate items with ease, the website fosters a trustworthy marketplace where buyers and sellers can interact directly without the need for a centralized middleman, aside from the platform itself.
-**The main goals of these users are:**
+**The main goals of the users are:**
 
-1.
-2.
-3.
+1.**For Sellers:** To easily list items, reach a broad audience, and manage sales.
+
+2.**For Buyers:** To quickly search for and purchase items at competitive prices, with confidence in the platform's security.
+
+3.To have a smooth, safe, and seamless experience, fostering trust within the community.
 # Credits:
 ## Media:
 Images for menu:
@@ -52,7 +54,10 @@ https://www.pinterest.com/pin/914160424362452685/
 
 https://www.pinterest.com/pin/914160424362452792/
 
+The rest are from pinterest
+
 ## Acknowlegement:
+Animation from lottie
 
 
 

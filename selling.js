@@ -9,9 +9,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const imageInput = document.getElementById("upload");
     const previewImage = document.getElementById("image-preview");
     const descriptionInput = document.getElementById("comment");
-   
+    //const useremail = "yao@gmail.com" 
     const useremail =sessionStorage.getItem("loginemail"); 
-    console.log(useremail);
 
     let imageBase64 = "";
 
@@ -96,20 +95,20 @@ document.addEventListener("DOMContentLoaded", function () {
                 previewImage.style.display = "none";
                 imageBase64 = "";
             })
-            // .catch((error) => {
-            //     console.error("Error:", error);
+            .catch((error) => {
+                console.error("Error:", error);
         
-            //     // If error is due to a failed response, try to read the JSON error message from the response
-            //     if (error.response) {
-            //         error.response.json().then((response) => {
-            //             console.log("API Error Response:", response);
-            //         });
-            //     } else {
-            //         console.log("Error without response:", error);
-            //     }
+                // If error is due to a failed response, try to read the JSON error message from the response
+                if (error.response) {
+                    error.response.json().then((response) => {
+                        console.log("API Error Response:", response);
+                    });
+                } else {
+                    console.log("Error without response:", error);
+                }
         
-            //     alert("An error occurred while saving the product.");
-            // });
+                alert("An error occurred while saving the product.");
+            });
         
 
         
