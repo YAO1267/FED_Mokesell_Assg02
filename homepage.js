@@ -230,6 +230,7 @@ drawButton.addEventListener('click', () => {
         
     }, totalDuration); 
 
+
     // 0 = avaliable, 1 = applied 
     const API_KEY = "677f336bc7a864b3d4c78324"; 
     const DATABASE_URL = "https://database-9cfc.restdb.io/rest/promo"; 

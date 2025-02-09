@@ -1,8 +1,7 @@
 # FED_MokeSell_Assg02
 MokeSell is an online platform catering to consumers who want to buy and sell new and second-hand items. It provides a seamless, secure, and user-friendly experience for users to list their items for sale and find products they’re looking to buy.
 
-## Design process:
-
+## Design process:  
 ### Target users, Intent, and Purpose
 ### Target users
 MokeSell caters to two primary user groups:
