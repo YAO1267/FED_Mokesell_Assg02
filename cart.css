@@ -31,14 +31,161 @@
     margin-top: 20px;
   }
 
+
+
+  /* Styling the input field in the coupon section */
+.coupon-section input[type="text"] {
+    padding: 10px;
+    width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-right: 10px; /* Space between input and button */
+  }
+  
+  /* Styling the button in the coupon section */
+  .coupon-section button {
+    padding: 10px 15px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .coupon-section button:hover {
+    background-color: #444; /* Darker color on hover */
+  }
+  
+  /* Popup Modal Styling */
+  .popup {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    z-index: 1;
+  }
+  
+  .popup-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 5px;
+    width: 300px;
+  }
+  
+  .popup h2 {
+    margin-top: 0;
+  }
+  
+  #coupon-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  #coupon-list li {
+    padding: 5px 0;
+  }
+  
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+  }.coupon-section input[type="text"] {
+    padding: 10px;
+    width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-right: 10px; /* Space between input and button */
+  }
+  
+  /* Styling the button in the coupon section */
+  .coupon-section button {
+    padding: 10px 15px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .coupon-section button:hover {
+    background-color: #444; /* Darker color on hover */
+  }
+  
+  /* Popup Modal Styling */
+  .popup {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    z-index: 1;
+  }
+  
+  .popup-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 5px;
+    width: 300px;
+  }
+  
+  .popup h2 {
+    margin-top: 0;
+  }
+  
+  /* Style for the coupon list items */
+  #coupon-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  #coupon-list li {
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #f5f5f5; /* Light background color */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor to indicate it’s clickable */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
+  }
+  
+  #coupon-list li:hover {
+    background-color: #ddd; /* Darker background on hover */
+    transform: scale(1.05); /* Slightly enlarge when hovering */
+  }
+  
+  /* Close button in the popup */
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+/* 
   .coupon-section input[type="text"] {
     padding: 10px;
     width: 200px;
     border: 1px solid #ddd;
     border-radius: 4px;
-  }
+  } */
 
-  .coupon-section button {
+  /* .coupon-section button {
     padding: 10px 15px;
     background-color: black;
     color: white;
@@ -49,7 +196,7 @@
 
   .coupon-section button:hover {
     background-color: #444;
-  }
+  } */
 
   .cart-total {
     padding: 20px;

@@ -6,200 +6,53 @@
     <title>Profile</title>
     <link rel="icon" type="image/x-icon" href="images/logo.png">
     <link rel="stylesheet" type="text/css" href="general.css">
+    <link rel="stylesheet" type="text/css" href="progile.css">
 
       <!-- google font Averia Serif Libre  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
-    <style>
-        .profile-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: white;
-    padding: 40px;
-    border-radius: 12px;
-
-    margin: 30px auto;
-    max-width: 750px;
-    width: 90%;
-    gap: 40px;
-}
-
-.profile-pic-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.profile-pic {
-    width: 220px;
-    height: 220px;
-    border-radius: 50%;
-    border: 3px solid #ddd;
-    object-fit: cover;
-    transition: 0.3s ease;
-}
-
-.profile-pic:hover {
-    border-color: #444;
-}
-
-.upload-btn {
-    margin-top: 10px;
-    padding: 8px 16px; 
-    background: #444;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background 0.3s ease;
-}
-
-.upload-btn:hover {
-    background: #222;
-}
-
-.profile-details {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.personal-info {
-    margin-bottom: 16px;
-}
-
-.personal-info label {
-    font-size: 16px;
-    font-weight: 600;
-    color: #333;
-    display: block;
-    margin-bottom: 5px;
-}
-
-.personal-info input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-    transition: 0.3s;
-}
-
-.personal-info input:focus {
-    border-color: #5594d7;
-    outline: none;
-    box-shadow: 0px 0px 5px rgba(127, 171, 219, 0.5);
-}
-
-.personal-info input:read-only {
-    background: #f4f4f4;
-    color: #666;
-}
-
-.form-group {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    gap: 12px;  
-}
-
-.form-group button {
-    padding: 8px 16px;  
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-    flex: 1; 
-}
-
-.form-group button:first-child {
-    background: #444;
-    color: white;
-}
-
-.form-group button:first-child:hover {
-    background: #222;
-}
-
-#saveBtn {
-    background: #444;  
-    color: white;
-}
-
-#saveBtn:hover {
-    background: #222;  
-}
-
-.btn-logout {
-    background: #dc3545;
-    color: white;
-    padding: 8px 16px;  
-    border-radius: 8px;
-    flex: 1;  
-}
-
-.btn-logout:hover {
-    background: #b02a37;
-}
-
-#newPassSection {
-    display: none;
-}
-
-#newPassword, #confirmPassword {
-    margin-top: 10px;
-}
-
-#editImageBtn:disabled {
-    background: #bbb;
-}
-
-#saveBtn {
-    display: none;
-}
-
-@media screen and (max-width: 600px) {
-    .profile-container {
-        flex-direction: column;
-        text-align: center;
-        padding: 20px;
-    }
-
-    .form-group {
-        flex-direction: column;
-        gap: 10px;
-    }
-}
-
-
-
-    </style>
 </head>
 <body>
+<!-- Overlay for background dim effect -->
+<div id="overlay" class="overlay"></div>
 
-     <!-- nav bar -->
-  <header class="navbar">
-    <div class="link1">
-        <a onclick="click_my_account(event, 'MokeSell')">MokeSell</a>
-    </div>
-    <nav class="nav-links">
-        <a onclick="click_my_account(event, 'Clothes')">Clothes</a>
-        <a onclick="click_my_account(event, 'Shoes')">Shoes</a>
-        <a onclick="click_my_account(event, 'Home-decor')">Home-decor</a>
-        <a onclick="click_my_account(event, 'my_account')" id="myAccountLink" style="display:none;">My Account</a>
-        <a onclick="click_my_account(event, 'Login')" id="loginLink" style="display:block;">Login/Sign Up</a>
-        <a onclick="click_my_account(event, 'shopping')">
-          <i class="fa-solid fa-cart-shopping"></i>
-        </a>
-    </nav>
-  </header>
+<!-- Off-Canvas Menu -->
+<div id="offCanvasMenu" class="off-canvas">
+ <button class="close-btn" onclick="toggleMenu()">✖</button>
+ <nav class="nav-links">
+   <a onclick="click_my_account('MokeSell')" style="font-size: 30px;">MokeSell</a>
+ </nav>
+ <a onclick="click_my_account('Clothes')">Clothes</a>
+ <a onclick="click_my_account('Shoes')">Shoes</a>
+ <a onclick="click_my_account('Home-decor')">Home-decor</a>
+ <a onclick="click_my_account('my_account')" class="myAccountLink" style="display:none;">My Account</a>
+ <a onclick="click_my_account('Logout')" class="logoutLink" style="display:none;">Logout</a>
+ <a onclick="click_my_account('Login')" class="loginLink" style="display:block;">Login/Sign Up</a>
+ <a onclick="click_my_account('my_message')">My message</a>
+ <a onclick="click_my_account('shopping')">
+     <i class="fa-solid fa-cart-shopping"></i>
+ </a>
+</div>   
 
+<!-- Nav Bar -->
+<header class="navbar">
+   <nav class="nav-links">
+       <a onclick="click_my_account('MokeSell')" style="font-size: 30px;">MokeSell</a>
+   </nav>
+   <nav class="nav-links">
+       <a onclick="click_my_account('Clothes')">Clothes</a>
+       <a onclick="click_my_account('Shoes')">Shoes</a>
+       <a onclick="click_my_account('Home-decor')">Home-decor</a>
+       <a onclick="click_my_account('my_account')" class="myAccountLink" style="display:none;">My Account</a>
+       <a onclick="click_my_account('Login')" class="loginLink" style="display:block;">Login/Sign Up</a>
+       <a onclick="click_my_account('shopping')">
+           <i class="fa-solid fa-cart-shopping"></i>
+       </a>
+       <a onclick="toggleMenu()">Others</a> <!-- Triggers Off-Canvas Menu -->
+   </nav>
+   <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+</header> 
     
   <div class="menu-header">
     <h1 >Profile</h1>
@@ -250,139 +103,6 @@
             </div>
         </form>
     </div>
-
-    <script>
-        const userEmail = sessionStorage.getItem("loginemail");
-        const APIKEY = "677f336bc7a864b3d4c78324";
-        const BASE_URL = "https://database-9cfc.restdb.io/rest/contactdetail";
-        let userData = {}; // Store user data
-
-        if (!userEmail) {
-            alert("User not logged in! Redirecting to login page...");
-            window.location.href = "login.html";
-        }
-
-        async function fetchUserProfile() {
-            try {
-                const query = encodeURIComponent(JSON.stringify({ loginemail: userEmail }));
-                const response = await fetch(`${BASE_URL}?q=${query}`, {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "x-apikey": APIKEY,
-                        "Cache-Control": "no-cache",
-                    },
-                });
-
-                const data = await response.json();
-                if (data.length > 0) {
-                    userData = data[0]; // Store user data
-
-                    document.getElementById("firstName").value = userData.firstname || "";
-                    document.getElementById("lastName").value = userData.lastname || "";
-                    document.getElementById("email").value = userData.loginemail || "";
-                    document.getElementById("oldPassword").value = userData.password || "";
-
-                    if (userData.profilePic) {
-                        document.getElementById("profileImage").src = userData.profilePic;
-                    }
-                } else {
-                    alert("User profile not found!");
-                }
-            } catch (error) {
-                console.error("Error fetching user data:", error);
-            }
-        }
-
-        function enableEdit() {
-            document.getElementById("editBtn").disabled = true;
-            document.getElementById("saveBtn").disabled = false;
-            document.getElementById("editImageBtn").disabled = false;
-            document.getElementById("newPassSection").style.display = "block";
-
-            document.getElementById("newPassword").required = true;
-            document.getElementById("confirmPassword").required = true;
-        }
-
-        async function saveChanges() {
-            const newPassword = document.getElementById("newPassword").value.trim();
-            const confirmPassword = document.getElementById("confirmPassword").value.trim();
-            const profilePic = document.getElementById("profileImage").src;
-
-            if (newPassword !== confirmPassword) {
-                alert("Passwords do not match!");
-                return;
-            }
-
-            try {
-                const updatedUserData = {
-                    firstname: userData.firstname,
-                    lastname: userData.lastname,
-                    loginemail: userData.loginemail,
-                    type: userData.type,
-                    password: newPassword || userData.password,
-                    profilePic: profilePic || userData.profilePic,
-                };
-
-                const updateResponse = await fetch(`${BASE_URL}/${userData._id}`, {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "x-apikey": APIKEY,
-                        "Cache-Control": "no-cache",
-                    },
-                    body: JSON.stringify(updatedUserData),
-                });
-
-                if (updateResponse.ok) {
-                    alert("Profile updated successfully!");
-                    location.reload();
-                } else {
-                    console.error("Failed to update profile:", await updateResponse.text());
-                    alert("Failed to update profile. Check console for details.");
-                }
-            } catch (error) {
-                console.error("Error updating profile:", error);
-            }
-        }
-
-        function previewImage(event) {
-            const reader = new FileReader();
-            reader.onload = function () {
-                document.getElementById("profileImage").src = reader.result;
-            };
-            reader.readAsDataURL(event.target.files[0]);
-        }
-
-        function logout() {
-            sessionStorage.clear();
-            alert("Logged out successfully!");
-            window.location.href = "login.html";
-        }
-
-        window.onload = fetchUserProfile;
-        function enableEdit() {
-            // Disable the Edit button
-            document.getElementById("editBtn").style.display = "none";
-            
-            // Enable the Save Changes button
-            document.getElementById("saveBtn").style.display = "inline-block";
-            
-            // Enable the profile image change button
-            document.getElementById("editImageBtn").disabled = false;
-            
-            // Show new password section
-            document.getElementById("newPassSection").style.display = "block";
-            
-            // Set fields to editable
-            document.getElementById("firstName").removeAttribute("readonly");
-            document.getElementById("lastName").removeAttribute("readonly");
-            document.getElementById("email").removeAttribute("readonly");
-            document.getElementById("oldPassword").removeAttribute("readonly");
-            document.getElementById("newPassword").required = true;
-            document.getElementById("confirmPassword").required = true;
-}
-
-    </script>
+<script src="profile.js"></script>
 </body>
 </html>

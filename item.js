@@ -1,14 +1,7 @@
 //check if the user has logged in 
-window.onload = function () {
-    checkLoginStatus();
+window.onload = checkLoginStatus();
 
-    // Show popup once after login, but not on refresh
-    const useremail = sessionStorage.getItem("loginemail");
-    if (useremail && !sessionStorage.getItem("popupShown")) {
-        openPopup(); // Show the popup only once
-        sessionStorage.setItem("popupShown", "true");
-    }
-};
+    
 
 //check login status and show myaccount/login
 function checkLoginStatus(){
@@ -172,6 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
             amount:1,
             loginemail:useremail,
             status: 0, //0 means still pending, 1 means finished
+            name:product.name
         };
         addToCart(data);
         };
