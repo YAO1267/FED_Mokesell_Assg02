@@ -107,7 +107,8 @@ async function fetchCartItems() {
         // var totalPrice = 0;
         const cartItems = await response.json();
         for (const cartItem of cartItems) {
-            itemAdded.push = cartItem.index;
+            itemAdded.push(cartItem.index);
+            //umcompleted
             // Get the table body
             const tableBody = document.querySelector("#cart-table");
 
@@ -119,25 +120,42 @@ async function fetchCartItems() {
             const cell2 = document.createElement("td");
             const cell3 = document.createElement("td");
             const cell4 = document.createElement("td");
-
-           
             cell1.textContent = cartItem.name;
             cell2.textContent = cartItem.price;
             cell3.textContent = cartItem.amount;
+
+            //umcompleted
+            // Get the table body
+            const tableBody2 = document.querySelector("#cart-table2");
+
+            // Create a new row element
+            const newRow2 = document.createElement("tr");
+
+            // Create new cells for the row
+            const cellb1 = document.createElement("td");
+            const cellb2 = document.createElement("td");
+            const cellb3 = document.createElement("td");
+            const cellb4 = document.createElement("td");
+            cellb1.textContent = cartItem.name;
+            cellb2.textContent = cartItem.price;
+            cellb3.textContent = cartItem.amount;
+        
             if(cartItem.status == 0){
                 cell4.textContent = 'pending';
+                newRow.appendChild(cell1);
+                newRow.appendChild(cell2);
+                newRow.appendChild(cell3);
+                newRow.appendChild(cell4);
+                tableBody.appendChild(newRow);
+                totalPrice += Number(cartItem.price);
             }else{
-                cell4.textContent = 'Competed';
+                cellb4.textContent = 'Competed';
+                newRow2.appendChild(cellb1);
+                newRow2.appendChild(cellb2);
+                newRow2.appendChild(cellb3);
+                newRow2.appendChild(cellb4);
+                tableBody2.appendChild(newRow2);
             }
-
-            newRow.appendChild(cell1);
-            newRow.appendChild(cell2);
-            newRow.appendChild(cell3);
-            newRow.appendChild(cell4);
-
-            tableBody.appendChild(newRow);
-
-            totalPrice += Number(cartItem.price);
         }
 
         const paragraph = document.getElementById("totalPrice");
@@ -233,17 +251,19 @@ function appandCoupon(userCoupons){
       const li = document.createElement("li");
       li.textContent = coupon.title;
       if(coupon.status == 1){
+        //unapplicable
         li.style.background = '#d3d3d3';
         couponList.appendChild(li);
-      }else{
-        couponList.appendChild(li);
-        // Add event listener for click on each coupon
-        li.addEventListener("click", () => {
-            couponInput.value = coupon.title;  // Set the selected coupon into the input field
-            couponUsed = coupon.title;  
-            popup.style.display = "none"; // Close the popup after selection
+      }else
+        {
+            couponList.appendChild(li);
+            // Add event listener for click on each coupon
+            li.addEventListener("click", () => {
+                couponInput.value = coupon.title;  // Set the selected coupon into the input field
+                couponUsed = coupon.title;  
+                popup.style.display = "none"; // Close the popup after selection
         });
-      }      
+      } 
     });
   
     // Show the popup
@@ -339,8 +359,9 @@ async function patchData(recordId) {
     }
 }
 
-console.log(itemAdded); 
+ 
 async function finishPayment() {
+    console.log(itemAdded);
     const url = `https://database-9cfc.restdb.io/rest/cart?q=${encodeURIComponent(
         JSON.stringify({ loginemail: userEmail, index: { "$in": itemAdded } }) // Fix filter
     )}`;

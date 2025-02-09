@@ -85,6 +85,8 @@ export async function listenForNewMessages(sellerEmail) {
     );
 
     let checkBuyerList = {};
+    // {'buyer':[{'from':'', 'msg': ''}]}  
+    // {'buyer':['msg']}
     const useremail = sessionStorage.getItem("loginemail");
     onSnapshot(q,(querySnapshot) => {
         let messagesDiv = document.getElementById("messages");
@@ -93,7 +95,8 @@ export async function listenForNewMessages(sellerEmail) {
         querySnapshot.forEach((doc) => {
             let messageData = doc.data();
             if(messageData.buyer in checkBuyerList){
-                checkBuyerList[messageData.buyer].push(messageData.message);
+                checkBuyerList[messageData.buyer].push({'from': messageData.from, 'msg': messageData.message});
+                //
             }else{
                     let chatItem = document.createElement("div");
                     chatItem.classList.add("chat-item");
@@ -101,13 +104,35 @@ export async function listenForNewMessages(sellerEmail) {
                     chatList.appendChild(chatItem);
                     const key = messageData.buyer;
                     checkBuyerList[key] = [];
-                    checkBuyerList[key].push(messageData.message);
-                    chatItem.onclick = function() { openChat(messageData,checkBuyerList[key]); };
+                    checkBuyerList[key].push({'from': messageData.from, 'msg': messageData.message});
+                    //
+                    chatItem.onclick = function() { openChat(key, checkBuyerList[key]); };
             }
             
             let elements = document.getElementsByName(messageData.buyer);
             if(elements.length != 0){
-                document.getElementById("messages").innerHTML += messageData.message + "<br/>";
+                let chatBody = document.getElementById("messages");
+                // let mesg = document.getElementById("messages").innerHTML += messageData.message + "<br/>";
+                const messageDiv3 = document.createElement("div");
+                const messageDiv2 = document.createElement("div");
+                messageDiv3.style.display ="flex";
+                
+                messageDiv2.textContent = messageData.message;
+                messageDiv2.style.padding = "5px";
+                messageDiv2.style.margin = "5px 0";
+                messageDiv2.style.background = "#007bff";
+                messageDiv2.style.color = "white";
+                messageDiv2.style.borderRadius = "5px";
+                messageDiv2.style.width = "fit-content";
+                // Append message to chat body
+                if(messageData.from == "buyer"){
+                    messageDiv3.appendChild(messageDiv2)
+                    chatBody.appendChild(messageDiv3);   
+                }else{
+                    messageDiv3.style.setProperty("justify-content", "flex-end");
+                    messageDiv3.appendChild(messageDiv2)
+                    chatBody.appendChild(messageDiv3);   
+                }
             }
         });
         
@@ -115,15 +140,38 @@ export async function listenForNewMessages(sellerEmail) {
         console.error("Error listening for new messages: ", error);
     });
 }
+
 let buyeremail; 
-function openChat(user,msg) {
-    document.getElementById("chatTitle").textContent = user.buyer;
-    buyeremail = user.buyer;
-    msg.forEach(mesg =>{
-        document.getElementById("messages").innerHTML += mesg + "<br>";
+function openChat(buyer, userMsg) {
+    document.getElementById("chatTitle").textContent = buyer;
+    buyeremail = buyer;
+    let chatBody = document.getElementById("messages");
+    userMsg.forEach(mesg =>{
+            const messageDiv3 = document.createElement("div");
+            const messageDiv2 = document.createElement("div");
+            messageDiv3.style.display ="flex";
+            
+            messageDiv2.textContent = mesg.msg;
+            messageDiv2.style.padding = "5px";
+            messageDiv2.style.margin = "5px 0";
+            messageDiv2.style.background = "#007bff";
+            messageDiv2.style.color = "white";
+            messageDiv2.style.borderRadius = "5px";
+            messageDiv2.style.width = "fit-content";
+
+            // Append message to chat body
+            if(mesg.from == "buyer"){
+                messageDiv3.appendChild(messageDiv2)
+                chatBody.appendChild(messageDiv3);   
+            }else{
+                messageDiv3.style.setProperty("justify-content", "flex-end");
+                messageDiv3.appendChild(messageDiv2)
+                chatBody.appendChild(messageDiv3);   
+            }
+        // document.getElementById("messages").innerHTML += mesg + "<br>";
     });
-    document.getElementById("chatBox").setAttribute("name",user.buyer);
-    document.getElementsByName(user.buyer)[0].style.display = "flex";
+    document.getElementById("chatBox").setAttribute("name", buyer);
+    document.getElementsByName(buyer)[0].style.display = "flex";
 }
 
 
@@ -132,30 +180,30 @@ export async function sendMessage2() {
     const messageInput = document.getElementById("messageInput");
     const messageText = messageInput.value.trim();
     const useremail = sessionStorage.getItem("loginemail");
-    // const seller = JSON.parse(sessionStorage.getItem("seller"));
+   
 
     if (messageText === "") return; // Don't send empty messages
     
-    const messages = document.getElementById("messages");
+    // const messages = document.getElementById("messages");
 
-    // Create a new message div
-    const messageDiv = document.createElement("div");
-    messageDiv.textContent = messageText;
-    messageDiv.style.padding = "5px";
-    messageDiv.style.margin = "5px 0";
-    messageDiv.style.background = "#007bff";
-    messageDiv.style.color = "white";
-    messageDiv.style.borderRadius = "5px";
-    messageDiv.style.textAlign = "right";
+    // // Create a new message div
+    // const messageDiv = document.createElement("div");
+    // messageDiv.textContent = messageText;
+    // messageDiv.style.padding = "5px";
+    // messageDiv.style.margin = "5px 0";
+    // messageDiv.style.background = "#007bff";
+    // messageDiv.style.color = "white";
+    // messageDiv.style.borderRadius = "5px";
+    // messageDiv.style.textAlign = "right";
 
-    // Append message to chat body
-    messages.appendChild(messageDiv);
+    // // Append message to chat body
+    // messages.appendChild(messageDiv);
     
     // Clear input
     messageInput.value = "";
 
-    // Scroll to the latest message
-    messages.scrollTop = messages.scrollHeight;
+    // // Scroll to the latest message
+    // messages.scrollTop = messages.scrollHeight;
 
     // Store the message in Firestore using addDoc
     try {
