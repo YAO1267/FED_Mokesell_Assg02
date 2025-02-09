@@ -1,5 +1,6 @@
 //check if the user has logged in 
 window.onload = checkLoginStatus();
+
 //nav bar
 function toggleMenu() {
     let menu = document.getElementById("offCanvasMenu");
@@ -70,8 +71,8 @@ function click_my_account(page_name) {
 
 
 const userEmail = sessionStorage.getItem("loginemail");
-        const APIKEY = "677f336bc7a864b3d4c78324";
-        const BASE_URL = "https://database-9cfc.restdb.io/rest/contactdetail";
+const APIKEY = "677f336bc7a864b3d4c78324";
+const BASE_URL = "https://database-9cfc.restdb.io/rest/contactdetail";
         let userData = {}; // Store user data
 
         if (!userEmail) {
@@ -79,6 +80,7 @@ const userEmail = sessionStorage.getItem("loginemail");
             window.location.href = "login.html";
         }
 
+        var userId = ''; //to store the userid for update
         async function fetchUserProfile() {
             try {
                 const query = encodeURIComponent(JSON.stringify({ loginemail: userEmail }));
@@ -94,82 +96,84 @@ const userEmail = sessionStorage.getItem("loginemail");
                 const data = await response.json();
                 if (data.length > 0) {
                     userData = data[0]; // Store user data
-
+                    userId = data[0]._id; // Extract the user ID
                     document.getElementById("firstName").value = userData.firstname || "";
                     document.getElementById("lastName").value = userData.lastname || "";
                     document.getElementById("email").value = userData.loginemail || "";
                     document.getElementById("oldPassword").value = userData.password || "";
 
-                    if (userData.profilePic) {
-                        document.getElementById("profileImage").src = userData.profilePic;
+                    if (userData.profilepage) {
+                        document.getElementById("profileImage").src = `https://database-9cfc.restdb.io/media/${userData.profilepage}`;
                     }
                 } else {
-                    alert("User profile not found!");
+                    document.getElementById("profileImage").src = "./images/avatar.png"
+                    // alert("User profile not found!");
                 }
             } catch (error) {
                 console.error("Error fetching user data:", error);
             }
         }
 
-        function enableEdit() {
-            document.getElementById("editBtn").disabled = true;
-            document.getElementById("saveBtn").disabled = false;
-            document.getElementById("editImageBtn").disabled = false;
-            document.getElementById("newPassSection").style.display = "block";
-
-            document.getElementById("newPassword").required = true;
-            document.getElementById("confirmPassword").required = true;
-        }
-
-        async function saveChanges() {
-            const newPassword = document.getElementById("newPassword").value.trim();
-            const confirmPassword = document.getElementById("confirmPassword").value.trim();
-            const profilePic = document.getElementById("profileImage").src;
-
-            if (newPassword !== confirmPassword) {
-                alert("Passwords do not match!");
-                return;
-            }
-
-            try {
-                const updatedUserData = {
-                    firstname: userData.firstname,
-                    lastname: userData.lastname,
-                    loginemail: userData.loginemail,
-                    type: userData.type,
-                    password: newPassword || userData.password,
-                    profilePic: profilePic || userData.profilePic,
-                };
-
-                const updateResponse = await fetch(`${BASE_URL}/${userData._id}`, {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "x-apikey": APIKEY,
-                        "Cache-Control": "no-cache",
-                    },
-                    body: JSON.stringify(updatedUserData),
-                });
-
-                if (updateResponse.ok) {
-                    alert("Profile updated successfully!");
-                    location.reload();
-                } else {
-                    console.error("Failed to update profile:", await updateResponse.text());
-                    alert("Failed to update profile. Check console for details.");
-                }
-            } catch (error) {
-                console.error("Error updating profile:", error);
-            }
-        }
-
+let url = '';
         function previewImage(event) {
             const reader = new FileReader();
-            reader.onload = function () {
-                document.getElementById("profileImage").src = reader.result;
+            reader.onload = function (e) {
+                url = e.target.result;
+                document.getElementById("profileImage").src = url;
+                // saveChanges(imageUrl)
             };
             reader.readAsDataURL(event.target.files[0]);
         }
+async function saveChanges() {
+    const newPassword = document.getElementById("newPassword").value.trim();
+    const confirmPassword = document.getElementById("confirmPassword").value.trim();
+    const profilePic = document.getElementById("profileImage").src;
+    if (newPassword !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+    }
+    
+    try{
+        var updatedUserData = {
+        password: newPassword || userData.password,
+        profilepage: url || userData.profilepage
+    }
+    
+    updateUserProfile(updatedUserData,userId)    
+
+    }catch (error) {
+        console.error("Error updating profile:", error);
+    }
+}   
+
+async function updateUserProfile(updatedUserData,userId) {
+    try {
+
+        // let url = 'https://database-9cfc.restdb.io/rest/contactdetail/' + userId;
+        const response = await fetch(`https://database-9cfc.restdb.io/rest/contactdetail/${userId}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "x-apikey": "677f336bc7a864b3d4c78324",
+                'Cache-Control': 'no-cache',
+            },
+            body: JSON.stringify(updatedUserData),
+        });
+
+        const updatedData = await response.json();
+        window.alert('Updated successfully')
+        console.log("Updated successfully:", updatedData);
+    } catch (error) {
+        console.error("Error updating data:", error);
+    }
+}
+
+         
+            
+
+
+
+        
 
         function logout() {
             sessionStorage.clear();
@@ -184,6 +188,7 @@ const userEmail = sessionStorage.getItem("loginemail");
             
             // Enable the Save Changes button
             document.getElementById("saveBtn").style.display = "inline-block";
+            
             
             // Enable the profile image change button
             document.getElementById("editImageBtn").disabled = false;

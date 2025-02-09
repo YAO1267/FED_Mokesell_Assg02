@@ -6,7 +6,7 @@
     <title>Profile</title>
     <link rel="icon" type="image/x-icon" href="images/logo.png">
     <link rel="stylesheet" type="text/css" href="general.css">
-    <link rel="stylesheet" type="text/css" href="progile.css">
+    <link rel="stylesheet" type="text/css" href="profile.css">
 
       <!-- google font Averia Serif Libre  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,11 +61,14 @@
   <div class="profile-container">
     <!-- Profile Image Section -->
     <div class="profile-pic-container">
-        <img src="./images/avatar.png" alt="Profile Picture" class="profile-pic" id="profileImage">
+        <img  alt="Profile Picture" class="profile-pic" id="profileImage">
         <input type="file" id="uploadImage" style="display: none;" accept="image/*" onchange="previewImage(event)">
         <button class="upload-btn" onclick="document.getElementById('uploadImage').click();" id="editImageBtn" disabled>Change Photo</button>
+        
+        <button class="uploadSellingItem" onclick="window.location.href='selling.html';">Upload Selling Items!</button>
     </div>
     
+
     <div class="profile-container">
         <form id="profileInfo">
             <div class="personal-info">
@@ -98,7 +101,7 @@
 
             <div class="form-group">
                 <button type="button" id="editBtn" onclick="enableEdit()">Edit</button>
-                <button type="button" id="saveBtn" onclick="saveChanges()" disabled>Save Changes</button>
+                <button type="button" id="saveBtn" onclick="saveChanges()" >Save Changes</button>
                 <button type="button" class="btn-logout" onclick="logout()">Logout</button>
             </div>
         </form>

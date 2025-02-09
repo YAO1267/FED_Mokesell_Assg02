@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Placeholder avatar
     const sellerAvatar = document.createElement("img");
-    sellerAvatar.src = "./images/avatar.png"; //put fixed avatar first
+    sellerAvatar.src = "./images/avatar.png"; //put fixed avatar
     sellerAvatar.alt = "Seller Avatar";
     sellerAvatar.classList.add("seller-avatar");
     //link to seller avatar also 
