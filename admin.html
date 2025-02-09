@@ -1,48 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>homepage</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
 
-  <link rel="stylesheet" href="homepage.css">
-  <link rel="stylesheet" href="general.css">
-  
-  <!-- google font Averia Serif Libre -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
-  
-  <!-- icon kit -->
-  <script src="https://kit.fontawesome.com/c3f87a633e.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: white;
+            color: black;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: black;
+            padding: 20px;
+            border-radius: 12px;
+            color: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            display: none; /* Initially hidden until data is loaded */
+        }
+        canvas {
+            background: white;
+            border-radius: 8px;
+            padding: 10px;
+        }
+        .refresh-btn {
+            background: white;
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 15px;
+        }
+        .refresh-btn:hover {
+            background: gray;
+            color: white;
+        }
+        /* Loading Screen */
+        #loading-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .loading-text {
+            font-size: 20px;
+            color: black;
+            margin-top: 10px;
+        }
+    </style>
 </head>
-
 <body>
 
-    <footer>
-        <hr>
-        <div class="footer-container">
-          <!-- Left Section: Logo and Privacy Policy -->
-          <div class="footer-logo">
-            <!-- <img src="#" alt="MokeSell icon"> -->
-            <p>Privacy policy</p>
-          </div>
-    
-          <!-- Right Section: Social Media Links -->
-          <div class="social-media">
-            <p>Follow us on</p>
-            <div>
-              <a href="#">&#9993;</a>                                   <!-- Email Icon -->
-              <a href="#"><i class="fa-brands fa-instagram"></i></a>    <!-- Instagram Icon -->
-              <a href="#"><i class="fa-brands fa-twitter"></i></a>      <!-- Twitter Icon -->
-              <a href="#"><i class="fa-brands fa-facebook"></i></a>     <!-- Facebook Icon -->
-            </div>
-            <p class="copyright">&copy; MokeSell 2025</p>
-          </div>
-        </div>
-        <hr>
-        <p>&copy; 2025 MokeSell Website. All rights reserved.</p>
-    </footer>
-      
+    <!-- Loading Animation -->
+    <div id="loading-container">
+        <dotlottie-player id="lottie-animation"
+            src="https://lottie.host/3118cb9c-9c5d-4ea6-91ac-b7e41c1e8e08/M9cwtFqumV.json"
+            background="transparent" 
+            speed="1" 
+            style="width: 300px; height: 300px;" 
+            loop autoplay>
+        </dotlottie-player>
+        <div class="loading-text">Loading orders... Please wait</div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div class="container" id="dashboard">
+        <h2>Order Performance</h2>
+        <canvas id="orderChart"></canvas>
+        <button class="refresh-btn" onclick="refreshData()">Refresh Data</button>
+    </div>
+
+    <script>
+        let myChart;
+        const apiKey = "677f336bc7a864b3d4c78324"; // Move to backend if possible
+        const loadingContainer = document.getElementById("loading-container");
+        const dashboard = document.getElementById("dashboard");
+
+        async function fetchData() {
+            try {
+                const response = await fetch("https://database-9cfc.restdb.io/rest/cart", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "x-apikey": apiKey
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                return await response.json();
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                return [];
+            }
+        }
+
+        function updateChart(data) {
+            if (myChart) {
+                myChart.destroy();
+            }
+
+            const ctx = document.getElementById("orderChart").getContext("2d");
+            const groupedData = {};
+
+            data.forEach(order => {
+                if (order.status === 1) { // Only include completed orders
+                    if (!groupedData[order.loginemail]) {
+                        groupedData[order.loginemail] = 0;
+                    }
+                    groupedData[order.loginemail] += order.price * order.amount;
+                }
+            });
+
+            myChart = new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: Object.keys(groupedData),
+                    datasets: [{
+                        label: "Total Sales ($)",
+                        data: Object.values(groupedData),
+                        backgroundColor: "white",
+                        borderColor: "black",
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        }
+
+        async function refreshData() {
+            // Show loading animation again when refreshing
+            loadingContainer.style.display = "flex";
+            dashboard.style.display = "none";
+
+            const data = await fetchData();
+            updateChart(data);
+
+            setTimeout(() => {
+                loadingContainer.style.display = "none";
+                dashboard.style.display = "block";
+            }, 1000);
+        }
+
+        async function initializeDashboard() {
+            const data = await fetchData();
+            updateChart(data);
+
+            // Hide loading and show dashboard after fetching data
+            setTimeout(() => {
+                loadingContainer.style.display = "none";
+                dashboard.style.display = "block";
+            }, 5000);
+        }
+
+        document.addEventListener("DOMContentLoaded", initializeDashboard);
+    </script>
+
 </body>
 </html>

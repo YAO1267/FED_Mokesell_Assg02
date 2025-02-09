@@ -84,7 +84,7 @@ const login = async (email, password) => {
                 // store the data using local storage
                 sessionStorage.setItem("loginemail",email)
                 sessionStorage.setItem("password",password)
-                // window.location.href = "index.html" //go to the admin page
+                window.location.href = "admin.html" //go to the admin page
             } else{
                 // store the data using local storage
                 sessionStorage.setItem("loginemail",email)
