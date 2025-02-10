@@ -90,26 +90,23 @@ document.addEventListener("DOMContentLoaded", function () {
                 }, 5000); // Adjust timing 
             })
         
-                form.reset();
-                previewImage.src = "";
-                previewImage.style.display = "none";
-                imageBase64 = "";
+                // form.reset();
+                // previewImage.src = "";
+                // previewImage.style.display = "none";
+                // imageBase64 = "";
             })
-            .catch((error) => {
-                console.error("Error:", error);
+            // .catch((error) => {
+            //     console.error("Error:", error);
         
-                // If error is due to a failed response, try to read the JSON error message from the response
-                if (error.response) {
-                    error.response.json().then((response) => {
-                        console.log("API Error Response:", response);
-                    });
-                } else {
-                    console.log("Error without response:", error);
-                }
+            //     // If error is due to a failed response, try to read the JSON error message from the response
+            //     if (error.response) {
+            //         error.response.json().then((response) => {
+            //             console.log("API Error Response:", response);
+            //         });
+            //     } else {
+            //         console.log("Error without response:", error);
+            //     }
         
-                alert("An error occurred while saving the product.");
-            });
-        
-
-        
+            //     alert("An error occurred while saving the product.");
+            // });
     });
